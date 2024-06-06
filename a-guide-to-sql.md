@@ -25,7 +25,7 @@ information about its sales reps, customers, and inventory in the new database:
     - Finally, the footing (bottom) of the invoice contains the invoice total.
     
   
-![Figure 1-1: a sample invoice](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-1-sample-invoice.JPG)
+![Figure 1-1: a sample invoice](images/figure-1-1-sample-invoice.JPG)
 
 - KimTay Pet Supplies also must store the following items in the database for each
 customer’s invoice:
@@ -34,13 +34,13 @@ customer’s invoice:
 - The overall invoice total is not stored. Instead, the database calculates the total whenever an invoice is printed or displayed on the screen.
 - Figure 1-2 shws sample data for KimTay Pet Supplies.
 
-![figure 1-2a: sample data for KimTay Pet Supplies customer table](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-2a-customer-table.JPG)
+![figure 1-2a: sample data for KimTay Pet Supplies customer table](images/figure-1-2a-customer-table.JPG)
 
-![figure 1-2a: sample data for KimTay Pet Supplies sales rep table](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-2b-sales-rep-table.JPG)
+![figure 1-2a: sample data for KimTay Pet Supplies sales rep table](images/figure-1-2b-sales-rep-table.JPG)
 
-![figure 1-2a: sample data for KimTay Pet Supplies item table](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-2c-items-table.JPG)
+![figure 1-2a: sample data for KimTay Pet Supplies item table](images/figure-1-2c-items-table.JPG)
 
-![figure 1-2a: sample data for KimTay Pet Supplies invoices and invoice line tables](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-2d-invoice-tables.JPG)
+![figure 1-2a: sample data for KimTay Pet Supplies invoices and invoice line tables](images/figure-1-2d-invoice-tables.JPG)
 
 - In the SALES_REP table, you see that there are four reps, whose ID values are 05, 10, 15, and 20. The name of sales rep 05 is Susan Garcia. Her street address is 42 Mountain Ln. She lives in Cody, WY, and her postal code is 82414. Her cell phone number is 307-824-1245. Her total commission is \$12,743.16, and her commission rate is 0.04 (four percent).
 - In the CUSTOMER table, 12 KimTay Pet Supplies customers are identified with the ID values of 126, 182, 227, 294, 314, 375, 435, 492, 543, 616, 721, and 795. The name of customer number 126 is Joey Smith. This customer’s address is 17 Fourth St in Cody, WY, with a postal code of 82414. The e-mail address of the customer is jsmith17@ example.com. The customer’s current balance is \$80.68, and their credit limit is \$500.00. The value 05 in the REP_ID column indicates that Joey Smith is represented by sales rep 05 (Susan Garcia).
@@ -48,7 +48,7 @@ customer’s invoice:
 - In the table named INVOICES, you see that there are eight invoices which are identified with the numbers 14216, 14219, 14222, 14224, 14228, 14231, 14233, and 14237. Invoice number 14216 was placed on November 15, 2021, by customer 125 (Joey Smith).
 - The table named INVOICE_LINE might seem strange at first glance. Why do you need a separate table for the invoice lines? Could they be included in the INVOICES table? The answer is technically yes. You could structure the table named INVOICES as shown in Figure 1-3. Notice that this table contains the same invoices as shown in Figure 1-2, with the same dates and customer ID numbers. In addition, each table row in Figure 1-3 contains all the invoice lines for a given invoice. Examining the second row, for example, you see that invoice 14219 has two invoice lines. One of the invoice lines is for 2 units of item AD72 at \$79.99 each, and the other invoice line is for 4 units of item DT12 at \$39.99 each.
 
-![FIGURE 1-3 Alternative INVOICES table structure](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-3-alternative-invoice-tables.JPG)
+![FIGURE 1-3 Alternative INVOICES table structure](images/figure-1-3-alternative-invoice-tables.JPG)
 
 > **Q & A**
 > **Question**: How is the information from Figure 1-2 represented in Figure 1-3?
@@ -86,30 +86,30 @@ customer’s invoice:
 - The OFFICE table shown in Figure 1-4 shows the office number, office location,
 address, area, city, state, and ZIP code.
 
-![FIGURE 1-4 Sample data for StayWell offices](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-4-staywell-office-table.JPG)
+![FIGURE 1-4 Sample data for StayWell offices](images/figure-1-4-staywell-office-table.JPG)
 
 - StayWell is split into two offices to better manage the properties. This management includes communicating with owners about the status and upkeep of their properties. They also facilitate the payment from the properties, meaning that the owners get regular income without having to collect rent in arrears. Offices also advertise properties and place students in appropriate properties, facilitating initial visits and taking deposits. Lastly the office administers the maintenance of the properties, communicating with residents, owners, and maintenance services. This is discussed later.
 - StayWell stores information about the owners of each property in the OWNER table, as seen in Figure 1-5. Each owner is identified by a unique owner number that consists of two uppercase letters followed by a three-digit number. For each owner, the table also includes the last name, first name, address, city, state, and ZIP code. Notice the owners are from across the United States. Although some apartments may be owned by a couple or a family, only the primary contact is given.
 
-![FIGURE 1-5 Sample data for the owners of StayWell properties](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-5-staywell-owners-table.JPG)
+![FIGURE 1-5 Sample data for the owners of StayWell properties](images/figure-1-5-staywell-owners-table.JPG)
 
 - Each property at each location is identified by a property ID, as seen in Figure 1-6. Each property also includes the office number that manages the property, address, floor size, the number of bedrooms, the number of floors, monthly rent per property, and the owner number. The property ID is an integer unique for each property.
 
-![FIGURE 1-6 Sample data for StayWell properties](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-6-staywell-properties-table.JPG)
+![FIGURE 1-6 Sample data for StayWell properties](images/figure-1-6-staywell-properties-table.JPG)
 
 -It might at first seem reasonable to include property IDs in the OWNER table, as it would only add one more column. However, if you look at the tables, you notice that there are more properties than owners because some owners have more than one property managed by StayWell. If the OWNER table included the property codes, this would require some entries to have more than one property ID. This would either require multiple property columns or require single rows to contain multiple data entries, creating issues in cross-referencing.
 - StayWell provides maintenance services across the properties in the two areas; this is shown in Figure 1-7. The SERVICE_CATEGORY table includes details of these services. The CATEGORY_NUM provides a unique number for the service, and
 CATEGORY_DESCRIPTION shows what the service is.
 
-![FIGURE 1-7 Sample category data for StayWell maintenance services](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-7-staywell-service-category-table.JPG)
+![FIGURE 1-7 Sample category data for StayWell maintenance services](images/figure-1-7-staywell-service-category-table.JPG)
 
 - The SERVICE_REQUEST, as shown in Figure 1-8, table shows requests that residents have put into the offices for maintenance. Each row contains a unique service ID number, the property ID, and the category relating to Figure 1-7. For example, the first line shows the unique service ID, followed by the property ID, which is 11. Looking at the PROPERTY table, we can see that this is 9531 Sherwood Rd, and by referencing the office number we can see that this is managed by StayWell-Georgetown. The table includes details of the request, along with the current status. The estimated time to complete the service is included, plus the actual amount of time and the date of the action to be taken, where applicable.
 
-![FIGURE 1-8 Sample service request category](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-8-staywell-service-request-table.JPG)
+![FIGURE 1-8 Sample service request category](images/figure-1-8-staywell-service-request-table.JPG)
 
 - The RESIDENTS database, as shown in Figure 1-9, includes details about the residents living in each property. The RESIDENT column includes the first name and last name for each of the residents, along with a resident ID. The PROPERTY_ID is the unique identification number of the property in which they are staying.
 
-![FIGURE 1-9 Sample data for StayWell residents](https://github.com/olumpeter/a-guide-to-sql/blob/main/images/figure-1-9-staywell-residents-table.JPG)
+![FIGURE 1-9 Sample data for StayWell residents](images/figure-1-9-staywell-residents-table.JPG)
 
 ### Module Summary
 
@@ -285,7 +285,7 @@ through 1–9. No computer work is required.
 
 > **Q-11.** List the property ID and office number for all service requests for which the estimated number of hours is greater than 5.
 > **Answer**:
-> > | Property ID | Office number |
+> | Property ID | Office number |
 > | --- | --- |
 > | 10 | 2 |
 > | 8 | 2 |
