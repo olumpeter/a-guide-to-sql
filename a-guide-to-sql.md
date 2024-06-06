@@ -1,4 +1,4 @@
-# Notes on the book A Guide to SQL [10th Edition] by Mark Shellman/Hassan Afyouni/Philip J. Pratt/Mary Z.
+# Notes on the book "A Guide to SQL" [10th Edition] by Mark Shellman/Hassan Afyouni/Philip J. Pratt/Mary Z.
 
 ## Module 1: INTRODUCTION TO KIMTAY PET SUPPLIES AND STAYWELL STUDENT ACCOMMODATION DATABASES
 
