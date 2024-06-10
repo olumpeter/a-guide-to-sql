@@ -330,6 +330,10 @@ through 1–9. No computer work is required.
 
 - A **relational database** is a collection of tables like the ones you examined for KimTay Pet Supplies in Module 1. Formally, these tables are called relations, and this is how this type of database gets its name.
 
+![FIGURE 2-1 Sample data for KimTay Pet Supplies](./images/figure-2-1-sample-data-for-kimtay-pet-supplies.JPG)
+
+![FIGURE 2-1 Sample data for KimTay Pet Supplies b (Continued)](./images/figure-2-1b-sample-data-for-kimtay-pet-supplies.continued.JPG)
+
 > **HELPFUL HINT**: 
 > - The names of columns and tables in this text follow a common naming convention in which column names use uppercase letters and replace spaces between words with an underscore (_). For example, KimTay Pet Supplies uses the column named FIRST_NAME to store first names and the column named INVOICE_NUM to store invoice numbers.
 
