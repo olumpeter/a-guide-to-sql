@@ -1124,12 +1124,12 @@ tables with a crow’s foot, as shown in Figure 2-14.
 > **Q-3**: What is a relationship? What is a one-to-many relationship?
 > 
 > **Answer**: 
-> - A relationship is the association between entities. For example, there might be an association between the customer entity and the sale representative entity.
+> - A relationship is the association between two entities. For example, there might be an association between the customer entity and the sale representative entity.
 > - A one-to-many relationship is the one in which one record in one entity is associated to any number of records in the other entity. For example, the customer entity and the sale representative entity have a one-to-many relationship because one sale representative can represent more than one customer.
 
 > **Q-4**: What is a repeating group?
 > 
-> **Answer**: A repeating group is a case in which multiple entries exist in an individual location in the relation or table. For example, a cell in a relation or table can me merged to allow it to span several rows. 
+> **Answer**: A repeating group is a case in which multiple entries exist in an individual location in a relation or table. For example, a cell in a relation or table can contain more than one entries. 
 
 > **Q-5**: What is a relation?
 > 
@@ -1150,7 +1150,7 @@ tables with a crow’s foot, as shown in Figure 2-14.
 
 > **Q-9**: What does it mean for a column to be functionally dependent on another column?
 > 
-> **Answer**: A column say Y is functionally dependent on another column (or a collection of columns), say X, if at any point in time a value of X determines a single value for Y. You can say that X functionaly determines Y. For example, you can say that in a SALES_REP table, THE sales rep first and last names is functionally dependent on the REP_ID column because you can determine the first name and the last name of that sales rep.
+> **Answer**: A column say Y is functionally dependent on another column (or a collection of columns), say X, if at any point in time a value of X determines a single value for Y. You can say that X functionaly determines Y. For example, you can say that in a SALES_REP table, THE sales rep first and last names is functionally dependent on the REP_ID column because you can determine the first name and the last name of that sales rep using his or her sales rep ID.
 
 > **Q-10**: What is a primary key? Why is a primary key required for proper database design?
 > 
@@ -1394,19 +1394,56 @@ tables with a crow’s foot, as shown in Figure 2-14.
 > **Q-1**: Indicate the changes (using the shorthand representation) that you would need to make to the original KimTay Pet Supplies database design (see Figure 2-1) to support the following requirements. A customer is not necessarily represented by a single sales rep, but they can be represented by several sales reps. When a customer places an order, the sales rep who gets the commission on the invoice must be in the collection of sales reps who represent the customer.
 >
 > **Answer**: 
-> For a customer to be represented by several sales reps, there must be a 
-> 
+> For a customer to be represented by several sales reps, the CUST_ID must be included as column in the SALES_REP table, and the primary key of the new SALES_REP table be REP_ID and CUST_ID. Since REP_ID and CUST_ID are the new primary key, the new table could be renamed as CUSTOMER_SALES_REP as shown below:
+>
+> <dl>
+>   <dd>
+>       CUSTOMER_SALES_REP (<ins>REP_ID</ins>, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, POSTAL_CELL_PHONE, COMMISSION, RATE, <ins>CUST_ID</ins>)
+>   </dd>
+> </dl>
 >
 
 > **Q-2**: Indicate the changes (using the shorthand representation) that you would need to make to the original KimTay Pet Supplies database design to support the following requirements. There is no relationship between customers and sales reps. When a customer places an order, any sales rep can process the order and create the invoice. On the invoice, you need to identify both the customer placing the order and the sales rep responsible for the invoice. Draw an E-R diagram for the new design.
 >
 > **Answer**:
 >
+> CUSTOMER and SALES_REP tables are connected using the REP_ID columns. To remove the relationship between customers and sales reps, we need to remove REP_ID column from the CUSTOMER table. The following is a shorthand representation of the new table:
+>
+> <dl>
+>   <dd>
+>       CUSTOMER (CUST_ID, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, POSTAL, EMAIL, BALANCE, CREDIT_LIMIT)
+>   </dd>
+> </dl>
+> 
+> To identify both the customer placing the order and the sales rep responsible for the invoice, we need to include REP_ID as a column of the INVOICE table. Since REP_ID is the primary key of the SALES_REP table, there will be a one-to-many relationship between SALES_REP and INVOICE (one sales rep can create many invoices)
+>
+> <dl>
+>   <dd>
+>       INVOICES (INVOICE_NUM, INVOICE_DATE, CUST_ID, REP_ID)
+>   </dd>
+> </dl>
+>
+> The new design is shown in the following E-R diagram:
+> 
+> ![Figure: E-R diagram showing the relationship between SALES_REP, INVOICES, and CUSTOMER](./images/Figure-e-r-diagram-showing-the-relationship-between-sales-rep-invoices-and-customer.JPG)
+> 
+
 
 > **Q-3**: Indicate the changes (using the shorthand representation) that you would need to make to the original KimTay Pet Supplies database design in the event that the original Requirement 3 is changed as follows. For an item, store the item’s ID, description, category, and price. In addition, for each location in which the item is located, store the value of the location, the description of the location, and the number of units of the item stored in the location. Draw an E-R diagram for the new design. 
 >
 > **Answer**:
+>  You will need to come up with the ITEM table and the LOCATION table that are related using the LOCATION_ID columns. Since LOCATION_ID is the primary key of the LOCATION table, the ITEM and LOCATION have a one-to-many relationship (one location can have many items).
 >
+> <dl>
+>   <dd>
+>       ITEM (ITEM_ID, DESCRIPTION, CATEGORY, PRICE, LOCATION_ID)
+>   </dd>
+>   <dd>
+>       LOCATION (LOCATION_ID, VALUE, DESCRIPTION, ON_HAND)
+>   </dd>
+> </dl>
+>
+> ![Figure: E-R diagram showing the relationship between ITEM and LOCATION](./images/Figure-E-R-diagram-showing-the-relationship-between-ITEM-and-LOCATION.JPG)
 
 > **Q-4**: Using your knowledge of KimTay Pet Supplies, determine the functional dependencies that exist in the following table. After determining the functional dependencies, convert this table to an equivalent collection of tables that are in third normal form.
 > <ul style="list-style-type: none">
@@ -1416,5 +1453,174 @@ tables with a crow’s foot, as shown in Figure 2-14.
 > </ul>
 >
 > **Answer**:
+>
+> The functional dependencies that exist in the above table are:
+>
+> <dl>
+>   <dd>
+>       ITEM_ID &rarr; DESCRIPTION, ON_HAND, CATEGORY, LOCATION, PRICE
+>   </dd>
+>   <dd>
+>       INVOICE_NUM &rarr; INVOICE_DATE, CUST_ID
+>   </dd>
+>   <dd>
+>       CUST_ID &rarr; FIRST_NAME, LAST_NAME
+>   </dd>
+>   <dd>
+>       INVOICE_NUM, ITEM_ID &rarr; QUANTITY, QUOTED_PRICE
+>   </dd>
+> </dl>
+>
+> The equivalent collection of tables that are in third normal form are as follows:
+>
+> <dl>
+>   <dd>
+>       ITEM (<ins>ITEM_ID</ins>, DESCRIPTION, ON_HAND, CATEGORY, LOCATION, PRICE)
+>   </dd>
+>   <dd>
+>       INVOICES (<ins>INVOICE_NUM</ins>, INVOICE_DATE, CUST_ID)
+>   </dd>
+>   <dd>
+>       CUSTOMER (<ins>CUST_ID</ins>, FIRST_NAME, LAST_NAME)
+>   </dd>
+>   <dd>
+>       INVOICE_LINE (<ins>INVOICE_NUM</ins>, <ins>ITEM_ID</ins>, QUANTITY, QUOTED_PRICE)
+>   </dd>
+> </dl>
+>
+> ##### Critical Thinking
+>
+> **Q-4**: Indicate the changes you need to make to the KimTay Pet Supplies database to support the following additional requirement. Each location has a manager who is identified by a manager ID, a manager first name, and a manager last name.
+>
+> **Answer**:
+>
+> You need to add an extra entity called MANAGER and a table called MANAGER to the KimTay Pet Supplies database. The shorthand representation for the MANAGER table is:
+>
+> <dl>
+>   <dd>
+>       MANAGER (<ins>MANAGER_ID</ins>, FIRST_NAME, LAST_NAME)
+>   </dd>
+> </dl>
+>
+> You also need to add an extra entity called LOCATION and a table called LOCATION to the KimTay Pet Supplies database with MANAGER_ID column as one of the columns in the LOCATION table. The shorthand representation for the LOCATION table is:
+>
+> <dl>
+>   <dd>
+>       LOCATION (LOCATION_ID, DESCRIPTION, MANAGER_ID)
+>   </dd>
+> </dl>
+>
+> ##### StayWell Student Accommodation
+>
+> Answer each of the following questions using the StayWell Student Accommodation data shown in Figures 1-4 through 1-9 in Module 1. No computer work is required.
+>
+> **Q-1**: Determine the functional dependencies that exist in the following table and then convert this table to an equivalent collection of tables that are in third normal form.
+>
+> <dl>
+>   <dd>
+>       OFFICE (OFFICE_NUM, OFFICE_NAME, (ADDRESS, SQR_FT, BDRMS, FLOORS, MONTHLY_RENT, OWNER_NUM))
+>   </dd>
+> </dl>
+>
+> **Answer**:
+>
+> The functional dependencies that exist are:
+> <dl>
+>   <dd>
+>       OFFICE_NUM &rarr; OFFICE_NAME, ADDRESS
+>   </dd>
+>   <dd>
+>       OFFICE_NUM, ADDRESS &rarr; SQR_FT, BDRMS, FLOORS, MONTHLY_RENT, OWNER_NUM
+>   </dd>
+> </dl>
+>
+> An equivalent collection of tables that are in third normal form are:
+>
+> <dl>
+>   <dd>
+>       OFFICE (<ins>OFFICE_NUM </ins>, OFFICE_NAME, ADDRESS)
+>   </dd>
+>   <dd>
+>       OFFICE_ADDRESS (<ins>OFFICE_NUM</ins>, <ins>ADDRESS</ins>, SQR_FT, BDRMS, FLOORS, MONTHLY_RENT, OWNER_NUM)
+>   </dd>
+> </dl>
+>
+>
+> **Q-2**: Determine the functional dependencies that exist in the following table and then convert this table to an equivalent collection of tables that are in third normal form.
+>
+> <dl>
+>   <dd>
+>       PROPERTY (PROPERTY_ID, OFFICE_NUM, ADDRESS, SQR_FT, BDRMS, FLOORS, MONTHLY_RENT, OWNER_NUM, LAST_NAME, FIRST_NAME)
+>   </dd>
+> </dl>
+>
+> **Answer**:
+>
+> The functional dependencies that exist are:
+>
+> <dl>
+>   <dd>
+>       PROPERTY_ID &rarr; OFFICE_NUM, ADDRESS, SQR_FT, BDRMS, FLOORS, MONTHLY_RENT, OWNER_NUM
+>   </dd>
+>   <dd>
+>       OWNER_NUM &rarr; LAST_NAME, FIRST_NAME
+>   </dd>
+> </dl>
+>
+> An equivalent collection of tables that are in third normal form are:
+>
+> <dl>
+>   <dd>
+>       PROPERTY (<ins>PROPERTY_ID</ins>, OFFICE_NUM, ADDRESS, SQR_FT, BDRMS, FLOORS, MONTHLY_RENT, OWNER_NUM)
+>   </dd>
+>   <dd>
+>       OWNER (<ins>OWNER_NUM</ins>, LAST_NAME, FIRST_NAME)
+>   </dd>
+> </dl>
+>
+> **Q-3**: StayWell also rents out properties on a weekly basis to students attending summer school in the Seattle area. Design a database to meet the following requirements, using the shorthand representation and a diagram of your choice.
+> <ol style="list-style-type:lower-alpha;">
+>   <li>
+>       For each student renter, list his or her number, first name, middle initial, last name, address, city, state, postal code, telephone number, and e-mail address.
+>   </li>
+>   <li>
+>       For each property, list the office number, property address, city, state, postal code, square footage, number of bedrooms, number of floors, maximum number of persons that can sleep in the unit, and the base weekly rate.
+>   </li>
+>   <li>
+>       For each rental agreement, list the renter number, first name, middle initial, last name, address, city, state, postal code, telephone number, start date of the rental, end date of the rental, and the weekly rental amount. The rental period is one or more weeks.
+>   </li>
+> </ol>
+>
+> **Answer**:
+>
+> From the first requirement, we can come up with the following table:
+>
+> <dl>
+>   <dd>
+>       STUDENT (STUDENT_NUM, FIRST_NAME, MIDDLE_INITIAL, LAST_NAME, ADDRESS, CITY, STATE, POSTAL_CODE, TELEPHONE_NUMBER, EMAIL_ADDRESS)
+>   </dd>
+> </dl>
+>
+> From the second requirement, we can come up with the following table:
+>
+> <dl>
+>   <dd>
+>       PROPERTY(PROPERTY_ID, OFFICE_NUMBER, ADDRESS, CITY, STATE, POSTAL_CODE, SQUARE_FOOTAGE, NUMBER_OF_BEDROOMS, NUMBER_OF_FLOORS, NUMBER_OF_PERSONS, BASE_WEEEKLY_RATE)
+>   </dd>
+> </dl>
+>
+> From the third requirement, we can come up with the following table:
+>
+> <dl>
+>   <dd>
+>       RENTAL_AGREEMENT (STUDENT_NUM, STUDENT_FIRST_NAME, STUDENT_MIDDLE_INITIAL, STUDENT_LAST_NAME, STUDENT_ADDRESS, STUDENT_CITY, STUDENT_STATE, STUDENT_POSTAL_CODE, STUDENT_TELEPHONE_NUMBER, START_DATE, END_DATE, WEEKLY_RENTAL_AMOUNT)
+>   </dd>
+> </dl>
+> 
+> The RENTAL_AGREEMENT table will be related to the STUDENT table using the STUDENT_NUM columns, and to the PROPERTY table using the PROPERTY_ID columns. There will be a one-to-many relationship between RENTAL_AGREEMENT and STUDENT (one student can have many rental agreements), and between RENTAL_AGREEMENT and PROPERTY (one property can have many agreements.)
+>
+> The relationships between the STUDENT, PROPERTY, and RENTAL AGREEMENT entities can be represented by using the following E-R diagram.
+>
+> ![Figure: E-R diagram showing the relationship between STUDENT, PROPERTY, and RENTAL AGREEMENT](./images/figure-e-r-diagram-showing-the-relationship-between-student-property-and-rental-agreement.JPG)
 >
 > 
