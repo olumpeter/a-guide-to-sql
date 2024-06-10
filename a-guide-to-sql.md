@@ -351,7 +351,7 @@ through 1–9. No computer work is required.
 > - You implement these relationships by having common columns in two or more tables. The REP_ID column in the SALES_REP table and the REP_ID column in the CUSTOMER table are used to implement the relationship between sales reps and customers. Given a sales rep, you can use these columns to determine all the customers that he or she represents; given a customer, you can use these columns to find the sales rep who represents the customer.
 > - In this context, a relation is essentially a two-dimensional table. You can see that certain restrictions are placed on relations. Each column has a unique name, and entries within each column should match this column name. For example, if the column name is CREDIT_LIMIT, all entries in that column must be credit limits. In addition, each row should be unique — when two rows are identical, the second row does not provide any new information. For maximum flexibility, the order of the columns and rows should be immaterial. Finally, the table’s design should be as simple as possible by restricting each position to a single entry and by preventing multiple entries (also called repeating groups) in an individual location in the table. Figure 2-2 shows a table design that includes repeating groups.
 > 
-> ![FIGURE 2-2 Table with repeating groups](images/figure-2-2-table-with-repeating-groups.JPG)
+> ![FIGURE 2-2 Table with repeating groups](./images/figure-2-2-table-with-repeating-groups.JPG)
 > 
 > - Figure 2-3 shows a better way to represent the same information shown in Figure 2-2. In Figure 2-3, every position in the table contains a single value.
 > 
