@@ -1622,5 +1622,484 @@ tables with a crow’s foot, as shown in Figure 2-14.
 > The relationships between the STUDENT, PROPERTY, and RENTAL AGREEMENT entities can be represented by using the following E-R diagram.
 >
 > ![Figure: E-R diagram showing the relationship between STUDENT, PROPERTY, and RENTAL AGREEMENT](./images/figure-e-r-diagram-showing-the-relationship-between-student-property-and-rental-agreement.JPG)
+
+
+## MODULE 3: CREATING TABLES
+
+### INTRODUCTION
+
+- In this module, you begin your study of **Structured Query Language (SQL)**, which is one of the most popular and widely used languages for retrieving and manipulating database data.
+- In the mid-1970s, SQL was developed as the data manipulation language for IBM’s prototype relational model DBMS, System R, under the name SEQUEL at IBM's San Jose research facilities. In 1980, the language was renamed SQL (but still pronounced sequel although the equally popular pronunciation of S-Q-L [ess-cue-ell] is preferable) to avoid confusion with an unrelated hardware product named SEQUEL. Most DBMSs use a version of SQL as their data manipulation language.
+- In this module, you learn: 
+    - the basics of working in SQL.
+    - how to create tables and assign data types to columns.
+    - about a special type of value, called a null value, and learn how to manage these values in tables. 
+    - how to insert data into your tables after you create them. 
+    - how to describe a table’s layout using SQL.
+
+### CREATING AND RUNNING SQL COMMANDS
+
+- You accomplish tasks in SQL by creating and running commands using a DBMS that
+supports SQL. This text uses MySQL to create and run SQL commands. The text also
+indicates differences you find if you are using Oracle or Microsoft SQL Server.
+- The version of MySQL used in this text is MySQL 8.0 (specifically MySQL Community
+Server 8.0.18). You can download and install the latest version, and previous versions, of MySQL 8.0 edition for free from the MySQL Web site (https://dev.mysql.com). Although you may choose any of the setup types during installation dependent upon your needs, to be able to perform operations presented in this text, it is suggested you choose the Developer Default setup type or the Full option. Either of these options include the installation of the MySQL Workbench. MySQL Workbench contains many powerful tools that allows developers and database administrators to visually design, develop, and administer MySQL databases. The MySQL Workbench also contains an SQL editor that is used throughout the text to enter commands and view the results of the commands entered. Be sure to remember the password selected during installation.
+
+#### Using MySQL Workbench
+
+- After installing MySQL 8.0, run the MySQL Workbench 8.0 CE app using whatever method you prefer for running an app (You can download it from https://dev.mysql.com/downloads/workbench/). On the MySQL Workbench opening window, you notice links where you may browse MySQL documentation, access a MySQL blog, and participate in forums related to MySQL. On this main window, you also see a list of the MySQL connections currently available to you. The one connection listed is to the server created during the installation of MySQL. See Figure 3-1.
+
+![FIGURE 3-1 MySQL Workbench opening window](./images/FIGURE-3-1-MySQL-Workbench-opening-window.JPG)
+
+
+- Click on the connection box Local instance *MySQL80*. MySQL80 was the default name given during installation if you accepted the defaults. The name may be different if you changed the name during installation. Next provide the password to access the server you created during installation. See Figure 3-2.
+
+![FIGURE 3-2 Entering password for server](./images/FIGURE-3-2-Entering-password-for-server.JPG)
+
+- Once you have successfully submitted the password for the connection, you are given
+access to the main MySQL Workbench environment for that connection. See Figure 3-3.
+
+![FIGURE 3-3 Main MySQL Workbench environment](./images/FIGURE-3-3-Main-MySQL-Workbench-environment.JPG)
+
+- Remember that MySQL Workbench is a very powerful tool that contains many features. We only use the SQL editor within the MySQL Workbench for our purposes. Therefore, we can simplify, or unclutter, the window by hiding some of the panes. The two panes we would like to hide are the Navigation pane and the MySQL Additions pane. To hide these two panes, click on their corresponding toggle button as show in Figure 3-3. The result of hiding the Navigator pane and the SQL Additions pane gives more room for the Query pane and the Output pane. Each pane expands to fill the original window as shown in Figure 3-4.
+
+![FIGURE 3-4 Outcome of hiding the Navigator and SQL Additions panes](./images/FIGURE-3-4-Outcome-of-hiding-the-Navigator-and-SQL-Additions-panes.JPG)
+
+The next step is to begin entering SQL commands in the MySQL Workbench
+environment. 
+
+#### Entering Commands
+
+- Before creating a database on our own, we can first get used to the MySQL Workbench environment by entering a simple SQL command and going through the process to have it executed. MySQL has internal databases it uses to handle its internal processing. These databases will be separate from the database we will be creating; however, they are viewable. Because we have not yet created any databases on our own, and just installed MySQL, any databases listed will be internal to MySQL. To show the databases on a MySQL server host you use the SHOW DATABASES command followed by a semicolon. A semicolon ends a statement in SQL. The syntax is shown in Figure 3-5.
+
+![FIGURE 3-5 Syntax of the SHOW DATABASES command](./images/FIGURE-3-5-Syntax-of-the-SHOW-DATABASES-command.JPG)
+
+- The next step is to enter the `SHOW DATABASES;`command into the MySQL Workbench SQL editor. Enter the command on the first line as show in Figure 3-6. Be sure to enter the semicolon after the command.
+
+![FIGURE 3-6 Enter SHOW DATABASES command](./images/FIGURE-3-6-Enter-SHOW-DATABASES-command.JPG)
+
+- Notice as you entered the command, the keywords of <span style="color: blue">SHOW DATABASES</span> turn blue.
+This color of blue is used to represent keywords in the SQL editor within the MySQL
+Workbench. This color scheme is the Microsoft Windows default scheme and can be modified if preferred; however, for the remainder of the text we continue using this color of blue for keywords.
+- The next step is to execute the command entered. On the main menu, select the Query menu and select Execute Current Statement as shown in Figure 3-7. This executes the statement you just entered. Note that you could have also selected Execute (All or Selected) because there was only one SQL statement entered.
+
+![FIGURE 3-7 Execute the query](./images/FIGURE-3-7-Execute-the-query.JPG)
+
+> **HELPFUL HINT**
+> Although some environments may not require a semicolon to end an SQL statement, it is always good practice to do so. For in the event you are using an environment in which it is required and do not include the semicolon, an error will occur. Always follow proper coding practice for any language you are using, regardless of whether the environment is forgiving or not.
+
+- Once the command is executed, a result grid is displayed between the query pane and output pane. Note on the right-hand side of the result grid there are other options available; however, we will not be using them at present. The result of the command SHOW DATABASES lists the databases available in the MySQL server connection. Note we did not create any of these databases; instead, these six internal databases are used by MySQL for its purposes. You may need to use the vertical scroll bar on the right side of the result grid, or adjust the vertical size of the grid, to view all of the databases. Also note in the output pane there is information pertaining to the execution of the statement, such as the time of day it was executed, general description of the processing, outcome, and the time it took for the processing to occur. Note under the message column in the output pane that six rows were returned, which corresponds to the six databases listed. The green circle with a checkmark indicates the command executed successfully. See Figure 3-8.
+
+![FIGURE 3-8 Outcome of SHOW DATABASES command](./images/FIGURE-3-8-Outcome-of-SHOW-DATABASES-command.JPG)
+
+> **HELPFUL HINT**
+> - Note that your specific version of MySQL may have a different number of internal databases listed. This presents no issues.
+
+- To clear the result grid, click on the "x" located on the bottom left of the result grid after "Result #." The grid is removed, and the query and output panes remain. To remove the details from output pane, you may right-click anywhere while the cursor is on the row or pane pertaining to the action. When the menu appears, select the Clear option from the menu, and the information is removed. If you wish to review any history of processing commands, you can click the drop-down arrow beside Action Output in the output pane and select History Output. See Figure 3-9.
+
+![FIGURE 3-9 To clear results of the SHOW DATABASES command](./images/FIGURE-3-9-To-clear-results-of-the-SHOW-DATABASES-command.JPG)
+
+- Now that you have entered and executed an SQL command in MySQL Workbench, the next step is to create your own database. Prior to creating your own database, you can clear the query pane by simply highlighting the command and deleting it, or any other method you prefer. You should now have a MySQL Workbench window similar to Figure 3-4, prior to entering any commands and only the query and output panes showing.
+
+> **HELPFUL HINT**
+> - Although it is not necessary to clear the query and output panes as you progress to creating a database of your own, it is cleared during the presentation in the textbook to make the examples more readable and easier to understand. This way you can focus on one command, or group of commands, at a time and not constantly viewing previous commands or results.
+
+### CREATING A DATABASE
+
+- There are many objects within a database, including tables and fields. All of these objects have identifiers, or names, associated with them. DBMS rules for naming identifiers vary dependent upon the DBMS. For example, in the version of MySQL used in this text, identifier names for a database, table, or a field can be up to 64 characters; however, that doesnot mean that you should give your identifiers names of that length. It is simply permitted if the need arises to properly describe the object. If you want to name identifiers very uniquely in any DBMS, you should consult the documentation for that specific DMBS. The documentation for naming identifiers in the version of MySQL used in this text can be found at https://dev.mysql.com/doc/refman/8.0/en/identifiers.html. General guidelines that are acceptable to most DBMS are given below. If you adhere to these guidelines for naming identifiers when using a DBMS, it is rare that you will have an issue.
+
+  1. The identifier name cannot exceed 30 characters.
+  2. The identifier name must start with a letter.
+  3. The identifier name can contain letters, numbers, and underscores (_).
+  4. The identifier name cannot contain spaces.
+
+- Prior to defining the objects within a database, the first step is to create the database itself. The command in MySQL to create a database is **CREATE DATABASE** followed by the name of the database. To create a database named KIMTAY, for example, the command is <span style="color: blue">CREATE DATABASE</span> KIMTAY; as shown in Figure 3-10. Note that a semicolon ends the command.
+
+![FIGURE 3-10 Syntax of the CREATE DATABASE command](./images/FIGURE-3-10-Syntax-of-the-CREATE-DATABASE-command.JPG)
+
+Enter the command to create the KimTay database into the MySQL Workbench SQL editor. Execute the command similar to how you executed the SHOW DATABASES command and view the results. See Figure 3-11.
+
+![FIGURE 3-11 Enter SHOW DATABASES command](./images/FIGURE-3-11-Enter-SHOW-DATABASES-command.JPG)
+
+- Execute the <span style="color: blue">SHOW DATABASES</span>; command as you did previously and view the results in Figure 3-12. The results are now different because the KimTay database has been added, with seven databases now listed. Six of the databases will be internal to MySQL; however, the one additional database is the one you just created.
+
+![FIGURE 3-12 Outcome of SHOW DATABASES command after creating the KimTay database](./images/figure-3-12-outcome-of-show-databases-command-after-creating-the-kimtay-database.JPG)
+
+- Now the KimTay database has been created, you need to create the tables that will reside within the database. In addition, you need to populate the tables with the data from the previous modules. First, we begin by creating the table that holds the sales reps.
+
+#### Changing the Default Database
+
+- To work with a database, you must change the default database to the one you need to use. The default database is the database to which all subsequent commands pertain. To activate the default database, execute the USE command followed by the name of the database. For example, to change the default database to the one you just created for KimTay Pet Supplies, the command would be USE KIMTAY;, as shown in Figure 3-13. Changing the default database is also known as activating or using the database.
+
+![FIGURE 3-13 Syntax of the USE command](./images/figure-3-13-syntax-of-the-use-command.JPG)
+
+- Execute the command to activate the KIMTAY database and see the results in
+Figure 3-14.
+
+![FIGURE 3-14 Enter USE command to activate the KIMTAY database](./images/figure-3-14-enter-use-command-to-activate-the-kimtay-database.JPG)
+
+- Now that the default database has been set to the KIMTAY database, you can now
+begin to add the tables to the database.
+
+### CREATING A TABLE
+
+- The first step in creating a table is to describe the layout of the table to the DBMS.
+
+**EXAMPLE 1: Describe the layout of the SALES_REP table to the DBMS.**
+
+- You use the **CREATE TABLE** command to describe the layout of a table. The word TABLE is followed by the name of the table to be created and then by the names and data types of the columns that the table contains (for example, characters, numbers, or dates) as well as the maximum number of characters or digits that the column can store.
+- In the previous modules we chose the name SALES_REP to contain the information
+pertaining to sales reps employed by KimTay Pet Supplies. The SQL command that creates the SALES_REP table is shown in Figure 3-15.
+
+![FIGURE 3-15 CREATE TABLE command to create the SALES_REP table](./images/figure-3-15-create-table-command-to-create-the-sales_rep-table.JPG)
+
+- This CREATE TABLE command, which uses the data definition features of SQL, describes a table named SALES_REP. The table contains ten columns: REP_ID, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, POSTAL, CELL_PHONE, COMMISSION, and RATE. The REP_ID column can store two characters and is the table’s primary key. The FIRST_NAME and LAST_NAME columns can store 20 characters each, and the STATE column can store two characters. The COMMISSION column can store only numbers, and those numbers are limited to seven digits, including two decimal places. Similarly, the RATE column can store three-digit numbers, including two decimal places. You can think of the SQL command shown in Figure 3-15 as creating an empty table with column headings for each column name.
+- In SQL, commands are free format; that is, no rule says that a particular word
+must begin in a particular position on the line. For example, you could have written the CREATE TABLE command shown in Figure 3-15 as follows:
+
+```sql
+CREATE TABLE SALES_REP (REP_ID CHAR(2) PRIMARY KEY, FIRST_NAME CHAR(20), 
+LAST_NAME CHAR(20), ADDRESS CHAR(20), CITY CHAR(15), STATE CHAR(2), 
+POSTAL CHAR(5), CELL_PHONE CHAR(12), COMMISSION DECIMAL(7,2), RATE DECIMAL(3,2));
+```
+- It should be noted that the PRIMARY KEY clause in the previous statement specifies that REP_ID will be the unique identifier to the row meaning "No Duplicate" are allowed for the column.
+- The manner in which the CREATE TABLE command shown in Figure 3-15 was
+written makes the command more readable. This text strives for such readability when writing SQL commands.
+
+> **HELPFUL HINT**
+> - Making code readable is extremely important. The more readable the code, the easier it is to understand and modify. Proper indentation can make code much more readable compared to code that is not indented properly. There is no one way to indent code to make it more readable, each coder will have his/her on way of indenting code for readability. This text attempts to make code much more readable through proper indentation and spacing to maximize readability.
 >
+> **HELPFUL HINT**
+> - SQL is not case sensitive; you can type commands using uppercase or lowercase letters. There is one exception to this rule, however. When you are inserting character values into a table, you must use the correct case.
+>
+> - To create the SALES_REP table in MySQL Workbench, enter and execute the command shown in Figure 3-15 as you did with the previous commands. Once again, there is a different color scheme for various parts of the command as you enter it. Figure 3-16 shows the executed command and results. The figures in this text may show the panes resized so that more of the command or results is visible to the user.
+
+![FIGURE 3-16 Enter CREATE TABLE command to create the SALES_REP table](./images/figure-3-16-enter-create-table-command-to-create-the-sales_rep-table.JPG)
+
+![ORACLE FIGURE 3-1 CREATE TABLE statement to create SALES_REP table using Oracle](./images/oracle-figure-3-1-create-table-statement-to-create-sales_rep-table-using-oracle.JPG)
+
+![SQL SERVER FIGURE 3-1 CREATE TABLE statement to create SALES_REP table using SQL Server](./images/sql-server-figure-3-1-create-table-statement-to-create-sales_rep-table-using-sql-server%20(2).JPG)
+
+- Although there was verification from MySQL that the table was created, you may view the list of tables within an activated database by using the SHOW TABLES; command. This command is similar to the SHOW DATABASES command you used previously, but instead it gives you a list of tables residing in the current database in use. In our case, this results in a list of the tables residing in the KIMTAY database. See Figure 3-17 for the results of the command.
+
+![FIGURE 3-17 Outcome of SHOW TABLES command listing the tables in the KIMTAY database](./images/figure-3-17-outcome-of-show-tables-command-listing-the-tables-in-the-kimtay-database.JPG)
+
+#### Correcting Errors in SQL Commands
+
+- Suppose that you attempted to create the SALES_REP table using the CREATE TABLE command shown in Figure 3-18, which contains several mistakes. Instead of displaying a message that the table was created successfully, MySQL displays an error message about a problem that it encountered. In reviewing the command, you see that CHAR is misspelledon line 5, the CITY column was omitted, and line 8 should be deleted. If you run a command and MySQL Workbench displays an error, you can use the mouse and the arrow keys on the keyboard to position the insertion point in the correct position so you can correct these errors using the same techniques that you might use in a word processor. For example, you can use the pointer to select the word CHR on line 5 and type CHAR, and then you can use the pointer to move the insertion point to the end of line 5 so you can press Enter to insert the missing information to create the CITY column. You can use the pointer to select the contents of line 8 and then press Delete to remove it. After making these changes, you can click the Run button to execute the command again. If the command contains additional errors, you see an error message again. If the command is correct, you see the message that the table was created.
+
+![FIGURE 3-18 CREATE TABLE command with errors](./images/figure-3-18-create-table-command-with-errors.JPG)
+
+You may have also noticed that the SQL editor within the MySQL Workbench indicated there was a syntax error in the command on line 5 prior to executed, as indicated by the small red box with an X in it beside the line. The SQL editor is quite advanced and understands the correct syntax as you enter the commands. In addition, note that omitting the CITY column and inserting a XYZ column do not produce syntax errors. Instead, they are considered logic errors on your part.
+
+#### Dropping a Table
+
+- After creating a table, you might notice that you added a column that you do not need or that you assigned the wrong data type or size to a column. One way to correct such errors in a table is simply to delete (drop) the table and start over. For example, suppose you wrote a CREATE TABLE command that contained a column named LST instead of LAST or defined a column as CHAR(5) instead of CHAR(15). Suppose you do not discover the rror and you execute the command, creating a table with these problems. In this case, you can delete the entire table using the **DROP TABLE** command and then re-create the table using the correct CREATE TABLE command.
+- To drop a table, execute the **DROP TABLE** command, followed by the name of the table you want to delete and a semicolon. To delete the SALES_REP table, for example, you would enter and execute the following command:
+
+```sql
+DROP TABLE SALES_REP
+```
+
+- Dropping a table also deletes any data that you entered into the table. It is a good idea to check your CREATE TABLE commands carefully before executing them and to correct any problems before adding data. Later in this text, you learn how to change a table’s structure without having to delete the entire table.
+
+> **Q & A**
+> - **Question**: How can I correct a mistake that I made when I created a table?
+> - **Answer**: Later in the text, you see how to alter a table to make any necessary corrections. For now, the easiest way is to drop the table using the DROP TABLE command and then to execute the correct CREATE TABLE command.
+
+### USING DATA TYPES
+
+- For each column in a table, you must specify the data type to use to store the type of data that the column contains. Figure 3-19 describes some common data types used in databases.
+
+| DataType | Description |
+| --- | --- |
+| CHAR(n) | Stores a character string n characters long. You use the CHAR data type for columns that contain letters and special characters, and for columns containing numbers that will not be used in any calculations. Because neither sales rep ID numbers nor customer ID numbers will be used in any calculations, for example, the REP_ID and CUST_ID columns are both assigned the CHAR data type. |
+| VARCHAR(n) | An alternative to CHAR that stores a character string up to n characters long. Unlike CHAR, only the actual character string is stored. If a character string 20 characters long is stored in a CHAR(30) column, for example, it will occupy 30 characters (20 characters plus 10 blank spaces). If it is stored in a VARCHAR(30) column, it will only occupy 20 spaces. In general, tables that use VARCHAR instead of CHAR occupy less space, but the DBMS does not process them as rapidly during queries and updates. However, both are legitimate choices. This text uses CHAR, but VARCHAR works equally well.
+| DATE | Stores date data. The specific format in which dates are stored varies from one SQL implementation to another. In MySQL and SQL Server, dates are enclosed in single quotation marks and have the format YYYY-MM-DD (for example, ‘2020-10-23’ is October 23, 2020). In Oracle, dates are enclosed in single quotation marks and have the format DD-MON-YYYY (for example, '23-OCT-2020' is October 23, 2020). |
+| DECIMAL(p,q) | Stores a decimal number p digits long with q of the digits being decimal places to the right of the decimal point. For example, the data type DECIMAL(5,2) represents a number with three places to the left and two places to the right of the decimal (for example, 123.45). You can use the contents of DECIMAL columns in calculations. You also can use the NUMERIC(p,q) data type in MySQL to store a decimal number. Oracle and SQL Server also use NUMBER(p, q) to store a decimal number. |
+| INT | Stores integers, which are numbers without a decimal part. The valid range is –2147483648 to 2147483647. You can use the contents of INT columns in calculations. If you follow the word INT with AUTO_INCREMENT, you create a column for which SQL will automatically generate a new sequence number for each time you add a new row. This would be the appropriate choice, for example, when you want the DBMS to generate a value for a primary key.|
+| SMALLINT | Stores integers but uses less space than the INT data type. The valid range is –32768 to 32767. SMALLINT is a better choice than INT when you are certain that the column will store numbers within the indicated range. You canuse the contents of SMALLINT columns in calculations.|
+
+FIGURE 3-19 Commonly used data type
+
+### USING NULLS
+
+- Occasionally, when you enter a new row into a table or modify an existing row, the values for one or more columns are unknown or unavailable. For example, you can add a customer’s name and address to a table even though the customer does not have an assigned sales rep or an established credit limit. In other cases, some values might never be known—perhaps there is a customer that does not have a sales rep. In SQL, you handle this situation by using a special value to represent cases in which an actual value is unknown, unavailable, or not applicable. This special value is called a null data value, or simply a null. When creating a table, you can specify whether to allow nulls in the individual columns.
+
+**Q & A**
+- **Question**: Should a user be allowed to enter null values for the primary key?
+- **Answer**: No. The primary key is supposed to uniquely identify a given row, and this would be impossible if nulls were allowed. For example, if you stored two customer records without values in the primary key column, you would have no way to tell them apart.
+- In SQL, you use the **NOT NULL** clause in a CREATE TABLE command to indicate columns that cannot contain null values. The default is to allow nulls; columns for which you do not specify NOT NULL can accept null values.
+- For example, suppose that the FIRST_NAME and LAST_NAME columns in the SALES_REP table cannot accept null values, but all other columns in the SALES_REP table can. The CREATE TABLE command in Figure 3-20 accomplishes this goal.
+
+![FIGURE 3-20 CREATE TABLE command with NOT NULL clauses](./images/figure-3-20-create-table-command-with-not-null-clauses.JPG)
+
+- If you created the SALES_REP table with this CREATE TABLE command, the DBMS would reject any attempt to store a null value in either the FIRST_NAME or LAST_NAME column. The database allows storing NULL values in the ADDRESS column because it was created without specifying NOT NULL when the table was created. Because the primary key column cannot accept null values, you do not need to specify the REP_ID column as NOT NULL.
+
+### ADDING ROWS TO A TABLE
+
+- After you have created a table in a database, you can load data into the table by using the INSERT command.
+
+#### The INSERT Command
+
+- The **INSERT** command adds rows to a table. You type <span style="color: blue">INSERT INTO<span> followed by the name of the table into which you are adding data. Then you type the word <span style="color: blue">VALUES<span> followed by the specific values to be inserted in parentheses. When adding rows to character columns, make sure you enclose the values in single quotation marks (for example, "Susan"). You also must enter the values in the appropriate case, because character data is stored exactly as you enter it.
+
+> **HELPFUL HINT**
+> - You must enclose values in single quotation marks for any column whose type is character (CHAR), even when the data contains numbers. Because the POSTAL column in the SALES_REP table has a CHAR data type, for example, you must enclose postal codes in single quotation marks, even though they are numbers.
+> - If you need to enter an apostrophe (single quotation mark) into a column, you type two single quotation marks. For example, to enter the name O'Toole in the LAST_NAME column, you would type "O'Toole" as the value in the INSERT command.
+
+**EXAMPLE 2: Add sales rep 05 to the SALES_REP table.**
+
+- The command for this example is shown in Figure 3-21. Note that the character strings ("05," "Susan," "Garcia," and so on) are enclosed in single quotation marks. When you execute the command, the record is added to the SALES_REP table.
+
+![FIGURE 3-21 INSERT command to add sales rep 05 to the SALES_REP table](./images/figure-3-21-insert-command-to-add-sales-rep-05-to-the-sales_rep-table.JPG)
+
+- The result of the command being entered and executed is shown in Figure 3-22.
+
+![FIGURE 3-22 INSERT command executed for the first record in the SALES_REP table](./images/figure-3-22-insert-command-executed-for-the-first-record-in-the-sales_rep-table.JPG)
+
+> - **HELPFUL HINT**
+> - Make sure that you type the values in the same case as those shown in the figures to avoid problems later when retrieving data from the database.
+
+**EXAMPLE 3: Add sales reps 10 and 15 to the SALES_REP table.**
+
+- You could enter and execute new INSERT commands to add the new rows to the table. However, an easier and faster way to add these new rows to the table is to use the mouse and the keyboard to modify the previous INSERT command and execute it to add the record for the second sales rep. Figure 3-23 shows the new command to add the second record containing the data for sales rep 10. Simply use the mouse and keyboard to modify the command and execute it. Note that if it is easier for you to delete the previous command and enter the new command from the beginning, it is absolutely fine.
+
+![FIGURE 3-23 INSERT command to add sales rep 10 to the SALES_REP table](./images/figure-3-23-insert-command-to-add-sales-rep-10-to-the-sales_rep-table.JPG)
+
+- Figure 3-24 shows the results of the command being entered and executed to add the second record to the SALES_REP table, containing the data for sales rep 10.
+
+![FIGURE 3-24 INSERT command executed for the second record in the SALES_REP table](./images/figure-3-24-insert-command-executed-for-the-second-record-in-the-sales_rep-table.JPG)
+
+- The next command to add the third record, containing the data for sales rep 15, is shown in Figure 3-25. Enter the command by modifying the previous command, or deleting the previous command and entering the new command from the beginning. Once entered, execute the command.
+
+![FIGURE 3-25 INSERT command to add sales rep 15 to the SALES_REP table](./images/figure-3-25-insert-command-to-add-sales-rep-15-to-the-sales_rep-table.JPG)
+
+- Figure 3-26 shows the results of the command being entered and executed to add the third record to the SALES_REP table, containing the data for sales rep 15.
+
+![FIGURE 3-26 INSERT command executed for the third record in the SALES_REP table](./images/figure-3-26-insert-command-executed-for-the-third-record-in-the-sales_rep-table.JPG)
+
+- The next command to add the fourth record, containing the data for sales rep 20, is shown in Figure 3-27. Enter the command by modifying the previous command or by deleting the previous command and entering the new command from the beginning. Once entered, execute the command.
+
+![FIGURE 3-28 INSERT command executed for the fourth record in the SALES_REP table](./images/figure-3-28-insert-command-executed-for-the-fourth-record-in-the-sales_rep-table.JPG)
+
+#### Inserting a Row that Contains Nulls
+
+- To enter a null value into a table, you use a special form of the INSERT command in which you identify the names of the columns that accept non-null values and then list only these non-null values after the VALUES command, as shown in Example 4.
+
+![FIGURE-3-29-INSERT-command-to-add-sales-rep-25-to-the-SALES_REP-table](./images/FIGURE-3-29-INSERT-command-to-add-sales-rep-25-to-the-SALES_REP-table.JPG)
+
+Figure 3-30 shows the results of the command being entered and executed to add the fifth record to the SALES_REP table, containing the data for sales rep 25; however, only the REP_ID, FIRST_NAME, and LAST_NAME fields are added. The remaining fields contain null values. The order of the data aligns with the order of the fields. The value of "25" is inserted into the REP_ID field, the value of "Donna" is inserted into the FIRST_NAME field, and the value of "Sanchez" is inserted into the LAST_NAME field.
+
+![FIGURE 3-30 INSERT command executed for the fifth record in the SALES_REP table containing null values](./images/figure-3-30-insert-command-executed-for-the-fifth-record-in-the-sales_rep-table-containing-null-values.JPG)
+
+### VIEWING TABLE DATA
+
+-To view the data in a table, you use the **SELECT** command, which is described in more detail in Modules 4 and 5. 
+
+**EXAMPLE 5: Display all the rows and columns in the SALES_REP table.**
+
+- You can use a simple version of the SELECT command to display all the rows and columns in a table by typing the word <span style="color: blue">SELECT</span>, followed by an asterisk (*), followed by the keyword FROM and the name of the table containing the data you want to view. Just as with other SQL commands, the command ends with a semicolon. In MySQL, you type the command shown in Figure 3-31.
+
+![FIGURE 3-31 Select command to list all records in the SALES_REP table](./images/figure-3-31-select-command-to-list-all-records-in-the-sales_rep-table.JPG)
+
+- Figure 3-32 shows the results of the command being entered and executed, along with the results shown in the results grid. As you can see, in the fifth record the data for the REP_ID, FIRST_NAME, and LAST_NAME fields have been inserted as you wanted. The remaining fields in the fifth record contain null values.
+
+ ![FIGURE 3-32 Using a SELECT command to view a table](./images/figure-3-32-using-a-select-command-to-view-a-table.JPG)
+
+ ![ORACLE FIGURE 3-2 SELECT statement showing all rows in SALES_REP table using Oracle](./images/oracle-figure-3-2-select-statement-showing-all-rows-in-sales_rep-table-using-oracle.JPG)
+
+ ![![SQL SERVER FIGURE 3-2 SELECT statement showing all rows in SALES_REP table using SQL Server]()](./images/sql-server-figure-3-2-select-statement-showing-all-rows-in-sales_rep-table-using-sql-server.JPG)
+
+
+ ### CORRECTING ERRORS IN A TABLE
+
+ - After executing a SELECT command to view a table’s data, you might find that you need to change the value in a column. You can use the UPDATE command to change a value in a table. The UPDATE command shown in Figure 3-33 changes the last name in the row on which the sales rep ID is 25 to Salinas.
+
+![FIGURE 3-33 UPDATE command to change the LAST_NAME for sales rep 25](./images/figure-3-33-update-command-to-change-the-last_name-for-sales-rep-25.JPG)
+
+- Figure 3-34 shows the results of the command being enter and executed. Note the message in the output gives further detail that one row was affected, with one row matching the criteria and one row being changed.
+- The same SELECT command used in Figure 3-31 to list all of the records in the SALES_REP table can be used again to show the results of the UPDATE command just executed in Figure 3-34. Figure 3-35 shows the SELECT command being entered and executed, along with displaying the results of the UPDATE command from Figure 3-34, in which the last name for rep number 25 is Salinas.
+
+![figure-3-34-using-an-update-command-to-change-a-value](./images//figure-3-34-using-an-update-command-to-change-a-value.JPG)
+
+![FIGURE 3-35 Using a SELECT command to view a table](./images/figure-3-35-using-a-select-command-to-view-a-table.JPG)
+
+![figure-3-36-delete-command-to-delete-all-records-where-the-sales-rep-id-is-25](./images/figure-3-36-delete-command-to-delete-all-records-where-the-sales-rep-id-is-25.JPG)
+
+- Figure 3-37 shows the results of the command being entered and executed. Note the message in the output gives further detail in that one row was affected, or in this case deleted.
+
+![FIGURE 3-37 Using the DELETE command to delete a row](./images/figure-3-37-using-the-delete-command-to-delete-a-row.JPG)
+
+- The SELECT command can once again be used to display the records in the SALES_REP table. Figure 3-38 shows the command entered and executed, and it displays the updated data in the table. Note that the data associated with sales rep ID 25 no longer resides in the table.
+
+![FIGURE 3-38 Using a SELECT command to view a table](./images/figure-3-38-using-a-select-command-to-view-a-table.JPG)
+
+> **Q & A**
+> Question: How do I correct errors in my data?
+> Answer: The method you use to correct an error depends on the type of error you need to correct. If you added a row that should not be in the table, use a DELETE command to remove it. If you forgot to add a row, you can use an INSERT command to add it. If you added a row that contains incorrect data, you can use an UPDATE command to make the necessary corrections. Alternatively, you could use a DELETE command to remove the row containing the error and then use an INSERT command to insert the correct row.
+
+### SAVING SQL COMMANDS
+
+- MySQL lets you save SQL commands so you can use them again without retyping them. In MySQL, as well as in many other DBMSs, you save commands in a script file, or simply a script, which is a text file. In MySQL, script files have the .sql filename extension. Some DBMSs, such as Oracle, have a special location called the script repository to store the scripts. With MySQL, you can save your scripts in the location of your choice on your local file system (such as on a hard drive or USB flash drive), therefore, creating your own repository. The following steps describe how to create and use scripts in the MySQL Workbench. If you are using a different version of MySQL or another DBMS, use Help, consult the system documentation, or search the Internet to determine how to accomplish the same tasks.
+
+> **Q & A**'
+> **Question**: What are advantages of creating scripts?
+> **Answer**: Creating a script offers some distinct advantages. You can create or edit a script using a text editor or word processor and save the script into your own script repository to be used in MySQL. A script can be created separately from the MySQL Workbench environment. Scripts allow you to create a group of SQL commands you would like to execute regularly and have them ready for use without rekeying them. Additionally, there are some advanced features you see later in this text that are only available when using scripts.
+
+- To create a script in MySQL:
+    1. Enter the command, or commands, you would like to comprise the script in the query pane.
+    2. On the MySQL Workbench main menu, click on the File menu and select the Save Script As option.
+    3. You may now navigate to a location in your file system you would like to save the script.
+    4. Enter a name for your script in the File name: text box. Note the file type is an SQL file with an extension of .sql.
+    5. When you are finished, click the Save button. You return to the query pane with the name of the tab being the name of your script.
+
+- To view or edit a script in MySQL:
+    1. On the MySQL Workbench main menu, click on the File menu and select
+    Open SQL Script. 
+    2. Navigate to the location in your file system where the script is saved.
+    3. Select the script and click Open.
+    4. Your script is now in a new tab in the query pane with the name being the
+    same name as your script.
+    5. You may now edit the script.
+
+- To run an existing script in MySQL (Option #2):
+    1. On the MySQL Workbench main menu, click on the File menu and select
+    Run SQL Script.
+    2. Navigate to the location in your file system where the script is saved.
+    3. Select the script and click Open.
+    4. In the Run SQL Script dialog box, select the Default Schema Name from the
+    drop-down menu and click Run.
+    5. After the results are displayed, you click on Close to close the Run SQL
+    Script dialog box.
+
+- When you are finished using a script and no longer need to store it, you can delete it.
+- To delete a script in MySQL:
+    1. Navigate to the location in your file system where the script is saved.
+    2. Delete the file containing the script by the normal methods for your file
+    system.
+
+> **ORACLE USER NOTE**
+> Oracle SQL Developer allows to save scripts any folder on your local system. All scripts created in Oracle SQL Developer are text files with the .sql filename extension. To create a script file in Oracle SQL Developer:
+> 1. Load the Oracle SQL Developer tool, under Oracle Connections pane click on the desired database. (Note: Initially, you must create a connection entering account credentials as shown in Oracle Figure 3-3.)
+> 2. Enter query statement you desire to store and execute the statement to validate it is syntactically correct and it returns the expected results.
+> 3. Click the Save button and then enter a name for the script. 
 > 
+> To view, edit, or run an existing script:
+> 1. Load Oracle SQL Developer and double click on Database Connection created previously.
+> 2. Click the Open File button on the toolbar.
+> 3. Navigate to the folder containing the script file and then click the Open button in the Open File dialog box. The script appears in the Query Editor window. You can view the content of the script to make changes to it by editing the commands. If you want to save your edits to a script, click the Save button to save your changes.
+> 4. To run a script, click the Execute button.
+
+![ORACLE FIGURE 3-3 Create Database Connection using Oracle SQL Developer](./images/oracle-figure-3-3-create-database-connection-using-oracle-sql-developer.JPG)
+
+> **SQL SERVER USER NOTE**
+> SQL Server can store scripts in any folder on your local system. All scripts created in SQL Server are text files with the .sql filename extension. To create a script file in SQL Server:
+>   1. Load SQL Server Management Studio and then click the Connect button in the Connect to Server dialog box.
+>   2. Open the appropriate database and then click the New Query button.
+>   3. Type the command or commands to save in the script. When necessary, click the Execute button to execute the commands saved in the script.
+>   4. When you are finished, click the Save button and then enter a name for the script.
+> 
+> To view, edit, or run an existing script:
+>   1. Load SQL Server Management Studio and then click the Connect button in the Connect to Server dialog box.
+>   2. Open the appropriate database and then click the New Query button.
+>   3. Click the Open File button on the toolbar.
+>   4. Navigate to the folder containing the script file and then click the Open button in the Open File dialog box. The script appears in the Query Editor window. You can view the content of the script to make changes to it by editing the commands. If you want to save your edits to a script, click the Save button to save your changes.
+>   5. To run a script, click the Execute button.
+
+### CREATING THE REMAINING DATABASE TABLES
+
+- To create the remaining tables in the KimTay Pet Supplies database (KIMTAY), you need to execute the appropriate CREATE TABLE and INSERT commands. You should save these commands as scripts so you can re-create your database, if necessary, by running the scripts.
+
+> **HELPFUL HINT**
+> Your instructor might give you the script files to use to create the tables for KimTay Pet Supplies and StayWell Student Accommodation databases and to insert data into them.
+
+- Figure 3-39 shows the CREATE TABLE command for the CUSTOMER table. Notice that the FIRST_NAME and LAST_NAME columns are specified as NOT NULL. Additionally, the CUST_ID column is the table’s primary key, indicating that the CUST_ID column is the unique identifier of rows in the table. With this column designated as the primary key, the DBMS rejects any attempt to store a customer ID that already exists in the table.
+
+![FIGURE 3-39 CREATE TABLE command for the CUSTOMER table](./images/figure-3-39-create-table-command-for-the-customer-table.JPG)
+
+- After creating the CUSTOMER table, you can create another file containing the
+INSERT commands to add the customer rows to the table. When a script file contains
+more than one command, each command must end with a semicolon. Figure 3-40 shows
+the INSERT commands to add rows to the CUSTOMER table.
+
+![FIGURE 3-40 INSERT commands for the CUSTOMER table](./images/figure-3-40-insert-commands-for-the-customer-table.JPG)
+
+- Figures 3-41 through 3-46 show the scripts for the CREATE TABLE and INSERT commands for creating and inserting data into the INVOICES, ITEM, and INVOICE_LINE tables in the KimTay Pet Supplies database. Figure 3-41 contains the CREATE TABLE command for the INVOICES table.
+
+![FIGURE 3-41 CREATE TABLE command for the INVOICES table](./images/figure-3-41-create-table-command-for-the-invoices-table.JPG)
+
+- Figure 3-42 contains the INSERT commands to load data into the INVOICES table.
+Notice the way that dates are entered.
+
+![FIGURE 3-42 INSERT commands for the INVOICES table](figure-3-42-insert-commands-for-the-invoices-table)
+
+- Figure 3-43 contains the CREATE TABLE command for the ITEM table.
+
+![FIGURE 3-43 CREATE TABLE command for the ITEM table](./images/figure-3-43-create-table-command-for-the-item-table.JPG)
+
+- Figure 3-44 contains the INSERT commands to load data into the ITEM table.
+
+![FIGURE 3-44 INSERT commands for the ITEM table](./images/figure-3-44-insert-commands-for-the-item-table.JPG)
+
+![FIGURE 3-44 INSERT commands for the ITEM table (Continued)](./images/figure-3-44-insert-commands-for-the-item-table-continued.JPG)
+
+- Figure 3-45 contains the CREATE TABLE command for the INVOICE_LINE table. Notice the way that the primary key is defined when it consists of more than one column.
+
+![FIGURE 3-45 CREATE TABLE command for the INVOICE_LINE table](./images/figure-3-45-create-table-command-for-the-invoice_line-table.JPG)
+
+Figure 3-46 contains the INSERT commands to load data into the INVOICE_LINE
+table.
+
+![figure-3-46-insert-commands-for-the-invoice_line-table](./images/figure-3-46-insert-commands-for-the-invoice_line-table.JPG)
+
+### DESCRIBING A TABLE
+
+- The CREATE TABLE command defines a table’s structure by listing its columns, datatypes, and column lengths. The CREATE TABLE command also indicates which columns cannot accept nulls. When you work with a table, you might not have access to the CREATE TABLE command that was used to create it. For example, another programmer might have created the table, or perhaps you created the table several months ago but did not save the command. You might want to examine the table’s structure to see the details about the columns in the table. Each DBMS provides a method to examine a table’s structure.
+
+**EXAMPLE 6: Describe the SALES_REP table.**
+
+- In MySQL, you can use the DESCRIBE command to list all the columns in a table and their properties. Figure 3-47 shows the DESCRIBE command for the SALES_REP table, note that DESC, the abbreviated form of the DESCRIBE command, is accepted in MySQL and Oracle. The result indicates the name of each column in the table, along with its data type and length. The Null column indicates whether the field can accept a value of null. The Key column indicates which fields are part of the primary key.
+
+![FIGURE 3-47 DESCRIBE command for the SALES_REP table](./images/figure-3-47-describe-command-for-the-sales_rep-table.JPG)
+
+![ORACLE FIGURE 3-4 List of table columns using Oracle](./images/oracle-figure-3-4-list-of-table-columns-using-oracle.JPG)
+
+![SQL SERVER FIGURE 3-3 List of table columns using SQL Server](./images/sql-server-figure-3-3-list-of-table-columns-using-sql-server.JPG)
+
+### Module Summary
+
+- Use the CREATE TABLE command to create a table by typing the table name and then
+listing within a single set of parentheses the columns in the table.
+- Use the DROP TABLE command to delete a table and all its data from the database.
+- Some commonly used data types in are INT, SMALLINT, DECIMAL, CHAR, VARCHAR, and DATE.
+- A null data value (or null) is a special value that is used when the actual value for a column is unknown, unavailable, or not applicable.
+- Use the NOT NULL clause in a CREATE TABLE command to identify columns that cannot accept null values.
+- Use the INSERT command to insert rows into a table.
+- Use the SELECT command to view the data in a table.
+- Use the UPDATE command to change the value in a column.
+- Use the DELETE command to delete a row from a table.
+- You can save SQL commands in a script file in MySQL, Oracle, and SQL Server.
+- You can use the DESCRIBE command in MySQL and Oracle to display a table’s structure and layout. In SQL Server, execute the SP_COLUMNS stored procedure to display the structure and layout of a table.
+
+### Key Terms
+
+- CREATE DATABASE
+- CREATE TABLE
+- data type
+- default database
+- DELETE
+- DESCRIBE
+- DROP TABLE
+- INSERT
+- NOT NULL
+- null
+- null data value
+- script
+- script file
+- script repository
+- SELECT
+- SHOW DATABASES
+- Structured Query Language (SQL)
+- UPDATE
+- USE
