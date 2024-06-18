@@ -2103,3 +2103,1131 @@ listing within a single set of parentheses the columns in the table.
 - Structured Query Language (SQL)
 - UPDATE
 - USE
+
+### Review Questions
+
+#### Module Quiz
+
+**Question 1**: How do you create a table using SQL?
+ 
+**Answer**:
+- The first step of creating a table is to describe the layout of the table to the DBMS such as MySQL, Oracle, or SQL server using the CREATE TABLE sql command. This command is followed by the name of the table to be created, and then by the names and data types of the columns that the table contains. The data type of each column indicates the type of data that the column can contain as well as the maximum number of characters or digits that the column can store. The data type of the column that is the primary key is followed by the sql clause PRIMARY KEY to indicate that it will be the unique identifier to the row meaning "No duplicate" are allowed for the column.
+- For example, suppose you want to create a table called SALES_REP that has the following columns:
+- REP_ID: A text with two character, such as "05" and "10". It's the primary key of the table.
+  - FIRST_NAME: A variable length text upto 20 characters, such as "Susan" and "Richard".
+  - LAST_Name: A variable length text upto 20 characters, such as"Garcia" and "Miller".
+  - ADDRESS: A variable length text upto 30 characters, such as "42 Mountain Ln" and "87 Pikes Dr"
+  - CITY: A variable length text upto 15 characters, such as "Cody" and "Ralston"
+  - STATE: A text with 2 characters, such as "WY"
+  - POSTAL: A text with 5 characters, such as "82414" and "82440"
+  - CELL_PHONE: A text with 12 characters, such as "307-824-1245" and "307-406-4321"
+  - COMMISSION: A 2 decimal point number with 5 digits before the decimal point, such as 12743.16 and 20872.11.
+  - RATE:  A 2 decimal point number with 1 digits before the decimal point, such as 0.04 and 0.06.
+
+ - The table described above can be created using the following sql command:
+
+<pre style="white-space: pre-wrap">
+<code>
+CREATE TABLE SALES_REP
+(
+    REP_ID CHAR(2) PRIMARY KEY,
+    FIRST_NAME CHAR(20),
+    LAST_Name CHAR(20),
+    ADDRESS CHAR(30),
+    CITY CHAR(15),
+    STATE CHAR(2),
+    POSTAL CHAR(5),
+    CELL_PHONE CHAR(12),
+    COMMISSION DECIMAL(7, 2)
+    RATE DECIMAL(3, 2)
+); 
+</code>
+</pre>
+
+
+**Question 2**: How do you delete a table using SQL?
+
+**Answer:**
+
+The entire table is deleted using the SQL command DROP TABLE followed by the name of the table that you want to delete and a semicolon. For example if you want to delete a table named SALES_REP, you will execute the following SQL command: 
+
+<pre style="white-space: pre-wrap">
+<code>
+DROP TABLE SALES_REP;
+</code>
+</pre>
+
+**Question 3**: What are common data types used to define columns using SQL?
+
+**Answer**:
+1. CHAR(n) data type: Specifies that a column stores a character string data that is n charater long. The character string can be a sequence of letters and special charater such as "Susan", "42 Mountain Ln", "307-824-1245", or a sequence of numbers that will not be used in any calculation such as "05" and "82414". 
+2. DATE data type: Specifies that a column store a date data. In a MySQL database, defining a column with DATE data type will store dates as "YYYY-MM-DD". For example, June, 20, 1990 will be stored as "1990-06-20".
+3. DECIMAL(p,q) data type: Specifies that a column stores q decimal point number that is p digits long. For example, a column that stores commission such as 12743.16 and 20872.11 will have a data type of DECIMAL(7, 2) because it is a 2 decimal points number that is 7 digits long. A column that stores rate as 0.04 and 0.06 will have a data type of DECIMAL(3, 2) because it is a 2 decimal points number that is 3 digits long.
+4. INT data type: Specifies that a column stores integer (whole number without the decimal part). The integers can range from –2147483648 to +2147483647. For example, a column that store age such as 20, 19, 22, 34 is better for it to be defined with a INT data type.
+5. VARCHAR(n) data type: Specifies a column that stores a character string data that is upto n character long. This is an alternative of CHAR(n). If you define a column with CHAR(20) to store a name such as "Susan", it will be stored in a 20 character space memory (5 with data and 15 with blank spaces). However, if you define a column with VARCHAR(20), the name "Susan" will be stored in a 5 charater space memory. Therefore, table using VARCHAR(n) data type to define columns occupy less space but DBMS such as MySQL does not process them as rapidly during queries and updates. 
+6. SMALLINT data type: Specifies that a column stores integer (whole number without the decimal part). The integers can range from –32768 to +32767. For example, a column that store age such as 20, 19, 22, 34 is better for it to be defined with a SMALLINT data type. This a better choice when you are sure the integer number you want to store is a small integer number.
+
+**Question 4**: Identify the best data type to use to store the following data in Oracle, in SQL Server, and in MySQL:
+<ul list-style-type: lower-alpha>
+   <li>The month, day, and year that an employee was hired</li>
+   <li>An employee’s Social Security number</li>
+   <li>The department in which an employee works</li>
+   <li>An employee’s hourly pay rate</li>
+</ul>
+
+**Answer:**
+
+| Data | Oracle | SQL Server | MySQL |
+| --- | --- | --- | --- |
+| The month, day, and year that an employee was hired | DATE | DATE | DATE |
+| An employee’s Social Security number | CHAR(9) |CHAR(9) | CHAR(9) |
+| The department in which an employee works | VARCHAR(20) | CHAR(20) | CHAR(20) |
+| An employee’s hourly pay rate | DECIMAL(3,2) | DECIMAL(3,2) | DECIMAL(3,2) |
+
+
+**Question 5**: Identify the following column names as valid or invalid in MySQL:
+<ul>
+   <li>COMMISSIONRATE</li>
+   <li>POSTAL_CODE_5CHAR</li>
+   <li>SHIP TO ADDRESS</li>
+   <li>INVOICE-NUMBER</li>
+</ul> 
+
+**Answer:**
+| Column name | Valid or invalid |
+| --- | --- |
+| COMMISSIONRATE | Valid |
+| POSTAL_CODE_5CHAR | Valid |
+| SHIP TO ADDRESS | Invalid because it contains empty spaces |
+| INVOICE-NUMBER | Invalid because it contains empty a hyphen |
+
+**Question 6**: What is a null value? How do you use SQL to identify columns that cannot accept null values?
+
+**Answer:**
+- A null value is any value entered into a table that is either unknown, unavailable or not applicable. For example, a null value can be inserted into a table when you insert values only for 3 columns whereas you have 10 columns in the table.
+- We identify columns that cannot accept null values by adding either PRIMARY KEY clause after the data type of the primary key column, or by adding NOT NULL clause after the data type of nonkey columns during the process of creating a table using the CREATE TABLE command. For example, the table created using the following CREATE TABLE command cannot accept null values in the REP_ID, FIRST_NAME, and LAST_NAME columns.
+
+
+<pre style="white-space: pre-wrap">
+<code>
+CREATE TABLE SALES_REP 
+(
+   REP_ID CHAR(2) PRIMARY KEY,
+   FIRST_NAME CHAR(20) NOT NULL,
+   LAST_NAME CHAR(20) NOT NULL,
+   ADDRESS CHAR(30),
+   CITY CHAR(15),
+   STATE CHAR(2),
+   POSTAL CHAR(5),
+   CELL_PHONE CHAR(12),
+   COMMISSION DECIMAL(7, 2)
+   RATE DECIMAL(3, 2)
+); 
+</code>
+</pre>
+
+
+**Question 7**: Which SQL command do you use to add a row to a table?
+
+**Answer:**: We use INSERT INTO command, followed by the name of the table into which we are adding data. You then type the word VALUES followed by the specific values to be inserted in parenthesis. The values that were defined using CHAR(n) must be enclose in a single quote. For example, 
+
+<pre style="white-space:pre-wrap;">
+<code>
+INSERT INTO SALES_REP 
+    VALUES ("05", "Susan", "Garcia", "42 Mountain Ln", "Cody", "WY","82414", "307-824-1245", 12743.16, 0.04));
+</code>
+</pre>
+
+The above SQL command is used to add a row to a table created using the following SQL command: 
+
+
+<pre style="white-space:pre-wrap;">
+<code>
+CREATE TABLE SALES_REP 
+(
+   REP_ID CHAR(2) PRIMARY KEY,
+   FIRST_NAME CHAR(20),
+   LAST_NAME CHAR(20),
+   ADDRESS CHAR(30),
+   CITY CHAR(15),
+   STATE CHAR(2),
+   POSTAL CHAR(5),
+   CELL_PHONE CHAR(12),
+   COMMISSION DECIMAL(7, 2)
+   RATE DECIMAL(3, 2)
+); 
+</code>
+</pre>
+
+**Question 8**: Which SQL command do you use to view the data in a table?
+
+**Answer**: We useSELECT command to view the data in a table. For example, to view all the data in a table, you type the word SELECT, followed by an asterisk (*), followed by the keyword FROM, followed by the name of the table containing the data you want to view, and finaly followed by a semicolon to end the SQL command. For example, to view all the data in a table called SALES_REP, you will type the following in the SQL editor, and then execute it:
+
+<pre style="white-space:pre-wrap;">
+<code>
+    SELECT *
+        FROM SALES_REP;
+</code>
+</pre>
+
+**Question 9**: Which SQL command do you use to change the value in a column in a table?
+**Answer**: We use UPDATE command to change the value in a column in a table.
+For example, if you want to change the first name of the sales rep with a sales rep ID of "05" in the SALES_REP table from "Susan" to "Sharon", you will type the following in the SQL editor and then execute it:
+
+<pre style="white-space:pre-wrap;">
+<code>
+    UPDATE SALES_REP
+        SET FIRST_NAME = "Sharon"
+            WHERE REP_ID = "05";
+</code>
+</pre>
+
+
+**Question 10**: Which SQL command do you use to delete rows from a table?
+**Answer**: We use DELETE command to delete rows from a table.  For example, the following command can be used to delete the row on which the sales rep ID is 05.
+
+<pre style="white-space:pre-wrap;">
+<code>
+    DELETE
+        FROM SALES_REP
+            WHERE REP_ID = "05";
+</code>
+</pre>
+
+
+**Question 11**: How do you display the columns in a table and their characteristics in MySQL?
+**Answer**: In MySQL, we use the DESCRIB command, followed by the name of the table in which we want to display the columns in the table and their characteristics, followed by a semi-colon. For example, the following SQL command can be used to display the columns in the SALES_REP table and their characteristics in MySQL.
+
+<pre style="white-space:pre-wrap;">
+<code>
+    DESCRIBE SALES_REP;
+</code>
+</pre>
+
+##### Critical Thinking
+
+**Question 1**. Explain the difference between the CHAR data type and the VARCHAR data type. Use the Internet to find examples of when to use VARCHAR and when to use CHAR. Be sure to cite the URL(s) that provided the examples as references at the end of your document.
+**Answer:**
+The following table summarizes the differences between CHAR data type and the VARCHAR data type.
+
+| CHAR data type | VARCHAR data type |
+| --- | --- |
+| Used to define a column that is used to store a character string data that is expected to have a fixed number of n character long | Used to define a column that is used to store a character string data that is expected to have a variable number of charater from a minimum of 1 to a maximum n character long |
+|  DBMS process them more rapidly than VARCHAR(n) during queries and updates  | DBMS such as MySQL does not process them more rapidly as compared to CHAR(n) during queries and updates |
+| If a column is defined as CHAR(20) an entry such as "Susan" requires pad space when storing it (5 with character values, and 15 with empty spaces) | If a column is defined as VARCHAR(20) an entry such as "Susan" require  no pad space when storing it (It will be stored as 5 character long)|
+| Each character takes 1 byte of storage | Each character takes 1 byte of storage plus an extra byte for holding the length of the information |
+ 
+**Reference**:
+1. Singh, A. (2023, January 13). Difference Between Char and Varchar - Shiksha Online. Shiksha.com; Shiksha Online. https://www.shiksha.com/online-courses/articles/difference-between-char-and-varchar/#:~:text=Char%20has%20a%20fixed%20size
+
+**Question 2**. Use the Internet to research BOOLEAN data types. What is a BOOLEAN data type and what is it called in Oracle, SQL Server, and MySQL? Be sure to cite the URL(s) that provided the information at the end of your document.
+**Answer:**
+A boolean data type allows a column to store either True or False. In databases, True is often stored as 1 and False is normally stored as 0. In Oracle, Booleans are called NUMBER(1). In SQL server, Boolean are called BIT. In MySQL, Booleans are called BIT or TINYINT.
+
+**Reference**:
+1. Ben. (2019, August 6). SQL Boolean Data Type. Database Star. https://www.databasestar.com/sql-boolean-data-type/
+
+
+#### Case Exercises
+
+- To print a copy of your commands using MySQL, start Word or another word processor and create a new document. Select the SQL command(s) in SQL Server, copy it to the Clipboard, and then past it into the document. To export a command’s results in MySQL, you can export a dataset to an external file by selecting the Export/Import option in the result grid. You can then choose the type of file you want to export the data to.
+- To print a copy of your commands and results using SQL Server, start Word or another word processor and create a new document. Select the SQL command(s) in MySQL or SQL Server, copy it to the Clipboard, and then paste it into the document. To copy and paste a command’s results in SQL Server, right-click the datasheet selector (the box in the upper-left corner of the datasheet) to select the entire datasheet, copy it to the Clipboard, and then paste it into the document.
+- To print a copy of your commands and results using Oracle, use the browser’s Print command on the File menu or click the Print button on the browser’s toolbar.
+- You may also consult with your instructor for any specific instructions on how she/he would like your work submitted.
+
+##### KimTay Pet Supplies
+
+- Use SQL to complete the following exercises.
+
+**Question 1**: Create a table named REP. The table has the same structure as the SALES_REP table shown in Figure 3-15 except the LAST_NAME column should use the VARCHAR data type and the COMMISSION and RATE columns should use the NUMERIC data type. Execute the command to describe the layout and characteristics of the REP table.
+ 
+**Answer**: 
+- Here is the SQL command that was executed using MySQL:
+
+<pre style="white-space: pre-wrap;">
+<code>
+CREATE TABLE REP 
+(
+    REP_ID CHAR(2) PRIMARY KEY,
+	FIRST_NAME CHAR(20),
+	LAST_NAME VARCHAR(20),
+	ADDRESS CHAR(20),
+	CITY CHAR(15),
+	STATE CHAR(2),
+	POSTAL CHAR(5),
+	CELL_PHONE CHAR(12),
+	COMMISSION DECIMAL(7, 2),
+	RATE DECIMAL(3, 2)
+);
+</code>
+</pre>
+
+- Here is the output of the SQL command:
+
+![The structure of the REP table](./images/module_2_question_1_rep_table_display.JPG)
+
+**Question 2**: Add the following row to the REP table: rep ID: 35, first name: Fred; last name: Kiser; address: 427 Billings Dr.; city: Cody; state: WY; postal: 82414; cell phone: 307-555-6309; commission: 0.00; and rate: 0.05. Display the contents of the REP table.
+
+- Here is the SQL commands that was used: 
+
+**Answer**: 
+
+<pre style="white-space: pre-wrap";>
+<code>
+INSERT INTO REP
+    VALUES ("35", "Fred", "Kiser", "427 Billings Dr.", "Cody", "WY", "82414", "307-555-6309", 0.00, 0.05);
+</code>
+</pre>
+    
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT * 
+    FROM REP;
+</code>
+</pre>
+
+
+- Here is the contents of the REP table:
+
+![The contents of the REP table](./images/module_2_question_2_rep_table_display.JPG)
+
+**Question 3**: Delete the REP table.
+
+**Answer**: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+DROP TABLE REP;
+</code>
+</pre>
+
+**Question 4**: Run the script file for the KimTay Pet Supplies database to create the five tables and add records to the tables. Be sure to select the script file for the particular DBMS that you are using (MySQL, Oracle, or SQL Server).
+
+**Answer**: 
+
+**Table 1: SALES_REP**
+- Create the SALES_REP table using the CREATE TABLE command in MySQL and use DESCRIBE command to display its structure.:
+
+<pre style="white-space: pre-wrap;">
+<code>
+CREATE TABLE SALES_REP
+(
+	REP_ID CHAR (2) PRIMARY KEY,
+	FIRST_NAME CHAR (20) NOT NULL,
+	LAST_NAME CHAR (20) NOT NULL,
+	ADDRESS CHAR (20),
+	CITY CHAR (15),
+	STATE CHAR (2),
+	POSTAL CHAR (5),
+	CELL_PHONE CHAR (12),
+	COMMISSION DECIMAL (7, 2),
+	RATE DECIMAL (3, 2)
+);
+
+DESCRIBE SALES_REP;
+</code>
+</pre>
+
+- Add data to the SALES_REP table using the INSERT INTO command in MySQL and displaying the data after the process using SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>
+INSERT INTO SALES_REP
+    VALUES ("05", "Susan", "Garcia", "42 Mountain Ln", "Cody", "WY", "82414", "307-824-1245", 12743.16, 0.04);
+    
+INSERT INTO SALES_REP
+    VALUES ("10", "Richard", "Miller", "87 Pikes Dr", "Ralston", "WY", "82440", "307-406-4321", 20872.11, 0.06);
+    
+INSERT INTO SALES_REP
+    VALUES ("15", "Donna", "Smith", "312 Oak Rd", "Powell", "WY", "82440", "307-982-8401", 14912.92, 0.04);
+    
+INSERT INTO SALES_REP
+    VALUES ("20", "Daniel", "Jackson", "19 Lookout Dr", "Elk Butte", "WY", "82433", "307-833-9481", 0.00, 0.04);
+    
+SELECT * 
+    FROM SALES_REP;
+</code>
+</pre>
+
+
+**Table 2: CUSTOMER**
+- Create the CUSTOMER table using the CREATE TABLE command in MySQL and use DESCRIBE command to display its structure.:
+
+<pre style="white-space: pre-wrap;">
+<code>
+CREATE TABLE CUSTOMER
+(
+    CUST_ID CHAR (3) PRIMARY KEY,
+    FIRST_NAME CHAR (20) NOT NULL,
+    LAST_NAME CHAR (20) NOT NULL,
+    ADDRESS CHAR (20),
+    CITY CHAR (15),
+    STATE CHAR (2),
+    POSTAL CHAR (5),
+    EMAIL CHAR (25),
+    BALANCE DECIMAL (7, 2),
+    CREDIT_LIMIT DECIMAL (7, 2),
+    REP_ID CHAR (2)
+);
+
+DESCRIBE CUSTOMER;
+</code>
+</pre>
+
+- Add data to the CUSTOMER table using the INSERT INTO command in MySQL and displaying the data after the process using SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>
+INSERT INTO CUSTOMER
+    VALUES ("125", "Joey", "Smith", "17 Fourth St", "Cody", "WY", "82414", "jsmith17@example.com", 80.68, 500.00, "05");
+INSERT INTO CUSTOMER
+    VALUES ("182", "Billy", "Rufton", "21 Simple Cir", "Garland", "WY", "82435", "billyruff@example.com", 43.13, 750.00, "10");
+INSERT INTO CUSTOMER
+    VALUES ("227", "Sandra", "Pincher", "53 Verde Ln", "Powell", "WY", "82440", "spinch2@example.com", 156.38, 500.00, "15");
+INSERT INTO CUSTOMER
+    VALUES ("294", "Samantha", "Smith", "14 Rock Ln", "Ralston", "WY", "82440", "ssmith5@example.com", 58.60, 500.00, "10");
+INSERT INTO CUSTOMER
+    VALUES ("314","Tom", "Rascal", "1 Rascal Farm Rd", "Cody", "WY", "82414", "trascal3@example.com", 17.25, 250.00, "15");
+INSERT INTO CUSTOMER
+    VALUES ("375", "Melanie", "Jackson", "42 Blackwater Way", "Elk Butte", "WY", "82433", "mjackson5@example.com", 252.25, 250.00, "05");
+INSERT INTO CUSTOMER
+    VALUES ("435", "James", "Gonzalez", "16 Rockway Rd", "Wapiti", "WY", "82450", "jgonzo@example.com", 230.40, 1000.00, "15");
+INSERT INTO CUSTOMER
+    VALUES ("492", "Elmer", "Jackson", "22 Jackson Farm Rd", "Garland", "WY", "82435", "ejackson4@example.com", 45.20, 500.00, "10");
+INSERT INTO CUSTOMER 
+    VALUES ("543", "Angie", "Hendricks", "27 Locklear Ln", "Powell", "WY", "82440", "ahendricks7@example.com", 315.00, 750.00,"05");
+INSERT INTO CUSTOMER
+    VALUES ("616", "Sally", "Cruz", "199 18th Ave", "Ralston", "WY", "82440", "scruz5@example.com", 8.33, 500.00, "15");
+INSERT INTO CUSTOMER
+    VALUES ("721", "Leslie", "Smith", "123 Sheepland Rd", "Elk Butte", "WY", "82433", "lsmith12@example.com", 166.65, 1000.00,"10");
+INSERT INTO CUSTOMER
+    VALUES ("795", "Randy", "Blacksmith", "75 Stream Rd", "Cody", "WY", "82414", "rblacksmith6@example.com", 61.50, 500.00, "05");
+    
+SELECT * 
+    FROM CUSTOMER;
+</code>
+</pre>
+
+
+**Table 3: INVOICES**
+- Create the INVOICES table using the CREATE TABLE command in MySQL and use DESCRIBE command to display its structure.:
+
+<pre style="white-space: pre-wrap;">
+<code>
+CREATE TABLE INVOICES
+(
+    INVOICE_NUM CHAR(5) PRIMARY KEY,
+    INVOICE_DATE DATE,
+    CUST_ID CHAR(3)
+);
+
+DESCRIBE INVOICES;
+</code>
+</pre>
+
+- Add data to the INVOICES table using the INSERT INTO command in MySQL and displaying the data after the process using SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>
+INSERT INTO INVOICES
+    VALUES ("14216", "2021-11-15", "125");
+INSERT INTO INVOICES
+    VALUES ("14219", "2021-11-15", "227");
+INSERT INTO INVOICES
+    VALUES ("14222", "2021-11-16", "294");
+INSERT INTO INVOICES
+    VALUES ("14224", "2021-11-16", "182");
+INSERT INTO INVOICES
+    VALUES ("14228", "2021-11-18", "435");
+INSERT INTO INVOICES
+    VALUES ("14231", "2021-11-18", "125");
+INSERT INTO INVOICES
+    VALUES ("14233", "2021-11-18", "435");
+INSERT INTO INVOICES
+    VALUES ("14237", "2021-11-19", "616");
+    
+SELECT * 
+    FROM INVOICES;
+</code>
+</pre>
+
+
+**Table 4: ITEM**
+- Create the ITEM table using the CREATE TABLE command in MySQL and use DESCRIBE command to display its structure.:
+
+<pre style="white-space: pre-wrap;">
+<code>
+CREATE TABLE ITEM
+(
+    ITEM_ID CHAR (4) PRIMARY KEY,
+    DESCRIPTION CHAR (30),
+    ON_HAND DECIMAL (4, 0),
+    CATEGORY CHAR (3),
+    LOCATION CHAR (1),
+    PRICE DECIMAL (6, 2)
+);
+
+DESCRIBE ITEM;
+</code>
+</pre>
+
+- Add data to the ITEM table using the INSERT INTO command in MySQL and displaying the data after the process using SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>
+INSERT INTO ITEM
+    VALUES ("AD72", "Dog Feeding Station", 12, "DOG", "B", 79.99);
+INSERT INTO ITEM
+    VALUES ("BC33", "Feathers Bird Cage (12x24x18)", 10, "BRD", "B", 79.99);
+INSERT INTO ITEM
+    VALUES ("CA75", "Enclosed Cat Litter Station", 15, "CAT", "C", 39.99);
+INSERT INTO ITEM
+    VALUES ("DT12", "Dog Toy Gift Set", 27, "DOG", "B", 39.99);
+INSERT INTO ITEM
+    VALUES ("FM23", "Fly Mask with Ears", 41, "HOR", "C", 24.95);
+INSERT INTO ITEM
+    VALUES ("FS39", "Folding Saddle Stand", 12, "HOR", "C", 39.99);
+INSERT INTO ITEM
+    VALUES ("FS42", "Aquarium (55 Gallon)", 5, "FSH", "A", 124.99);
+INSERT INTO ITEM
+    VALUES ("KH81", "Wild Bird Food (25 lb)", 24, "BRD", "C",19.99);
+INSERT INTO ITEM
+    VALUES ("LD14", "Locking Small Dog Door", 14, "DOG", "A", 49.99);
+INSERT INTO ITEM
+    VALUES ("LP73", "Large Pet Carrier", 23, "DOG", "B", 59.99);
+INSERT INTO ITEM
+    VALUES ("PF19", "Pump & Filter Kit", 5, "FSH", "A", 74.99);
+INSERT INTO ITEM
+    VALUES ("QB92", "Quilted Stable Blanket", 32, "HOR", "C", 119.99);
+INSERT INTO ITEM
+    VALUES ("SP91", "Small Pet Carrier", 18, "CAT", "B", 39.99);
+INSERT INTO ITEM
+    VALUES ("UF39", "Underground Fence System", 7, "DOG", "A", 199.99);
+INSERT INTO ITEM
+    VALUES ("WB49", "Insulated Water Bucket", 34, "HOR", "C", 79.99);
+    
+SELECT * 
+    FROM ITEM;
+</code>
+</pre>
+
+
+**Table 5: INVOICE_LINE**
+- Create the INVOICE_LINE table using the CREATE TABLE command in MySQL and use DESCRIBE command to display its structure.:
+
+<pre style="white-space: pre-wrap;">
+<code>
+CREATE TABLE INVOICE_LINE
+(
+    INVOICE_NUM CHAR(5),		
+    ITEM_ID CHAR(4),
+    QUANTITY DECIMAL(3, 0),
+    QUOTED_PRICE DECIMAL(6, 2),
+    PRIMARY KEY (INVOICE_NUM, ITEM_ID)
+);
+
+DESCRIBE INVOICE_LINE;
+</code>
+</pre>
+
+- Add data to the INVOICE_LINE table using the INSERT INTO command in MySQL and displaying the data after the process using SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>
+INSERT INTO INVOICE_LINE
+    VALUES ("14216", "CA75", 3, 37.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14219", "AD72", 2, 79.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14219", "DT12", 4, 39.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14222", "LD14", 1, 47.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14224", "KH81", 4, 18.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14228", "FS42", 1, 124.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14228", "PF19", 1, 74.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14231", "UF39", 2, 189.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14233", "KH81", 1, 19.99);
+INSERT INTO INVOICE_LINE
+    VALUES ("14233", "QB92", 4, 109.95);
+INSERT INTO INVOICE_LINE
+    VALUES ("14233", "WB49", 4, 74.95);
+INSERT INTO INVOICE_LINE
+    VALUES ("14237", "LP73", 3, 54.95);
+    
+SELECT * 
+    FROM INVOICE_LINE;
+</code>
+</pre>
+
+
+**Question 5**: Confirm that you have created the tables correctly by describing each table and comparing the results to Figures 3-15, 3-39, 3-41, 3-43, and 3-45.
+
+**Answer**: 
+
+**Table 1: SALES_REP**
+- Describing the SALES_REP table using the DESCRIBE command to display its structure:
+
+<pre style="white-space: pre-wrap;">
+<code>
+DESCRIBE SALES_REP;
+</code>
+</pre>
+
+![module 5 question 5 sale rep table description](./images/module_5_question_5_sale_rep_table_description.JPG)
+
+**Table 2: CUSTOMER**
+- Describing the CUSTOMER table using the DESCRIBE command to display its structure:
+
+<pre style="white-space: pre-wrap;">
+<code>
+DESCRIBE CUSTOMER;
+</code>
+</pre>
+
+![module 5 question 5 customer table description](./images/module_5_question_5_customer_table_description.JPG)
+
+**Table 3: INVOICES**
+- Describing the INVOICES table using the DESCRIBE command to display its structure:
+
+<pre style="white-space: pre-wrap;">
+<code>
+DESCRIBE INVOICES;
+</code>
+</pre>
+
+![module 5 question 5 invoices table description](./images/module_5_question_5_invoices_table_description.JPG)
+
+**Table 4: ITEM**
+- Describing the ITEM table using the DESCRIBE command to display its structure:
+
+<pre style="white-space: pre-wrap;">
+<code>
+DESCRIBE ITEM;
+</code>
+</pre>
+
+![module 5 question 5 item table description](/images/module_5_question_5_item_table_description.JPG)
+
+**Table 5: INVOICE_LINE**
+- Describing the INVOICE_LINE table using the DESCRIBE command to display its structure:
+
+<pre style="white-space: pre-wrap;">
+<code>
+DESCRIBE INVOICE_LINE;
+</code>
+</pre>
+
+![module 5 question 5 invoice line table description](./images/module_5_question_5_invoice_line_table_description.JPG)
+
+**Question 6**: Confirm that you have added all data correctly by viewing the data in each table and comparing the results to Figure 2-1 in Module 2.
+
+**Answer**: 
+
+**Table 1: SALES_REP**
+
+- Displaying the all the data in the SALES_REP table using the SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>   
+SELECT * 
+    FROM SALES_REP;
+</code>
+</pre>
+
+![module 5 question 6 sale rep table description](./images/module_5_question_5_sale_rep_table_data.JPG)
+
+**Table 2: CUSTOMER**
+
+- Displaying the all the data in the CUSTOMER table using the SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>    
+SELECT * 
+    FROM CUSTOMER;
+</code>
+</pre>
+
+![module 5 question 6 customer table description](./images/module_5_question_5_customer_table_data.JPG)
+
+
+**Table 3: INVOICES**
+
+- Displaying the all the data in the INVOICES table using the SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT * 
+    FROM INVOICES;
+</code>
+</pre>
+
+![module 5 question 6 invoices table description](./images/module_5_question_5_invoices_table_data.JPG)
+
+
+**Table 4: ITEM**
+
+- Displaying the all the data in the ITEM table using the SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT * 
+    FROM ITEM;
+</code>
+</pre>
+
+![module 5 question 6 item table description](./images/module_5_question_6_item_table_data.JPG)
+
+
+**Table 5: INVOICE_LINE**
+
+- Displaying the all the data in the INVOICE_LINE table using the SELECT command.
+
+<pre style="white-space: pre-wrap;">
+<code>  
+SELECT * 
+    FROM INVOICE_LINE;
+</code>
+</pre>
+
+![module 5 question 6 invoice line table description](./images/module_5_question_6_invoice_line_table_data.JPG)
+
+
+##### Critical Thinking
+
+**Question 1.** Review the data for the ITEM table in Figure 2-1 in Module 2 and then review the data types used to create the ITEM table in Figure 3-34. Suggest alternate data types for the DESCRIPTION, ON_HAND, and STOREHOUSE fields and explain your recommendations.
+
+- The alternate data types for the DESCRIPTION should be VARCHAR(30) because the each description has a variable length.
+- The alternate data types for the ON_HAND should be INT because it's does not contain any decimal point. It's a whole number.
+- There is no STOREHOUSE in the ITEM table.
+
+##### StayWell Student Accommodation
+
+Use SQL to complete the following exercises.
+
+**Question 1**: Create a table named SUMMER_SCHOOL_RENTALS. The table has the same structure as the PROPERTY table shown in Figure 3-48 except the PROPERTY_ID and OFFICE_NUMBER columns should use the NUMBER data type and the MONTHLY_RENT column should be changed to WEEKLY_RENT. Execute the command to describe the layout and characteristics of the SUMMER_SCHOOL_RENTALS table.
+
+**Answer**: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+CREATE TABLE SUMMER_SCHOOL_RENTALS
+(
+    PROPERTY_ID INT PRIMARY KEY,
+    OFFICE_NUM INT,
+    ADDRESS CHAR (25),
+    SQR_FT DECIMAL (5, 0),
+    BDRMS DECIMAL (2, 0),
+    FLOORS DECIMAL (2, 0),
+    WEEKLY_RENT DECIMAL (6, 2),
+    OWNER_NUM CHAR (5)
+);
+
+DESCRIBE SUMMER_SCHOOL_RENTALS;
+</code>
+</pre>
+
+![module 3 SUMMER_SCHOOL_RENTALS table creation and description](./images/module-3-summer_school_rentals-table-creation-and-description.JPG)
+
+
+**Question 2**: Add the following row to the SUMMER_SCHOOL_RENTALS table: property ID: 13; office ID: 1; address: 5867 Goodwin Ave; square feet: 1,650; bedrooms: 2; floors 1; weekly rent: 400; owner number: CO103.
+
+**Answer**: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+INSERT INTO SUMMER_SCHOOL_RENTALS
+	VALUES (13, 1, "5867 Goodwin Ave", 1650, 2, 1, 400, "CO103");
+
+SELECT * 
+	FROM SUMMER_SCHOOL_RENTALS;
+</code>
+</pre>
+
+![add row to the summer school rentals table](./images/add-row-to-the-summer_school_rentals-table.JPG)
+
+**Question 3**: Delete the SUMMER_SCHOOL_RENTALS table.
+
+**Answer**: 
+<pre style="white-space: pre-wrap;">
+<code>
+DROP TABLE SUMMER_SCHOOL_RENTALS;
+</code>
+</pre>
+
+**Question 4**: Run the script file for the StayWell database to create the six tables and add records to the tables. Be sure to select the script file for the particular DBMS that you are using (MySQL, Oracle, or SQL Server). (Note: If you do not have the script files for this text, ask your instructor for assistance.)
+
+**Answer**: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+#-------------------------------STAYWELL DATABASE----------------------#
+
+# Create STAYWELL database
+DROP DATABASE IF EXISTS STAYWELL;
+CREATE DATABASE STAYWELL;
+USE STAYWELL;
+
+#--------------------------------Table 2: OFFICE TABLE ---------------------------#
+
+# Create OFFICE table
+DROP TABLE IF EXISTS OFFICE;
+CREATE TABLE OFFICE 
+(
+	OFFICE_NUM INT PRIMARY KEY,
+    OFFICE_NAME VARCHAR(50) NOT NULL,
+    ADDRESS VARCHAR(100) NOT NULL,
+    AREA VARCHAR(50) NOT NULL,
+    CITY VARCHAR(20) NOT NULL,
+    STATE CHAR(2) NOT NULL,
+    ZIP_CODE CHAR(5) NOT NULL
+);
+
+# Display the structure of the OFFICE table
+DESCRIBE OFFICE;
+
+# Add data to the OFFICE table
+INSERT INTO OFFICE 
+	VALUES('1','StayWell-Colombia City','1135 N. Wells Avenue','Colombia City','Seattle','WA','98118');
+INSERT INTO OFFICE 
+	VALUES('2','StayWell-Georgetown','986 S. Madison Rd','Georgetown','Seattle','WA','98108');
+    
+# Displaying the all the data in the OFFICE table
+SELECT * 
+	FROM OFFICE;
+
+#--------------------------------Table 2: OWNER TABLE ---------------------------#
+
+# Create OWNER table
+DROP TABLE IF EXISTS OWNER;
+CREATE TABLE OWNER 
+(
+	OWNER_NUM CHAR(5) PRIMARY KEY,
+    LAST_NAME VARCHAR(20) NOT NULL,
+    FIRST_NAME VARCHAR(20) NOT NULL,
+    ADDRESS VARCHAR(100) NOT NULL,
+    CITY VARCHAR(20) NOT NULL,
+    STATE CHAR(2) NOT NULL,
+    ZIP_CODE CHAR(5) NOT NULL
+);
+
+# Display the structure of the OWNER table
+DESCRIBE OWNER;
+
+# Add data to the OWNER table
+INSERT INTO OWNER 
+	VALUES('MO100','Moore','Elle-May','8006 W. Newport Ave.','Reno','NV','89508');
+INSERT INTO OWNER 
+	VALUES('PA101','Patel','Makesh','7337 Sheffield St.','Seattle','WA','98119');
+INSERT INTO OWNER 
+	VALUES('AK102','Aksoy','Ceyda','411 Griffin Rd.','Seattle','WA','98131');
+INSERT INTO OWNER 
+	VALUES('CO103','Cole','Meerab','9486 Circle Ave.','Olympia','WA','98506');
+INSERT INTO OWNER 
+	VALUES('KO104','Kowalczyk','Jakub','7431 S. Bishop St.','Bellingham','WA','98226');
+INSERT INTO OWNER 
+	VALUES('SI105','Sims','Haydon','527 Primrose Rd.','Portland','OR','97203');
+INSERT INTO OWNER 
+	VALUES('BU106','Burke','Ernest','613 Old Pleasant St.','Twin Falls','ID','83303');
+INSERT INTO OWNER 
+	VALUES('RE107','Redman','Seth','7681 Fordham St.','Seattle','WA','98119');
+INSERT INTO OWNER 
+	VALUES('LO108','Lopez','Janine','9856 Pumpkin Hill Ln.','Everett','WA','98213');
+INSERT INTO OWNER 
+	VALUES('BI109','Bianchi','Nicole','7990 Willow Dr.','New York','NY','10005');
+INSERT INTO OWNER 
+	VALUES('JO110','Jones','Ammarah','730 Military Ave.','Seattle','WA','98126');
+    
+
+# Displaying the all the data in the OWNER table
+SELECT * 
+	FROM OWNER;
+
+
+#--------------------------------Table 3: PROPERTY TABLE ---------------------------#
+
+# Create PROPERTY table
+DROP TABLE IF EXISTS PROPERTY;
+CREATE TABLE PROPERTY 
+(
+    PROPERTY_ID INT PRIMARY KEY,
+    OFFICE_NUM INT NOT NULL,
+    ADDRESS VARCHAR(100) NOT NULL,
+    SQR_FT INT NOT NULL,
+    BDRMS INT NOT NULL,
+    FLOORS INT NOT NULL,
+    MONTHLY_RENT INT NOT NULL,
+    OWNER_NUM CHAR(5) NOT NULL
+);
+
+# Display the structure of the PROPERTY table
+DESCRIBE PROPERTY;
+
+# Add data to the PROPERTY table
+INSERT INTO PROPERTY 
+	VALUES('1','1','30 West Thomas Rd.','1600','3','1',1400,'BU106');
+INSERT INTO PROPERTY 
+	VALUES('2','1','782 Queen Ln.','2100','4','2',1900,'AK102');
+INSERT INTO PROPERTY 
+	VALUES('3','1','9800 Sunbeam Ave.','1005','2','1',1200,'BI109');
+INSERT INTO PROPERTY 
+	VALUES('4','1','105 North Illinois Rd.','1750','3','1',1650,'KO104');
+INSERT INTO PROPERTY 
+	VALUES('5','1','887 Vine Rd.','1125','2','1',1160,'SI105');
+INSERT INTO PROPERTY 
+	VALUES('6','1','8 Laurel Dr.','2125','4','2',2050,'MO100');
+INSERT INTO PROPERTY 
+	VALUES('7','2','447 Goldfield St.','1675','3','2',1700,'CO103');
+INSERT INTO PROPERTY 
+	VALUES('8','2','594 Leatherwood Dr.','2700','5','2',2750,'KO104');
+INSERT INTO PROPERTY 
+	VALUES('9','2','504 Windsor Ave.','700','2','1',1050,'PA101');
+INSERT INTO PROPERTY 
+	VALUES('10','2','891 Alton Dr.','1300','3','1',1600,'LO108');
+INSERT INTO PROPERTY 
+	VALUES('11','2','9531 Sherwood Rd.','1075','2','1',1100,'JO110');
+INSERT INTO PROPERTY 
+	VALUES('12','2','2 Bow Ridge Ave.','1400','3','2',1700,'RE107');
+    
+# Displaying the all the data in the PROPERTY table
+SELECT * 
+	FROM PROPERTY;
+
+#--------------------------------Table 4: SERVICE_CATEGORY TABLE ---------------------------#
+
+# Create SERVICE_CATEGORY table
+DROP TABLE IF EXISTS SERVICE_CATEGORY;
+CREATE TABLE SERVICE_CATEGORY 
+(
+	CATEGORY_NUM INT PRIMARY KEY,
+    CATEGORY_DESCRIPTION VARCHAR(100) NOT NULL
+);
+
+# Display the structure of the SERVICE_CATEGORY table
+DESCRIBE SERVICE_CATEGORY;
+
+# Add data to the SERVICE_CATEGORY table
+INSERT INTO SERVICE_CATEGORY 
+	VALUES('1','Plumbing');
+INSERT INTO SERVICE_CATEGORY 
+	VALUES('2','Heating');
+INSERT INTO SERVICE_CATEGORY 
+	VALUES('3','Painting');
+INSERT INTO SERVICE_CATEGORY 
+	VALUES('4','Electrical Systems');
+INSERT INTO SERVICE_CATEGORY 
+	VALUES('5','Carpentry');
+INSERT INTO SERVICE_CATEGORY 
+	VALUES('6','Furniture replacement');
+    
+# Displaying the all the data in the SERVICE_CATEGORY table
+SELECT * 
+	FROM SERVICE_CATEGORY;
+    
+#--------------------------------Table 5: SERVICE_REQUEST TABLE ---------------------------#
+
+# Create SERVICE_REQUEST table
+DROP TABLE IF EXISTS SERVICE_REQUEST;
+CREATE TABLE SERVICE_REQUEST 
+(
+    SERVICE_ID INT PRIMARY KEY,
+    PROPERTY_ID INT NOT NULL,
+    CATEGORY_NUMBER INT NOT NULL,
+    OFFICE_ID INT NOT NULL,
+    DESCRIPTION VARCHAR(200) NOT NULL,
+    STATUS VARCHAR(200) NOT NULL,
+    EST_HOURS INT NOT NULL,
+    SPENT_HOURS INT NOT NULL,
+    NEXT_SERVICE_DATE DATE
+);
+
+# Display the structure of the SERVICE_REQUEST table
+DESCRIBE SERVICE_REQUEST;
+
+# Add data to the SERVICE_REQUEST table
+INSERT INTO SERVICE_REQUEST 
+	VALUES('1','11','2','2','The second bedroom upstairs is not heating up at night.','Problem has been confirmed. central heating engineer has been scheduled. ','2','1','2019-11-01');
+INSERT INTO SERVICE_REQUEST 
+	VALUES('2','1','4','1','A new strip light is needed for the kitchen.','Scheduled','1','0','2019-10-2');
+INSERT INTO SERVICE_REQUEST 
+	VALUES('3','6','5','1','The bathroom door does not close properly.','Service rep has confirmed issue. Scheduled to be refitted.','3','1','2019-11-09');
+INSERT INTO SERVICE_REQUEST 
+	VALUES('4','2','4','1','New outlet has been requested for the first upstairs bedroom. (There is currently no outlet).','Scheduled','1','0','2019-10-02');
+INSERT INTO SERVICE_REQUEST 
+	VALUES('5','8','3','2','New paint job requested for the common area (lounge). ','Open','10','0',NULL);
+INSERT INTO SERVICE_REQUEST 
+	VALUES('6','4','1 ','1','Shower is dripping when not in use.','Problem confirmed. Plumber has been scheduled.','4','2','2019-10-07');
+INSERT INTO SERVICE_REQUEST 
+	VALUES('7','2','2','1','Heating unit in the entrance smells like its burning.','Service rep confirmed the issue to be dust in the heating unit. To be cleaned.  ','1','0','2019-10-09');
+INSERT INTO SERVICE_REQUEST 
+	VALUES('8','9','1','2','Kitchen sink does not drain properly. ','Problem confirmed. Plumber scheduled.','6','2','2019-11-12');
+INSERT INTO SERVICE_REQUEST 
+	VALUES('9','12','6','2','New sofa requested.','Open','2','0',NULL);
+
+# Displaying the all the data in the SERVICE_REQUEST table
+SELECT * 
+	FROM SERVICE_REQUEST;
+
+#--------------------------------Table 6: RESIDENTS TABLE ---------------------------#
+
+# Create RESIDENTS table
+DROP TABLE IF EXISTS RESIDENTS;
+CREATE TABLE RESIDENTS 
+(
+    RESIDENT_ID INT PRIMARY KEY,
+    FIRST_NAME VARCHAR(20) NOT NULL,
+    SURNAME VARCHAR(20) NOT NULL,
+    PROPERTY_ID INT NOT NULL
+);
+
+# Display the structure of the RESIDENTS table
+DESCRIBE RESIDENTS;
+
+# Add data to the RESIDENTS table
+INSERT INTO RESIDENTS 
+	VALUES('1','Albie ','ORyan','1');
+INSERT INTO RESIDENTS 
+	VALUES('2','Tariq ','Khan','1');
+INSERT INTO RESIDENTS 
+	VALUES('3','Ismail ','Salib','1');
+INSERT INTO RESIDENTS 
+	VALUES('4','Callen ','Beck','2');
+INSERT INTO RESIDENTS 
+	VALUES('5','Milosz ','Polansky','2');
+INSERT INTO RESIDENTS 
+	VALUES('6','Ashanti ','Lucas','2');
+INSERT INTO RESIDENTS 
+	VALUES('7','Randy ','Woodrue','2');
+INSERT INTO RESIDENTS 
+	VALUES('8','Aislinn ','Lawrence','3');
+INSERT INTO RESIDENTS 
+	VALUES('9','Monique ','French','3');
+INSERT INTO RESIDENTS 
+	VALUES('10','Amara ','Dejsuwan','4');
+INSERT INTO RESIDENTS 
+	VALUES('12','Rosalie ','Blackmore','4');
+INSERT INTO RESIDENTS 
+	VALUES('13','Carina ','Britton','4');
+INSERT INTO RESIDENTS 
+	VALUES('14','Valentino ','Ortega','5');
+INSERT INTO RESIDENTS 
+	VALUES('15','Kaylem ','Kent','5');
+INSERT INTO RESIDENTS 
+	VALUES('16','Alessia ','Wagner','6');
+INSERT INTO RESIDENTS 
+	VALUES('17','Tyrone ','Galvan','6');
+INSERT INTO RESIDENTS 
+	VALUES('18','Constance ','Fleming','6');
+INSERT INTO RESIDENTS
+	VALUES('19','Eamonn ','Bain','6');
+INSERT INTO RESIDENTS 
+	VALUES('20','Misbah ','Yacob','7');
+INSERT INTO RESIDENTS 
+	VALUES('21','Gianluca ','Esposito','7');
+INSERT INTO RESIDENTS 
+	VALUES('22','Elinor ','Lake','7');
+INSERT INTO RESIDENTS 
+	VALUES('23','Ray ','Rosas','8');
+INSERT INTO RESIDENTS 
+	VALUES('24','Damon ','Caldwell','8');
+INSERT INTO RESIDENTS 
+	VALUES('25','Dawood ','Busby','8');
+INSERT INTO RESIDENTS 
+	VALUES('26','Dora ','Harris','8');
+INSERT INTO RESIDENTS 
+	VALUES('27','Leroy ','Stokes','8');
+INSERT INTO RESIDENTS 
+	VALUES('28','Tamia ','Hess','9');
+INSERT INTO RESIDENTS 
+	VALUES('29','Amelia ','Sanders','9');
+INSERT INTO RESIDENTS 
+	VALUES('30','Zarah ','Byers','10');
+INSERT INTO RESIDENTS 
+	VALUES('31','Sara ','Farrow','10');
+INSERT INTO RESIDENTS 
+	VALUES('32','Delilah ','Roy','10');
+INSERT INTO RESIDENTS 
+	VALUES('33','Dougie ','McDaniel','11');
+INSERT INTO RESIDENTS 
+	VALUES('34','Tahir ','Halabi','11');
+INSERT INTO RESIDENTS 
+	VALUES('35','Mila ','Zhikin','12');
+INSERT INTO RESIDENTS 
+	VALUES('36','Glenn ','Donovan','12');
+INSERT INTO RESIDENTS 
+	VALUES('37','Zayn ','Fowler','12');
+
+# Displaying the all the data in the SERVICE_REQUEST table
+SELECT * 
+	FROM RESIDENTS;
+</code>
+</pre>
+
+**Question 5**: Confirm that you have created the tables correctly by describing each table and comparing the results to Figures 3-48.
+
+**Answer**: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+# Display the structure of the OFFICE table
+DESCRIBE OFFICE;
+
+# Display the structure of the OWNER table
+DESCRIBE OWNER;
+
+# Display the structure of the PROPERTY table
+DESCRIBE PROPERTY;
+
+# Display the structure of the SERVICE_CATEGORY table
+DESCRIBE SERVICE_CATEGORY;
+
+# Display the structure of the SERVICE_REQUEST table
+DESCRIBE SERVICE_REQUEST;
+
+# Display the structure of the RESIDENTS table
+DESCRIBE RESIDENTS;
+</code>
+</pre>
+
+**Question 6**: Confirm that you have added all data correctly by viewing the data in each table and comparing the results to Figures 1-4 through 1-9 in Module 1.
+
+**Answer**: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+# Displaying the all the data in the OFFICE table
+SELECT * 
+	FROM OFFICE;
+
+# Displaying the all the data in the OWNER table
+SELECT * 
+	FROM OWNER;
+
+# Displaying the all the data in the PROPERTY table
+SELECT * 
+	FROM PROPERTY;
+
+# Displaying the all the data in the SERVICE_CATEGORY table
+SELECT * 
+	FROM SERVICE_CATEGORY;
+
+# Displaying the all the data in the SERVICE_REQUEST table
+SELECT * 
+	FROM SERVICE_REQUEST;
+
+# Displaying the all the data in the SERVICE_REQUEST table
+SELECT * 
+	FROM RESIDENTS;
+</code>
+</pre>
+
+
+##### Critical Thinking
+1. The SERVICE_REQUEST table uses the CHAR data type for the DESCRIPTION and STATUS fields. Is there an alternate data type that could be used to store the values in these fields? Justify your reason for choosing an alternate data type or for leaving the data type as CHAR.
+
+**Answer:**
+- The alternate data types for the DESCRIPTION and STATUS fields should be VARCHAR(255) because the each they have variable lengths.
