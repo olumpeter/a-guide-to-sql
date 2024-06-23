@@ -3231,3 +3231,1303 @@ SELECT *
 
 **Answer:**
 - The alternate data types for the DESCRIPTION and STATUS fields should be VARCHAR(255) because the each they have variable lengths.
+
+
+## MODULE 4: SINGLE-TABLE QUERIES
+
+### INTRODUCTION
+
+- In this module, you learn about the SQL SELECT command that is used to retrieve data in a database.
+- You examine ways to sort data and use SQL functions to count rows and calculate totals.
+- You also learn about a special feature of SQL that lets you nest SELECT commands by placing one SELECT command inside another.
+- Finally, you learn how to group rows that have matching values in a column.
+
+### CONSTRUCTING SIMPLE QUERIES
+
+- One of the most important features of a DBMS is its ability to answer a wide variety of questions concerning the data in a database. When you need to find data that answers a specific question, you use a query. A **query** is a question represented in a way that the DBMS can understand.
+- In SQL, you use the SELECT command to query a database. The basic form of the
+SELECT command is SELECT-FROM-WHERE. After you type the word SELECT, you list
+the columns that you want to include in the query results. This portion of the command is called the **SELECT clause**. Next, you type the word FROM followed by the name of the table that contains the data you need to query. This portion of the command is called the **FROM clause**. Finally, after the word WHERE, you list any conditions (restrictions) that apply to the data you want to retrieve. For example, when you need to retrieve the rows for only those customers with credit limits of $750, include a condition in the WHERE clause specifying that the value in the CREDIT_LIMIT column must be $750 (CREDIT_LIMIT = 750).
+- There are no special formatting rules in SQL. In this text, the FROM clause and the WHERE clause (when it is used) appear on separate lines only to make the commands more readable and understandable.
+
+#### Retrieving Certain Columns and All Rows
+
+- You can write a command to retrieve specified columns and all rows from a table, as illustrated in Example 1.
+
+**EXAMPLE 1: List the number, first name, last name, and balance for all customers.**
+- Because you need to list all customers, the WHERE clause is unnecessary; you do not need to put any restrictions on the data to retrieve. You list the columns to be included (CUST_ID, FIRST_NAME, LAST_NAME, and BALANCE) in the SELECT clause and the name of the table (CUSTOMER) in the FROM clause. Type a semicolon to indicate the end of the command. The query and its results appear in Figure 4-1.
+
+![FIGURE 4-1 SELECT command to select certain columns from the CUSTOMER table](./images/figure-4-1-select-command-to-select-certain-columns-from-the-customer-table.JPG)
+
+> **HELPFUL HINT:**
+> - Notice in Figure 4-1 the dataset that was returned contained the rows you expected, but also returned a row of null values. Because MySQL Workbench is a very powerful tool, this row of null values is for you to enter an additional row of data. You could then create a new dataset to be used in the database. If you were using the MySQL Command Client and operating at a command prompt, this would not occur. MySQL Workbench was chosen to demonstrate the execution of the SQL commands due to its graphical interface.
+
+> **HELPFUL HINT:**
+> - During execution of a query in MySQL Workbench, the query is automatically limited to producing 1000 rows by default. This setting can be modified within the SQL editor preferences that can be found in the documentation if you prefer. The query results shown within this text include all results when possible due to their limited size, so there is no need to modify this preference.
+
+> **HELPFUL HINT:**
+> - You may change the size of output pane, and results grid, to accommodate your query results. To change the size of the area, use the vertical resize pointer that separates the two areas. For example, if you hover between the query pane and the output pane, the vertical resize pointer will appear, allowing you to move the border between the two areas vertically. It may be cumbersome for you to resize the panes each time to look exactly like the one in the text, so consider using the vertical scroll bar within the results grid.
+
+#### Retrieving All Columns and All Rows
+
+- You can use the same type of command illustrated in Example 1 to retrieve all columns and all rows from a table. As Example 2 illustrates, however, you can use a shortcut to accomplish this task.
+
+**EXAMPLE 2: List the complete ITEM table.**
+
+- Instead of including every column in the SELECT clause, you can use an asterisk (*) to indicate that you want to include all columns. The result lists all columns in the order in which you described them to the DBMS when you created the table. If you want the columns listed in a different order, type the column names in the order in which you want them to appear in the query results. In this case, assuming that the default order is appropriate, you can use the query shown in Figure 4-2 to display the complete ITEM table. This is similar to how you displayed the contents of the SALES_REP table in Figures 3-31 and 3-32 in Module 3.
+
+![FIGURE 4-2 SELECT command to select all columns from the ITEM table](./images/figure-4-2-select-command-to-select-all-columns-from-the-item-table.JPG)
+
+#### Using a WHERE Clause
+
+- When you need to retrieve rows that satisfy some condition, you include a WHERE clause in the SELECT command, as shown in Example 3.
+
+**EXAMPLE 3: What is the last name of the customer with the customer ID 125?**
+
+- You can use a WHERE clause to restrict the query results to customer number 125, as shown in Figure 4-3. Because CUST_ID is a character column, the value 125 is enclosed in single quotation marks. In addition, because the CUST_ID column is the primary key of the CUSTOMER table, there can be only one customer whose number matches the number in the WHERE clause.
+
+![FIGURE 4-3 SELECT command to find the LAST_NAME of CUST_ID 125 in the CUSTOMER table](./images/figure-4-3-select-command-to-find-the-last_name-of-cust_id-125-in-the-customer-table.JPG)
+
+- The condition in the preceding WHERE clause is called a **simple condition**. A simple condition has the form column name, comparison operator, and then either another column name or a value. Figure 4-4 lists the comparison operators that you can use in SQL.
+
+![FIGURE 4-4 Comparison operators used in SQL commands](./images/figure-4-4-comparison-operators-used-in-sql-commands.JPG)
+
+**EXAMPLE 4: Find the last name of each customer located in the city Cody.**
+
+- The only difference between this example and the previous one is that in Example 3, there could only be one row in the answer because the condition involved the table’s primary key. In Example 4, the condition involves a column that is not the table’s primary key. Because there is more than one customer located in the city of Cody, the results can and do contain more than one row, as shown in Figure 4-5.
+
+![FIGURE 4-5 SELECT command to find the LAST_NAME of all customers living in the CITY of Cody](./images/figure-4-5-select-command-to-find-the-last_name-of-all-customers-living-in-the-city-of-cody.JPG)
+
+**EXAMPLE 5: Find first name, last name, balance, and credit limit for all customers with balances that exceed their credit limits.**
+
+- A simple condition can also compare the values stored in two columns. In Figure 4-6, the WHERE clause includes a comparison operator that selects only those rows in which the balance is greater than the credit limit.
+
+![FIGURE 4-6 SELECT command to find specific information for customers with a BALANCE that exceeds their CREDIT_LIMIT](./images/figure-4-6-select-command-to-find-specific-information-for-customers-with-a-balance-that-exceeds-their-credit_limit.JPG)
+
+#### Using Compound Conditions
+
+- The conditions you have seen so far are called simple conditions. Examples 6, 7, and 8 require compound conditions. You form a compound condition by connecting two or more simple conditions with the `AND`, `OR`, and `NOT` operators. When the AND operator connects simple conditions, all the simple conditions must be true for the compound condition to be true. When the OR operator connects the simple conditions, the compound condition will be true whenever any one of the simple conditions is true. Preceding a condition by the NOT operator reverses the truth of the original condition. For example, if the original condition is true, the new condition will be false; if the original condition is false, the new one will be true.
+
+**EXAMPLE 6: List the descriptions of all items that are stored in location B and for which there are more than 15 units on hand.**
+
+- In Example 6, you need to retrieve those items that meet both conditions—the location is equal to B and the number of units on hand is greater than 15.
+- To find the answer, you form a compound condition using the AND operator, as shown in Figure 4-7. The query examines the data in the ITEM table and lists the items that are stored in location B and for which there are more than 15 units on hand. When a WHERE clause uses the AND operator to connect simple conditions, it also is called an **AND condition**.
+
+> **HELPFUL HINT**
+> - You may have noticed the word DESCRIPTION is not blue in the command in Figure 4-7; however, it is blue in the screen shot of the results. The word DESCRIPTION was added to the keyword list in version 8.0.4 of MySQL; however, it is a non-reserved keyword and can be used.
+
+![FIGURE 4-7 SELECT command with an AND condition on separate lines](./images/figure-4-7-select-command-with-an-and-condition-on-separate-lines.JPG)
+
+- For readability, each of the simple conditions in the query shown in Figure 4-7 appears on a separate line. Some people prefer to put the conditions on the same line with parentheses around each simple condition, as shown in Figure 4-8. These two methods accomplish the same thing. In this text, simple conditions within a compound condition appear on the same line with parentheses around each simple condition.
+
+![FIGURE 4-8 SELECT command with an AND condition on the same line](./images/figure-4-8-select-command-with-an-and-condition-on-the-same-line.JPG)
+
+> **HELPFUL HINT**
+> - Notice that the simple conditions in the previous example are contained within parentheses. Although not necessary for the condition, it does make the condition more readable and easier to identify the simple conditions comprising the compound condition. As mentioned in a previous module, proper indenting also makes the command much more readable. Some coders like to also add a set of parentheses surrounding the entire compound condition, with the simple conditions also in parentheses. Just as in mathematical equations, the inner parentheses are evaluated first and helps to force proper interpretation of the condition. Additional parentheses can be helpful when you have very complicated compound conditions.
+
+**EXAMPLE 7: List the descriptions of all items that are stored in location B or for which there are more than 15 units on hand.**
+
+- In Example 7, you need to retrieve descriptions for those items for which the location is equal to B, or the number of units on hand is greater than 15, or both. To do this, you form a compound condition using the OR operator, as shown in Figure 4-9. When a WHERE clause uses the OR operator to connect simple conditions, it also is called an **OR condition**.
+
+![FIGURE 4-9 SELECT command with an OR condition instead of the AND condition](./images/figure-4-9-select-command-with-an-or-condition-instead-of-the-and-condition.JPG)
+
+**EXAMPLE 8: List the descriptions of all items that are not stored in location B.**
+
+- For Example 8, you could use a simple condition and the not equal to operator (WHERE LOCATION < > "B"). As an alternative, you could use the EQUAL operator (5) in the condition and precede the entire condition with the NOT operator, as shown in Figure 4-10. When a WHERE clause uses the NOT operator to connect simple conditions, it also is called a **NOT condition**. You do not need to enclose the condition LOCATION 5 "B" in parentheses; however, doing so makes the command more readable.
+
+![FIGURE 4-10 SELECT command with a NOT condition](./images/figure-4-10-select-command-with-a-not-condition.JPG)
+
+#### Using the BETWEEN Operator
+
+Example 9 requires a compound condition to determine the answer.
+
+**EXAMPLE 9: List the customer ID, first name, last name, and balance of all customers with balances greater than or equal to $125 and less than or equal to $250.**
+
+- You can use a WHERE clause and the AND operator, as shown in Figure 4-11, to retrieve the data.
+
+> **HELPFUL HINT**
+> - In SQL, numbers included in queries are entered without extra symbols, such as dollar signs and commas.
+
+![FIGURE 4-11 SELECT command with an AND condition for a single column](./images/figure-4-11-select-command-with-an-and-condition-for-a-single-column.JPG)
+
+- An alternative to this approach uses the BETWEEN operator, as shown in Figure 4-12. The BETWEEN operator lets you specify a range of values in a condition.
+
+![FIGURE 4-12 SELECT command using the BETWEEN operator](./images/figure-4-12-select-command-using-the-between-operator)
+
+- The BETWEEN operator is inclusive, meaning that the query selects a value equal to either value in the condition and in the range of the values. In the clause BETWEEN 125 AND 250, for example, values of 125 through 250 would make the condition true. You can use the BETWEEN operator in MySQL, Oracle, and SQL Server.
+- The BETWEEN operator is not an essential feature of SQL; you have just seen that you can obtain the same result without it. Using the BETWEEN operator, however, does make certain SELECT commands simpler to construct.
+
+#### Using Computed Columns
+
+- You can perform computations using SQL queries. A computed column does not exist in the database but can be computed using data in the existing columns. Computations can involve any arithmetic operator shown in Figure 4-13.
+
+![FIGURE 4-13 Arithmetic operators](./images/figure-4-13-arithmetic-operators)
+
+**EXAMPLE 10: Find the number, first and last name, and available credit (the credit limit minus the balance) for each customer.**
+
+- There is no column in the KimTay Pet Supplies database that stores a customer’s available credit, but you can compute the available credit using the CREDIT_LIMIT and BALANCE columns. To compute the available credit, you use the expression CREDIT_LIMIT - BALANCE, as shown in Figure 4-14.
+
+![FIGURE 4-14 SELECT command with a computed column](./images/figure-4-14-select-command-with-a-computed-column.JPG)
+
+- You also can assign a name, or alias, to a computed column by following the computation with the word AS and the desired name. The command shown in Figure 4-15, for example, assigns the name AVAILABLE_CREDIT to the computed column using the AS keyword. Giving the column a descriptive name, such as AVAILABLE_CREDIT, is much more readable and easier to understand than using CREDIT_LIMIT – BALANCE. Because this calculation is very simple, using the calculation as the heading for the column is understandable; however, if the calculation were much more complicated and the column headings were not named accordingly, it could become quite difficult to understand.
+
+![FIGURE 4-15 SELECT command with a named computed column](./images/figure-4-15-select-command-with-a-named-computed-column.JPG)
+
+> **HELPFUL HINT**
+> - You can use names containing spaces following the word AS. In many SQL implementations, including MySQL and Oracle, you do so by enclosing the name in quotation marks (for example, AS "AVAILABLE CREDIT"). Other SQL implementations require you to enclose the name in other special characters. For example, in SQL Server, you can use either quotation marks or square brackets (AS [AVAILABLE CREDIT]).
+
+**EXAMPLE 11: Find the customer ID, first name, last name, and available credit for each customer with at least $400 of available credit.**
+
+- You also can use computed columns in comparisons, as shown in Figure 4-16. Notice it is not necessary to place parentheses around the computation (CREDIT_LIMIT – BALANCE); however, it does make the statement more readable.
+
+![FIGURE 4-16 SELECT command with a computed column in the condition](./images/figure-4-16-select-command-with-a-computed-column-in-the-condition.JPG)
+
+#### Using the LIKE Operator
+
+- In most cases, the conditions in WHERE clauses involve exact matches, such as retrieving rows for each customer located in the city of Cody. In some cases, however, exact matches do not work. For example, you might know that the desired value contains only a certain collection of characters. In such cases, you use the LIKE operator with a wildcard symbol, as shown in Example 12. Rather than testing for equality, the **LIKE** operator uses one or more wildcard characters to test for a pattern match.
+
+**EXAMPLE 12: List the customer ID, first name, last name, and complete address of each customer located at an address that contains the letters "Rock."**
+
+- All you know is that the addresses you want contain a certain collection of characters ("Rock") somewhere in the ADDRESS column, but you do not know where. In SQL, for MySQL, Oracle, SQL Server, the percent sign (%) is used as a wildcard to represent any collection of characters. As shown in Figure 4-17, the condition LIKE "%Rock%" retrieves information for each customer whose address contains some collection of characters, followed by the letters "Rock," followed potentially by some additional characters. Note that this query also would retrieve information for a customer whose address is "783 Rockabilly" because "Rockabilly" also contains the letters "Rock." Notice the results list two different occurrences where "Rock" is listed somewhere in the address of the
+customer.
+
+![FIGURE 4-17 SELECT command with a LIKE operator and wildcard characters](./images/figure-4-17-select-command-with-a-like-operator-and-wildcard-characters.JPG)
+
+- Another wildcard symbol in SQL is the underscore (_), which represents any individual character. For example, "T_m" represents the letter "T" followed by any single character, followed by the letter "m," and would retrieve rows that include words such as Tim, Tom, or T3m.
+
+> HELPFUL HINT
+> In a large database, you should use wildcards only when absolutely necessary. Searches involving wildcards can be extremely slow to process.
+
+#### Using the IN Operator
+
+- An **IN** clause, which consists of the IN operator followed by a collection of values, provides a concise way of phrasing certain conditions, as Example 13 illustrates. You will see another use for the IN clause in more complex examples later in this module.
+
+**EXAMPLE 13: List the customer ID, first name, last name, and credit limit for each customer with a credit limit of $500, $750, or $1,000.**
+
+- In this query, you can use an IN clause to determine whether a credit limit is $500, $750, or $1,000. You could obtain the same answer by using the condition WHERE (CREDIT_LIMIT = 500) OR (CREDIT_LIMIT = 750) OR (CREDIT_LIMIT = 1000). The approach shown in Figure 4-18 is simpler because the IN clause contains a collection of values: 500, 750, and 1000. The condition is true for those rows in which the value in the CREDIT_LIMIT column is in this collection.
+
+![FIGURE 4-18 SELECT command with an IN clause](./images/figure-4-18-select-command-with-an-in-clause.JPG)
+
+### SORTING
+
+- Recall that the order of rows in a table is immaterial to the DBMS. From a practical standpoint, this means that when you query a relational database, there is no defined order in which to display the results. Rows might be displayed in the order in which the data was originally entered, but even this is not certain. If the order in which the data is displayed is important, you can specifically request that the results appear in a desired order. In SQL, you specify the results order by using the ORDER BY clause.
+
+#### Using the ORDER BY Clause
+
+- You use the ORDER BY clause to list data in a specific order, as shown in Example 14.
+
+**EXAMPLE 14: List the customer ID, first name, last name, and balance of each customer. Order (sort) the output in ascending (increasing) order by balance.**
+
+- The column on which to sort data is called a sort key or simply a key. In Example 14, you need to order the output by balance, so the sort key is the BALANCE column. To sort the output, use an ORDER BY clause followed by the sort key. If you do not specify a sort order, the default is ascending. The query appears in Figure 4-19.
+
+![FIGURE 4-19 SELECT command to sort rows](./images/figure-4-19-select-command-to-sort-rows.JPG)
+
+#### Additional Sorting Options
+
+- Sometimes you might need to sort data using more than one key, as shown in
+Example 15.
+
+**EXAMPLE 15: List the customer ID, first name, last name, and credit limit of each customer. Order the customers by last name within descending credit limit. (In other words, first sort the customers by credit limit in descending order. Within each group of customers that have a common credit limit, sort the customers by last name in ascending order.)**
+
+- Example 15 involves two new ideas: sorting on multiple keys — CREDIT_LIMIT and LAST_NAME — and sorting one of the keys in descending order. When you need to sort data on two columns, the more important column (in this case, CREDIT_LIMIT) is called the major sort key (or the primary sort key) and the less important column (in this case, LAST_NAME) is called the minor sort key (or the secondary sort key). To sort on multiple keys, you list the keys in order of importance in the ORDER BY clause. To sort in descending order, you follow the name of the sort key with the DESC operator, as shown in Figure 4-20.
+
+![FIGURE 4-20 SELECT command to sort data using multiple sort keys](./images/figure-4-20-select-command-to-sort-data-using-multiple-sort-keys.JPG)
+
+### USING FUNCTIONS
+
+- SQL uses special functions, called aggregate functions, to calculate sums, averages, counts, maximum values, and minimum values. These functions apply to groups of rows. They could apply to all the rows in a table (for example, calculating the average balance of all customers). They also could apply to those rows satisfying some particular condition (for example, the average balance of all customers of sales rep 10). The descriptions of the
+aggregate functions appear in Figure 4-21.
+
+![FIGURE 4-21 SQL aggregate functions](./images/figure-4-21-sql-aggregate-functions.JPG)
+
+#### Using the COUNT Function
+
+- The **COUNT** function, as illustrated in Example 16, counts the number of rows in a table.
+
+**EXAMPLE 16: How many items are in the category DOG?**
+
+- For this query, you need to determine the total number of rows in the ITEM table with the value DOG in the CATEGORY column. You use the COUNT function to assist you. You could count the item numbers in the query results, or the number of descriptions, or the number of entries in any other column. It does not matter which column you choose because all columns should provide the same answer. Rather than arbitrarily selecting one column, most SQL implementations let you use the asterisk (*) to represent any column, as shown in Figure 4-22.
+
+![FIGURE 4-22 SELECT command to count rows](./images/figure-4-22-select-command-to-count-rows.JPG)
+
+- You also can count the number of rows in a query by selecting a specific column instead of using the asterisk, such as the ITEM_ID column, as show in Figure 4-23. This produces the same result as the command in Figure 4-22.
+
+![FIGURE 4-23 SELECT command to count rows using a specific column](./images/figure-4-23-select-command-to-count-rows-using-a-specific-column.JPG)
+
+#### Using the SUM Function
+
+- If you need to calculate the total of all customers’ balances, you can use the SUM function, as illustrated in Example 17.
+
+**EXAMPLE 17: Find the total number of KimTay Pet Supplies customers and the total of their balances.**
+
+- When you use the SUM function, you must specify the column to total, and the column’s data type must be numeric. (How could you calculate a sum of names or addresses?) Figure 4-24 shows the query and the results.
+
+![FIGURE 4-24 SELECT command to count rows and calculate a total](./images/figure-4-24-select-command-to-count-rows-and-calculate-a-total.JPG)
+
+#### Using the AVG, MAX, and MIN Functions
+
+- Using the AVG, MAX, and MIN functions is similar to using SUM, except that different statistics are calculated. AVG calculates the average value in a numeric range, MAX calculates the maximum value in a numeric range, and MIN calculates the minimum value in a numeric range.
+
+**EXAMPLE 18: Find the sum of all balances, the average balance, the maximum balance, and the minimum balance of all KimTay Pet Supplies customers.**
+
+- Figure 4-25 shows the query and the results.
+
+![FIGURE 4-25 SELECT command with multiple functions](./images/figure-4-25-select-command-with-multiple-functions.JPG)
+
+> **HELPFUL HINT**
+> - When you use the SUM, AVG, MAX, or MIN functions, SQL ignores any null value(s) in the column and eliminates them from the computations.
+> - Null values in numeric columns can produce strange results when statistics are computed. For example, suppose the BALANCE column accepts null values, there are currently four customers in the CUSTOMER table, and their respective balances are $100, $200, $300, and null (unknown). When you calculate the average balance, SQL ignores the null value and obtains a result of $200 (($100 + $200 + $300) / 3). Similarly, when you calculate the total of the balances, SQL ignores the null value and calculates a total of $600. When you count the number of customers in the table, however, SQL includes the row containing the null value, and the result is 4. Thus, the total of the balances ($600) divided by the number of customers (4) results in an average balance of $150. Being aware of the details of how functions process their data prevents unexpected results.
+
+> **HELPFUL HINT**
+> - You can use an AS clause with a function. For example, the following command computes a sum of the BALANCE column and displays the column heading as TOTAL_BALANCE in the query results:
+
+<pre style="white-space: pre-wrap">
+<code>
+SELECT SUM(BALANCE) AS TOTAL_BALANCE
+    FROM CUSTOMER;
+</code>
+</pre>
+
+#### Using the DISTINCT Operator
+
+- In some situations, the DISTINCT operator is useful when used in conjunction with the COUNT function because it eliminates duplicate values in the query results. Examples 19 and 20 illustrate the most common uses of the DISTINCT operator.
+
+**EXAMPLE 19: Find the customer ID of each customer that currently has an invoice (that is, an invoice currently in the INVOICES table).**
+
+- The command seems fairly simple. When a customer currently has an invoice, there must be at least one row in the INVOICES table on which that customer’s ID appears. You could use the query shown in Figure 4-26 to find the customer IDs with invoices.
+
+![FIGURE 4-26 SELECT command listing the customer ID for each invoice](./images/figure-4-26-select-command-listing-the-customer-id-for-each-invoice.JPG)
+
+- Notice that customer IDs 125 and 435 each appear more than once in the results; this means that both customers currently have more than one invoice in the INVOICES table. Suppose you want to list each customer ID only once, as illustrated in Example 20.
+
+**EXAMPLE 20: Find the number of each customer that currently has an open order. List each customer only once.**
+
+![FIGURE 4-27 SELECT command listing the customer ID for all invoices with duplicates removed](./images/figure-4-27-select-command-listing-the-customer-id-for-all-invoices-with-duplicates-removed.JPG)
+
+- You might wonder about the relationship between COUNT and DISTINCT, because both involve counting rows. Example 21 identifies the differences.
+
+**EXAMPLE 21: Count the number of customers that currently have invoices.**
+
+- The query shown in Figure 4-28 counts the number of customers using the CUST_ID column in the INVOICES table.
+
+![FIGURE 4-28 SELECT command utilizing COUNT that includes duplicate customer ID values](./images/figure-4-28-select-command-utilizing-count-that-includes-duplicate-customer-id-values.JPG)
+
+> **Q & A**
+> **Question**: What is wrong with the query results shown in Figure 4-28?
+> **Answer**: The answer, 8, is the result of counting the customers that have invoices multiple times—once for each separate invoice currently on file. The result counts each customer ID and does not eliminate duplicate customer numbers to provide an accurate count of the number of customers.
+
+- Some SQL implementations, including MySQL, Oracle, and SQL Server, allow you to use the DISTINCT operator to calculate the correct count, as shown in Figure 4-29. Notice the results show 6 customer ID values that have invoices, excluding duplicates.
+
+![FIGURE 4-29 SELECT command utilizing COUNT and DISTINCT that eliminates duplicate customer ID values](./images/figure-4-29-select-command-utilizing-count-and-distinct-that-eliminates-duplicate-customer-id-values)
+
+### NESTING QUERIES
+
+- Sometimes obtaining the results you need requires two or more steps, as shown in the next two examples.
+
+**EXAMPLE 22: List the item ID of each item in category HOR.**
+
+- The command to obtain the results are shown in Figure 4-30. Notice the results show four item ID values with a category of HOR (FM23, FS39, QB92, and WB49).
+
+![FIGURE 4-30 SELECT command to list all item ID values in the category HOR](./images/figure-4-30-select-command-to-list-all-item-id-values-in-the-category-hor.JPG)
+
+**EXAMPLE 23: List the invoice numbers that contain an invoice line for an item in category HOR.**
+
+- Example 23 asks you to find the invoice numbers in the INVOICE_LINE table that correspond to the item ID values in the results of the query used in Example 22. After viewing those results (FM23, FS39, QB92, and WB49), you can use the command shown in Figure 4-31.
+
+![FIGURE 4-31 SELECT command using results from Figure 4-30](./images/figure-4-31-select-command-using-results-from-figure-4-30)
+
+#### Subqueries
+
+- It is possible to place one query inside another. The inner query is called a subquery. The subquery is evaluated first. After the subquery has been evaluated, the outer query can use the results of the subquery to find its results, as shown in Example 24.
+
+**EXAMPLE 24: Find the answer to Examples 22 and 23 in one step.**
+
+- You can find the same result as in the previous two examples in a single step by using a subquery. In Figure 4-32, the command shown in parentheses is the subquery. This subquery is evaluated first, producing a temporary table. The temporary table is used only to evaluate the query—it is not available to the user or displayed—and it is deleted after the evaluation of the query is complete. In this example, the temporary table has only a single column (ITEM_ID) and four rows (FM23, FS39, QB92, and WB49). The outer query is evaluated next. In this case, the outer query retrieves the invoice number on every row in the INVOICE_LINE table for which the item ID is in the results of the subquery. Because that table contains only the item numbers in category HOR, the results display the desired list of invoice numbers. The two items happen to be on the same invoice.
+
+![FIGURE 4-32 SELECT command using the IN operator and a subquery](./images/figure-4-32-select-command-using-the-in-operator-and-a-subquery.JPG)
+
+- Figure 4-32 shows duplicate invoice numbers in the results. To eliminate this duplication, you can use the DISTINCT operator as shown in Figure 4-33.
+
+![FIGURE 4-33 SELECT command using the IN operator and a subquery, along with the DISTINCT operator](./images/figure-4-33-select-command-using-the-in-operator-and-a-subquery,-along-with-the-distinct-operator.JPG)
+
+> **HELPFUL HINT**
+> Notice the indentions with the command for readability. As previously mentioned, there are many ways to indent code for better readability. This is the method this text uses, with the beginning and ending parentheses for the subquery aligning vertically.
+
+**EXAMPLE 25: List the customer ID, first name, last name, and balance for each customer whose balance exceeds the average balance of all customers.**
+
+- In this case, you use a subquery to obtain the average balance. Because the subquery produces a single number (the average balance of all customers), each individual customer’s balance is compared to this number, and the row for a customer is selected when the customer’s balance is greater than the average balance. The query is shown in Figure 4-34. Notice the results show five customers whose balance exceeds the average balance for all customers.
+
+![FIGURE 4-34 SELECT command using an operator and a subquery](./images/figure-4-34-select-command-using-an-operator-and-a-subquery.JPG)
+
+> HELPFUL HINT
+> You cannot use the condition BALANCE > AVG(BALANCE) in the WHERE clause; you must use a subquery to obtain the average balance. Then you can use the results of the subquery in a condition, as illustrated in Figure 4-34.
+
+### GROUPING
+
+- **Grouping** creates groups of rows that share some common characteristic. If you group customers by credit limit, for example, the first group contains customers with $250 credit limits, the second group contains customers with $500 credit limits, and so on. If, on the other hand, you group customers by sales rep ID, the first group contains those customers represented by sales rep 05, the second group contains those customers represented by sales rep 10, and the third group contains those customers represented by sales rep 15.
+- When you group rows, any calculations indicated in the SELECT command are performed for the entire group. For example, if you group customers by sales rep ID and the query requests the average balance, the results include the average balance for the group of customers represented by rep 05, the average balance for the group represented by rep 10, and the average balance for the group represented by rep 15. The following examples illustrate this process.
+
+#### Using the GROUP BY Clause
+
+The GROUP BY clause lets you group data on a particular column, such as REP_ID, and then calculate statistics, when desired, as shown in Example 26.
+
+**EXAMPLE 26: For each sales rep, list the rep ID and the average balance of the rep’s customers.**
+
+- Because you need to group customers by rep ID and then calculate the average balance for all customers in each group, you must use the GROUP BY clause. In this case, GROUP BY REP_ID puts customers with the same rep ID into separate groups. Any statistics indicated in the SELECT command are calculated for each group. It is important to note that the GROUP BY clause does not sort the data in a particular order; you must use the ORDER BY clause to sort data. Assuming that the results should be ordered by rep ID, you can use the command shown in Figure 4-35.
+
+![FIGURE 4-35 SELECT command grouping records in a column](./images/figure-4-35-select-command-grouping-records-in-a-column.JPG)
+
+- When rows are grouped, one line of output is produced for each group. The only things that can be displayed are statistics calculated for the group or columns whose values are the same for all rows in a group.
+
+> **Q & A**
+> **Question**: Is it appropriate to display the rep ID in the query for Example 26?
+> **Answer**: Yes, because the rep ID in one row in a group must be the same as the rep ID in any other row in the group.
+
+> **Q & A**
+> **Question**: Would it be appropriate to display a customer ID in the query for Example 26?
+> **Answer**: No, because the customer ID varies on the rows in a group. (The same rep is associated with many customers.) The DBMS would not be able to determine which customer ID to display for the group, and would display an error message if you attempt to display a customer ID.
+
+#### Using a HAVING Clause
+
+- The HAVING clause is used to restrict the groups that are included, as shown in Example 27.
+
+**EXAMPLE 27: Repeat the previous example, but list only those reps whose customers have an average balance greater than $100.**
+
+- The only difference between Examples 26 and 27 is the restriction to display only those reps whose customers have an average balance greater than $100. This restriction does not apply to individual rows but rather to groups. Because the WHERE clause applies only to rows, you cannot use it to accomplish the kind of selection that is required. Fortunately, the HAVING clause does for groups what the WHERE clause does for rows. The HAVING clause limits the groups that are included in the results. In Figure 4-36, the row created for a group is displayed only when the average balance for the rows in the group is greater than $100.
+
+![FIGURE 4-36 SELECT command restricting the groups to include in the results](./images/figure-4-36-select-command-restricting-the-groups-to-include-in-the-results.JPG)
+
+#### HAVING vs. WHERE
+
+Just as you can use the WHERE clause to limit the *rows* that are included in a query’s result, you can use the HAVING clause to limit the groups that are included. Examples 28, 29, and 30 illustrate the difference between these two clauses.
+
+**EXAMPLE 28: List each credit limit and the number of customers having each credit limit.**
+
+- To count the number of customers that have a given credit limit, you must group the data by credit limit, as shown in Figure 4-37.
+
+![FIGURE 4-37 SELECT command counting the number of rows in each group](./images/figure-4-37-select-command-counting-the-number-of-rows-in-each-group.JPG)
+
+**EXAMPLE 29: Repeat Example 28, but list only those credit limits held by more than two customers.**
+
+- Because this condition involves a group total, the query includes a HAVING clause, as shown in Figure 4-38.
+
+![FIGURE 4-38 SELECT command displaying groups with more than two rows](./images/figure-4-38-select-command-displaying-groups-with-more-than-two-rows.JPG)
+
+**EXAMPLE 30: List each credit limit and the number of customers of sales rep 05 that have this limit.**
+
+- The condition involves only rows, so using the WHERE clause is appropriate, as shown in Figure 4-39.
+
+![FIGURE 4-39 SELECT command restricting the rows to be grouped](./images/figure-4-39-select-command-restricting-the-rows-to-be-grouped.JPG)
+
+**EXAMPLE 31: Repeat Example 30, but list only those credit limits held by fewer than two customers.**
+
+- Because the conditions involve rows and groups, you must use both a WHERE clause and a HAVING clause, as shown in Figure 4-40.
+
+![FIGURE 4-40 SELECT command restricting the rows and the groups](./images/figure-4-40-select-command-restricting-the-rows-and-the-groups.JPG)
+
+- In Example 31, rows from the original table are evaluated only when the sales rep ID is 05. These rows then are grouped by credit limit and the count is calculated. Only groups for which the calculated count is less than two are displayed.
+
+### NULLS
+
+- Sometimes a condition involves a column that can accept null values, as illustrated in Example 32.
+
+**EXAMPLE 32: List the number and name of each customer with a null (unknown) address value.**
+
+- You might expect the condition to be something like ADDRESS 5 NULL. The correct format actually uses the IS NULL operator (ADDRESS IS NULL), as shown in Figure 4-41. To select a customer whose address is not null, use the IS NOT NULL operator (ADDRESS IS NOT NULL). In the current KimTay Pet Supplies database, no customer has a null address value; therefore, no rows are retrieved in the query results.
+
+![FIGURE 4-41 Selecting rows containing null values in the ADDRESS column](./images/figure-4-40-select-command-restricting-the-rows-and-the-groups.JPG)
+
+### SUMMARY OF SQL CLAUSES, FUNCTIONS, AND OPERATORS
+
+- In this module, you learned how to create queries that retrieve data from a single table by constructing appropriate SELECT commands. In the next module, you learn how to create queries that retrieve data from multiple tables. The queries you created in this module used the clauses, functions, and operators shown in Figure 4-42.
+
+![FIGURE 4-42 SQL query clauses and operators](./images/figure-4-42-sql-query-clauses-and-operators.JPG)
+
+
+### Module Summary
+
+- The basic form of the SQL SELECT command is SELECT-FROM-WHERE. Specify the columns to be listed after the word SELECT (or type an asterisk [*] to select all columns) and then specify the table name that contains these columns after the word FROM. Optionally, you can include one or more conditions after the word WHERE.
+- Simple conditions are written in the following form: column name, comparison operator, column name or value. Simple conditions can involve any of the comparison operators: 5, >, >5, <, <5, or <>.
+- You can form compound conditions by combining simple conditions using the AND, OR, and NOT operators.
+- Use the BETWEEN operator to indicate a range of values in a condition.
+- Use computed columns in SQL commands by using arithmetic operators and writing the computation in place of a column name. You can assign a name to the computed column by following the computation with the word AS and then the desired name.
+- To check for a value in a character column that is similar to a particular string of characters, use the LIKE operator. In MySQL, Oracle, and SQL Server, the percent (%) wildcard represents any collection of characters, and the underscore (_) wildcard represents any single character.
+- To determine whether a column contains a value in a set of values, use the IN
+operator.
+- Use an ORDER BY clause to sort data. List sort keys in order of importance. To sort in descending order, follow the sort key with the DESC operator.
+- SQL processes the aggregate functions COUNT, SUM, AVG, MAX, and MIN. These
+calculations apply to groups of rows.
+- To avoid duplicates in a query that uses an aggregate function, precede the column name with the DISTINCT operator.
+- When one SQL query is placed inside another, it is called a subquery. The inner query (the subquery) is evaluated first.
+- Use a GROUP BY clause to group data.
+- Use a HAVING clause to restrict the output to certain groups.
+- Use the IS NULL operator in a WHERE clause to find rows containing a null value in a particular column. Use the IS NOT NULL operator in a WHERE clause to find rows that do not contain a null value.
+
+### Key Terms
+
+aggregate functions
+AND
+AND condition
+AS
+AVG
+BETWEEN
+compound condition
+computed column
+COUNT
+DESC
+DISTINCT
+FROM clause
+GROUP BY clause
+grouping
+HAVING clause
+IN clause
+IS NOT NULL
+IS NULL
+key
+LIKE
+major sort key
+MAX
+MIN
+minor sort key
+NOT
+NOT condition
+OR
+OR condition
+ORDER BY clause
+primary sort key
+query
+secondary sort key
+SELECT clause
+simple condition
+sort key
+subquery
+SUM
+WHERE clause
+
+### Review Questions
+
+#### Module Quiz
+
+**Question 1.** Describe the basic form of the SQL SELECT command.
+**Answer**: 
+- The SQL SELECT is used to query a database, that is, ask a DBMS such MySQL a question in a way that it can understand. 
+- The basic form of the SQL SELECT command is SELECT-FROM-WHERE. After you type the word SELECT, you list the columns that you want to include in the query results. This portion of the command is called the **SELECT clause**. Next, you type the word FROM followed by the name of the table that contains the data you need to query. This portion of the command is called the **FROM clause**. Finally, after the word WHERE, you list any conditions (restrictions) that apply to the data you want to retrieve. This optional portion of the command is called the **WHERE clause**. 
+- For example, the following SQL SELECT command retrieve customer ID, first name, last name and credit limit for only those customers with credit limits of $750: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, CREDIT_LIMIT
+    FROM CUSTOMER
+        WHERE (CREDIT_LIMIT = 750);
+</code>
+</pre>
+
+**Question 2.** How do you form a simple condition?
+**Answer**:
+- When you need to retrieve rows that satisfy some condition, you include a WHERE clause in the SELECT command, as shown below.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, CREDIT_LIMIT
+    FROM CUSTOMER
+        WHERE (CREDIT_LIMIT = 750);
+</code>
+</pre>
+
+- The condition in the preceding WHERE clause is called a simple condition. A simple condition has the form column name, comparison operator, and then either another column name or a value. The comparison operators that can be used in SQL include `=` (equal to), `>` (greater than), `<` (less than),  `>=` (greater than or equal to), `<=` (less than or equal to), and `<>` (not equal to).
+
+
+**Question 3.** How do you form a compound condition?
+**Answer**: 
+- A compound condition can be formed by connecting two or more simple conditions with the AND, OR, and NOT operators. 
+- When the AND operator connects simple conditions, all the simple conditions must be true for the compound condition to be true. For example, the following SQL SELECT command list the the item ID and descriptions of all items that are stored in location B and for which there are more than 15 units on hand.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION
+    FROM ITEM
+        WHERE (LOCATION = "B") AND (ON_HAND > 15);
+</code>
+</pre>
+
+**Question 4.** In SQL, which operator do you use to determine whether a value is between two other values without using an AND condition?
+**Answer**:
+- We use the BETWEEN operator. 
+- For example, the following SQL SELECT command List the customer ID, first name, last name, and balance of all customers with balances greater than or equal to 125 dollars and less than or equal to 250 dollars.
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, BALANCE
+    FROM CUSTOMER
+        WHERE (BALANCE BETWEEN 125 AND 250);
+</code>
+</pre>
+
+- The BETWEEN operator is inclusive, meaning that the query selects a value equal to either value in the condition and in the range of the values. In the clause BETWEEN 125 AND 250, for example, values of 125 through 250 would make the condition true.
+
+**Question 5.** How do you use a computed column in SQL? How do you name the computed column?
+**Answer**:
+- We use a computed column in SQL by first computing it using data in the existing columns. 
+- For example, in the CUSTOMER table in KIMTAY database, available balance column can be computed by subtracting the balance a customer has from the credit limit of the customer as shown below:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, CREDIT_LIMIT - BALANCE
+    FROM CUSTOMER;
+</code>
+</pre>
+
+- We can name the computed column by by following the computation with the word AS and the desired name as shown below:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, CREDIT_LIMIT – BALANCE AS AVAILABLE_CREDIT
+    FROM CUSTOMER;
+</code>
+</pre>
+
+**Question 6.** In which clause would you use a wildcard in a condition?
+**Answer**:
+- We would use a wildcard in a condition in the WHERE clause to retrieve rows that match a particular pattern.
+- For example, the following SQL SELECT command List the customer ID, first name, last name, and complete address of each customer located at an address that contains the letters "Rock" anywhere in the address.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, POSTAL
+    FROM CUSTOMER
+        WHERE (ADDRESS LIKE "%Rock%");
+</code>
+</pre>
+
+**Question 7.** What wildcards are available in MySQL, and what do they represent?
+**Answer**:
+- The percent sign (%) is used as a wildcard to represent any collection of characters. 
+- For example, in the SQL SELECT command below, the condition LIKE "%Rock%" retrieves information for each customer whose address contains some collection of characters, followed by the letters "Rock," followed potentially by some additional characters.
+- For example, the following SQL SELECT command List the customer ID, first name, last name, and complete address of each customer located at an address that contains the letters "Rock." Notice the results list two different occurrences where "Rock" is listed somewhere in the address of the customer.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, POSTAL
+    FROM CUSTOMER
+        WHERE (FIRST_NAME LIKE "T_m");
+</code>
+</pre>
+
+![figure-4-module-quiz-question-7](./images/figure-4-module-quiz-question-7.JPG)
+
+- Another wildcard symbol in SQL is the underscore (_), which represents any individual character. 
+- For example, “T_m” represents the letter “T” followed by any single character, followed by the letter "m," and would retrieve rows that include words such as Tim, Tom, or T3m.
+
+**Question 8.** How do you determine whether a column contains one of a particular set of values without using an AND condition?
+**Answer**:
+- We use an IN clause, which consists of the IN operator followed by a collection of values, provides a concise way of phrasing certain conditions.
+- For example, the following SQL SELECT command List the customer ID, first name, last name, and credit limit for each customer with a credit limit of $500, $750, or $1,000.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, CREDIT_LIMIT
+    FROM CUSTOMER
+        WHERE (CREDIT_LIMIT IN (500, 750, 1000));
+</code>
+</pre>
+
+**Question 9.** How do you sort data?
+**Answer**:
+- We sort data using the ORDER BY clause. 
+- For example, the following SQL SELECT command list the customer ID, first name, last name, and balance of each customer, and then order (sort) the output in ascending (increasing) order by balance.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, BALANCE
+    FROM CUSTOMER
+        ORDER BY BALANCE;
+</code>
+</pre>
+
+
+**Question 10.** How do you sort data on more than one sort key? What is the more important key called? What is the less important key called?
+**Answer**:
+
+- To sort on multiple keys, you list the keys in order of importance in the ORDER BY clause.
+- For example, the following SQL SELECT command list the customer ID, first name, last name, and credit limit of each customer. Order the customers by last name within descending credit limit. (In other words, first sort the customers by credit limit in descending order. Within each group of customers that have a common credit limit, sort the customers by last name in ascending order.). 
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, CREDIT_LIMIT
+    FROM CUSTOMER
+        ORDER BY CREDIT_LIMIT DESC, LAST_NAME;
+</code>
+</pre>
+
+- When you need to sort data on two columns, the more important column (in this case, CREDIT_LIMIT) is called the major sort key (or the primary sort key) and the less important column (in this case, LAST_NAME) is called the minor sort key (or the secondary sort key).
+
+**Question 11.** How do you sort data in descending order?
+**Answer**:
+
+- To sort the data in descending (decreasing) order, we follow the name of the sort key with the DESC operator, as shown below
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, BALANCE
+    FROM CUSTOMER
+        ORDER BY BALANCE DESC;
+</code>
+</pre>
+
+**Question 12.** What are the SQL aggregate functions?
+**Answer**:
+- SQL aggregate functions are special functions that SQL used to calculate sums, averages, counts, maximum values, and minimum values. 
+    - The AVG function calculates the average value in a column, 
+    - The COUNT function determines the number of rows in a table,
+    - The MAX function determines the maximum value in a column,
+    - The MIN function determines the minimum value in a column,
+    - The SUM function calculates the total of the values in a column.
+- These functions apply to groups of rows. They could apply to all the rows in a table (for example calculating the average balance of all customers). They also could apply to those rows satisfying some particular condition (for example, the average balance of all customers of sales rep 10).
+- For example, the following SQL SELECT command finds how many items are in the category DOG
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT COUNT(ITEM_ID)
+    FROM ITEM
+        WHERE (CATEGORY = "DOG");
+</code>
+</pre>
+
+- For example, the following SQL SELECT command finds the total number of KimTay Pet Supplies customers, the sum of all balances, the average balance, the maximum balance, and the minimum balance of all KimTay Pet Supplies customers.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT COUNT(CUST_ID), SUM(BALANCE), AVG(BALANCE), MAX(BALANCE), MIN(BALANCE)
+    FROM CUSTOMER;
+</code>
+</pre>
+
+**Question 13.** How do you avoid including duplicate values in a query’s results?
+**Answer**:
+- We avoid including duplicate values in a query’s results by using the DISTINCT operator.
+- For example, to count the number of customers that currently have invoices, we have to use the DISTINCT operator to ensure we count only unique customer IDs in the CUST_ID column of the INVOICE table.
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT COUNT(DISTINCT CUST_ID)
+    FROM INVOICES;
+</code>
+</pre>
+
+**Question 14.** What is a subquery?
+**Answer**:
+- When one SQL query is placed inside another query, the inner query is called a subquery.
+- For example, the following SQL SELECT command list the invoice numbers that contain an invoice line for an item in category HOR.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT DISTINCT INVOICE_NUM
+    FROM INVOICE_LINE
+        WHERE ITEM_ID IN (SELECT ITEM_ID
+                              FROM ITEM
+                              WHERE (CATEGORY = "HOR"));
+</code>
+</pre>
+
+**Question 15.** How do you group data in an SQL query?
+**Answer**:
+- We use the GROUP BY clause to group data on a particular column, such as REP_ID, and then calculate statistics, when desired. 
+- For example the following SQL SELECT command lists the rep ID and the average balance of the rep’s customers, for each sales rep.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT REP_ID, AVG(BALANCE)
+    FROM CUSTOMER
+        GROUP BY REP_ID
+        ORDER BY REP_ID;
+</code>
+</pre>
+
+**Question 16.** When grouping data in a query, how do you restrict the output to only those groups satisfying some condition?
+**Answer**:
+- We use the HAVING clause to restrict the groups that are included.
+- For example, the following SQL SELECT command lists the rep ID and the average balance of the rep’s customers, for each sales rep whose customers have an average balance greater than $100.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT REP_ID, AVG(BALANCE)
+    FROM CUSTOMER
+        GROUP BY REP_ID
+        HAVING (AVG(BALANCE) > 100)
+        ORDER BY REP_ID;
+</code>
+</pre>
+
+**Question 17.** How do you find rows in which a particular column contains a null value?
+**Answer**:
+- We use IS NULL operator to find rows in which a particular column contains a null value.
+- For example, the following SQL SELECT command list the number and name of each customer with a null (unknown) address value.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME
+    FROM CUSTOMER
+        WHERE (ADDRESS IS NULL);
+</code>
+</pre>
+
+#### Critical Thinking
+
+**Question 1.** Use the Internet to research the SQL [charlist] wildcard that is available in Oracle and SQL Server. Using the information you find, complete the following SQL command to find all cities that begin with the letters "C" or "G."
+**Answer**:
+- The [charlist] WILDCARDS are used to represent any single character within a charlist.
+- The [^charlist] and [!charlist] WILDCARDS is used to represents any single character not in the charlist.
+- For example, to find all cities that begin with the letters "C" or "G.", you will execute the following SQL SELECT command:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT *
+    FROM CUSTOMER
+        WHERE CITY LIKE "[CG]%";
+</code>
+</pre>
+
+**Reference**
+1. Sql [charlist] wildcards - w3resource. (2024, May 22). W3resource. https://www.w3resource.com/sql/wildcards-like-operator/wildcards-charlist.php
+
+### Case Exercises
+
+#### KimTay Pet Supplies
+
+- Use SQL and the KimTay Pet Supplies database (see Figure 1-2 in Module 1) to complete the following exercises. If directed to do so by your instructor, use the information provided with the Module 3 Exercises to print your output or save it to a document.
+
+**Question 1.** List the item ID, description, and price for all items.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, PRICE
+    FROM ITEM;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-1](./images/figure-4-review-question-kimtay-question-1.JPG)
+
+**Question 2.** List all rows and columns for the complete INVOICES table.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT *
+    FROM INVOICES;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-2](./images/figure-4-review-question-kimtay-question-2.JPG)
+
+**Question 3.** List the first and last names of customers with credit limits of $1,000 or more.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT FIRST_NAME, LAST_NAME
+    FROM CUSTOMER
+        WHERE (CREDIT_LIMIT >= 1000);
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-3](./images/figure-4-review-question-kimtay-question-3.JPG)
+
+**Question 4.** List the order number for each order placed by customer number 125 on 11/15/2021. (Hint: If you need help, use the discussion of the DATE data type in Figure 3-19 in Module 3.)
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT INVOICE_NUM
+    FROM INVOICES
+        WHERE ((CUST_ID = "125") AND (INVOICE_DATE = "2021-11-15"));
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-4](./images/figure-4-review-question-kimtay-question-4.JPG)
+
+**Question 5.** List the number and name of each customer represented by sales rep 10 or sales rep 15.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME
+    FROM CUSTOMER
+        WHERE ((REP_ID = "10") OR (REP_ID = "15"));
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-5](./images/figure-4-review-question-kimtay-question-5.JPG)
+
+**Question 6.** List the item ID and description of each item that is not in category HOR.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION
+    FROM ITEM
+        WHERE CATEGORY <> "HOR";
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-6](./images/figure-4-review-question-kimtay-question-6.JPG)
+
+**Question 7.** List the item ID, description, and number of units on hand for each item that has between 10 and 30 units on hand, including both 10 and 30. Provide two alternate SQL statements to produce the same results.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, ON_HAND
+    FROM ITEM
+        WHERE ((ON_HAND > 10) AND (ON_HAND < 30));
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-7A](./images/figure-4-review-question-kimtay-question-7A.JPG)
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, ON_HAND
+    FROM ITEM
+        WHERE (ON_HAND BETWEEN 10 AND 30);
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-7B](./images/figure-4-review-question-kimtay-question-7B.JPG)
+
+**Question 8.** List the item ID, description, and on-hand value (units on hand * unit price) of each item in category CAT. (On-hand value is technically units on hand * cost, but there is no COST column in the ITEM table.) Assign the name ON_HAND_VALUE to the computed column.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, ON_HAND * PRICE AS ON_HAND_VALUE
+    FROM ITEM
+        WHERE CATEGORY = 'CAT';
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-8](./images/figure-4-review-question-kimtay-question-8.JPG)
+
+**Question 9.** List the item ID, description, and on-hand value for each item where the on-hand value is at least $1,500. Assign the name ON_HAND_VALUE to the computed column.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, ON_HAND * PRICE AS ON_HAND_VALUE
+    FROM ITEM
+        WHERE ((ON_HAND * PRICE) >= 1500); 
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-9](./images/figure-4-review-question-kimtay-question-9.JPG)
+
+**Question 10.** Use the IN operator to list the item ID and description of each item in category FSH or BRD.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CATEGORY, DESCRIPTION
+    FROM ITEM
+        WHERE CATEGORY IN ('FSH', 'BRD');
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-10](./images/figure-4-review-question-kimtay-question-10.JPG)
+
+**Question 11.** Find the ID, first name, and last name of each customer whose first name begins with the letter "S."
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME
+    FROM CUSTOMER
+        WHERE FIRST_NAME LIKE "S%";
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-11](./images/figure-4-review-question-kimtay-question-11.JPG)
+
+**Question 12.** List all details about all items. Order the output by description.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT *
+    FROM ITEM
+        ORDER BY DESCRIPTION;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-12](./images/figure-4-review-question-kimtay-question-12.JPG)
+
+**Question 13.** List all details about all items. Order the output by item ID within location. (That is, order the output by location and then by item ID.)
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT *
+    FROM ITEM
+        ORDER BY LOCATION, ITEM_ID;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-13](./images/figure-4-review-question-kimtay-question-13.JPG)
+
+**Question 14.** How many customers have balances that are more than their credit limits?
+**Answer**:
+- One customer.
+  
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT COUNT(*)
+    FROM CUSTOMER
+        WHERE (BALANCE > CREDIT_LIMIT);
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-14](./images/figure-4-review-question-kimtay-question-14.JPG)
+
+**Question 15.** Find the total of the balances for all customers represented by sales rep 10 with balances that are less than their credit limits.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT SUM(BALANCE)
+    FROM CUSTOMER
+        WHERE REP_ID = "10" AND BALANCE < CREDIT_LIMIT;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-15](./images/figure-4-review-question-kimtay-question-15.JPG)
+
+**Question 16.** List the item ID, description, and on-hand value of each item whose number of units on hand is more than the average number of units on hand for all items. (Hint: Use a subquery.)
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, ON_HAND * PRICE AS ON_HAND_VALUE
+    FROM ITEM
+        WHERE (ON_HAND > (SELECT AVG(ON_HAND)
+                               FROM ITEM));
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-16](./images/figure-4-review-question-kimtay-question-16.JPG)
+
+**Question 17.** What is the price of the least expensive item in the database?
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT MIN(PRICE)
+    FROM ITEM;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-17.JPG](./images/figure-4-review-question-kimtay-question-17.JPG)
+
+**Question 18.** What is the item ID, description, and price of the least expensive item in the database? (Hint: Use a subquery.)
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, PRICE
+    FROM ITEM
+        WHERE (PRICE = (SELECT MIN(PRICE)
+                            FROM ITEM));
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-18.JPG](./images/figure-4-review-question-kimtay-question-18.JPG)
+
+**Question 19.** List the sum of the balances of all customers for each sales rep. Order and group the results by sales rep ID.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT REP_ID, SUM(BALANCE)
+    FROM CUSTOMER
+        GROUP BY REP_ID
+        ORDER BY REP_ID;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-19.JPG](figure-4-review-question-kimtay-question-19.JPG)
+
+**Question 20.** List the sum of the balances of all customers for each sales rep but restrict the output to those sales reps for which the sum is more than $150. Order the results by sales rep ID.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT REP_ID, SUM(BALANCE)
+    FROM CUSTOMER
+        GROUP BY REP_ID
+        HAVING SUM(BALANCE) > 150
+        ORDER BY REP_ID;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-20.JPG](./images/figure-4-review-question-kimtay-question-20.JPG)
+
+**Question 21.** List the item ID of any item with an unknown description.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID
+    FROM ITEM
+        WHERE DESCRIPTION = NULL;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-question-21](./images/figure-4-review-question-kimtay-question-21.JPG)
+
+
+#### Critical Thinking
+
+**Question 1.** List the item ID and description of all items that are in the DOG or CAT category and contain the word “Small” in the description.
+**Answer**: 
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT *
+    FROM ITEM
+        WHERE ((CATEGORY IN ("DOG", "CAT")) AND (DESCRIPTION LIKE "%Small%"));
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-critical-thinking-1](./images/figure-4-review-question-kimtay-critical-thinking-1.JPG)
+
+**Question 2.** KimTay Pet Supplies is considering discounting the price of all items by 10 percent. List the item ID, description, and discounted price for all items. Use DISCOUNTED_PRICE as the name for the computed column.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, PRICE * 0.9 AS DISCOUNTED_PRICE
+    FROM ITEM;
+</code>
+</pre>
+
+![figure-4-review-question-kimtay-critical-thinking-2.JPG](./images/figure-4-review-question-kimtay-critical-thinking-2.JPG)
+
+
+#### StayWell Student Accommodation
+
+Use SQL and the StayWell Student Accommodation database (Figures 1-4 through 1-9 in Module 1) to complete the following exercises. If directed to do so by your instructor, use the information provided with the Module 3 Exercises to print your output or save it to a document.
+
+**Question 1.** List the owner number, last name, and first name of every property owner.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT OWNER_NUM, LAST_NAME, FIRST_NAME
+    FROM OWNER;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-1](./images/figure-4-review-question-staywell-question-1.JPG)
+
+**Question 2.** List the complete PROPERTY table (all rows and all columns).
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT *
+    FROM PROPERTY;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-2](./images/figure-4-review-question-staywell-question-2.JPG)
+
+**Question 3.** List the last name and first name of every owner who lives in Seattle.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT LAST_NAME, FIRST_NAME
+    FROM OWNER
+        WHERE CITY = "Seattle";
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-3](./images/figure-4-review-question-staywell-question-3.JPG)
+
+**Question 4.** List the last name and first name of every owner who does not live in Seattle.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT LAST_NAME, FIRST_NAME
+    FROM OWNER
+        WHERE CITY <> "Seattle";
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-4.JPG](./images/figure-4-review-question-staywell-question-4.JPG)
+
+**Question 5.** List the property ID and office number for every property whose square footage is equal to or less than 1,400 square feet.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT PROPERTY_ID, OFFICE_NUM
+    FROM PROPERTY
+        WHERE SQR_FT <= 1400;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-5](./images/figure-4-review-question-staywell-question-5.JPG)
+
+**Question 6.** List the office number and address for every property with three bedrooms.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT OFFICE_NUM, ADDRESS
+    FROM PROPERTY
+        WHERE BDRMS = 3;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-6.JPG](./images/figure-4-review-question-staywell-question-6.JPG)
+
+**Question 7.** List the property ID for every property with two bedrooms that is managed by StayWell-Georgetown.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT PROPERTY_ID
+    FROM PROPERTY
+        WHERE BDRMS = 2;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-7.JPG](./images/figure-4-review-question-staywell-question-7.JPG)
+
+**Question 8.** List the property ID for every property with a monthly rent that is between \$1,350 and \$1,750.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT *
+    FROM PROPERTY
+        WHERE MONTHLY_RENT BETWEEN 1350 AND 1750;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-8.JPG](./images/figure-4-review-question-staywell-question-8.JPG)
+
+**Question 9.** List the property ID for every property managed by StayWell-Columbia City whose monthly rent is less than \$1,500.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT PROPERTY_ID
+    FROM PROPERTY
+        WHERE MONTHLY_RENT < 1500;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-9.JPG](./images/figure-4-review-question-staywell-question-9.JPG)
+
+**Question 10.** Labor is billed at the rate of $35 per hour. List the property ID, category number, estimated hours, and estimated labor cost for every service request. To obtain the estimated labor cost, multiply the estimated hours by 35. Use the column name ESTIMATED_COST for the estimated labor cost.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT PROPERTY_ID, CATEGORY_NUMBER, OFFICE_ID, EST_HOURS, EST_HOURS * 35 AS    ESTIMATED_COST
+    FROM SERVICE_REQUEST;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-10.JPG](./images/figure-4-review-question-staywell-question-10.JPG)
+
+**Question 11.** List the owner number and last name for all owners who live in Nevada (NV), Oregon (OR), or Idaho (ID).
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT OWNER_NUM, LAST_NAME
+    FROM OWNER
+    WHERE STATE IN ("NV", "OR", "ID");
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-11.JPG](./images/figure-4-review-question-staywell-question-11.JPG)
+
+**Question 12.** List the office number, property ID, square footage, and monthly rent for all properties. Sort the results by monthly rent within the square footage.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT OFFICE_NUM, PROPERTY_ID, SQR_FT, MONTHLY_RENT
+    FROM PROPERTY
+        ORDER BY SQR_FT, MONTHLY_RENT;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-12.JPG](./images/figure-4-review-question-staywell-question-12.JPG)
+
+**Question 13**. How many three-bedroom properties are managed by each office?
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT OFFICE_NUM, COUNT(BDRMS)
+    FROM PROPERTY
+        WHERE BDRMS = 3
+            GROUP BY OFFICE_NUM
+            ORDER BY OFFICE_NUM;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-13.JPG](./images/figure-4-review-question-staywell-question-13.JPG)
+
+**Question 14.** Calculate the total value of monthly rents for all properties.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT SUM(MONTHLY_RENT)
+    FROM PROPERTY;
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-14](./images/figure-4-review-question-staywell-question-14.JPG)
+
+#### Critical Thinking
+
+**Question 1.** There are two ways to create the query in Step 11. Write the SQL command that you used and then write the alternate command that also would obtain the correct result.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT OWNER_NUM, LAST_NAME
+    FROM OWNER
+    WHERE STATE IN ("NV", "OR", "ID");
+</code>
+</pre>
+
+![figure-4-review-question-staywell-question-11.JPG](./images/figure-4-review-question-staywell-question-11.JPG)
+
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT OWNER_NUM, LAST_NAME
+    FROM OWNER
+    WHERE STATE = "NV" OR STATE = "OR" OR STATE = "ID";
+</code>
+</pre>
+
+![figure-4-review-question-staywell-critical-thinking-1.JPG](./images/figure-4-review-question-staywell-critical-thinking-1.JPG)
+
+**Question 2.** What WHERE clause would you use to find all service requests with the word "heating" anywhere in the description field?
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT SERVICE_ID, PROPERTY_ID, DESCRIPTION
+    FROM SERVICE_REQUEST
+        WHERE DESCRIPTION LIKE "%heating%";
+</code>
+</pre>
+
+![figure-4-review-question-staywell-critical-thinking-2.JPG](./images/figure-4-review-question-staywell-critical-thinking-2.JPG)
