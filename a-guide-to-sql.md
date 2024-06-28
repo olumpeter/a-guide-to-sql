@@ -2865,16 +2865,16 @@ DROP TABLE SUMMER_SCHOOL_RENTALS;
 
 <pre style="white-space: pre-wrap;">
 <code>
-#-------------------------------STAYWELL DATABASE----------------------#
+------STAYWELL DATABASE---------------
 
-# Create STAYWELL database
+-- Create STAYWELL database
 DROP DATABASE IF EXISTS STAYWELL;
 CREATE DATABASE STAYWELL;
 USE STAYWELL;
 
-#--------------------------------Table 2: OFFICE TABLE ---------------------------#
+-----Table 2: OFFICE TABLE -------------
 
-# Create OFFICE table
+-- Create OFFICE table
 DROP TABLE IF EXISTS OFFICE;
 CREATE TABLE OFFICE 
 (
@@ -2887,22 +2887,22 @@ CREATE TABLE OFFICE
     ZIP_CODE CHAR(5) NOT NULL
 );
 
-# Display the structure of the OFFICE table
+-- Display the structure of the OFFICE table
 DESCRIBE OFFICE;
 
-# Add data to the OFFICE table
+-- Add data to the OFFICE table
 INSERT INTO OFFICE 
 	VALUES('1','StayWell-Colombia City','1135 N. Wells Avenue','Colombia City','Seattle','WA','98118');
 INSERT INTO OFFICE 
 	VALUES('2','StayWell-Georgetown','986 S. Madison Rd','Georgetown','Seattle','WA','98108');
     
-# Displaying the all the data in the OFFICE table
+-- Displaying the all the data in the OFFICE table
 SELECT * 
 	FROM OFFICE;
 
-#--------------------------------Table 2: OWNER TABLE ---------------------------#
+---------Table 2: OWNER TABLE --------------
 
-# Create OWNER table
+-- Create OWNER table
 DROP TABLE IF EXISTS OWNER;
 CREATE TABLE OWNER 
 (
@@ -2915,10 +2915,10 @@ CREATE TABLE OWNER
     ZIP_CODE CHAR(5) NOT NULL
 );
 
-# Display the structure of the OWNER table
+-- Display the structure of the OWNER table
 DESCRIBE OWNER;
 
-# Add data to the OWNER table
+-- Add data to the OWNER table
 INSERT INTO OWNER 
 	VALUES('MO100','Moore','Elle-May','8006 W. Newport Ave.','Reno','NV','89508');
 INSERT INTO OWNER 
@@ -2943,14 +2943,13 @@ INSERT INTO OWNER
 	VALUES('JO110','Jones','Ammarah','730 Military Ave.','Seattle','WA','98126');
     
 
-# Displaying the all the data in the OWNER table
+-- Displaying the all the data in the OWNER table
 SELECT * 
 	FROM OWNER;
 
+--------Table 3: PROPERTY TABLE ------------
 
-#--------------------------------Table 3: PROPERTY TABLE ---------------------------#
-
-# Create PROPERTY table
+-- Create PROPERTY table
 DROP TABLE IF EXISTS PROPERTY;
 CREATE TABLE PROPERTY 
 (
@@ -2964,10 +2963,10 @@ CREATE TABLE PROPERTY
     OWNER_NUM CHAR(5) NOT NULL
 );
 
-# Display the structure of the PROPERTY table
+-- Display the structure of the PROPERTY table
 DESCRIBE PROPERTY;
 
-# Add data to the PROPERTY table
+ --Add data to the PROPERTY table
 INSERT INTO PROPERTY 
 	VALUES('1','1','30 West Thomas Rd.','1600','3','1',1400,'BU106');
 INSERT INTO PROPERTY 
@@ -2993,13 +2992,13 @@ INSERT INTO PROPERTY
 INSERT INTO PROPERTY 
 	VALUES('12','2','2 Bow Ridge Ave.','1400','3','2',1700,'RE107');
     
-# Displaying the all the data in the PROPERTY table
+-- Displaying the all the data in the PROPERTY table
 SELECT * 
 	FROM PROPERTY;
+    
+-------Table 4: SERVICE_CATEGORY TABLE -----------
 
-#--------------------------------Table 4: SERVICE_CATEGORY TABLE ---------------------------#
-
-# Create SERVICE_CATEGORY table
+-- Create SERVICE_CATEGORY table
 DROP TABLE IF EXISTS SERVICE_CATEGORY;
 CREATE TABLE SERVICE_CATEGORY 
 (
@@ -3007,10 +3006,10 @@ CREATE TABLE SERVICE_CATEGORY
     CATEGORY_DESCRIPTION VARCHAR(100) NOT NULL
 );
 
-# Display the structure of the SERVICE_CATEGORY table
+-- Display the structure of the SERVICE_CATEGORY table
 DESCRIBE SERVICE_CATEGORY;
 
-# Add data to the SERVICE_CATEGORY table
+-- Add data to the SERVICE_CATEGORY table
 INSERT INTO SERVICE_CATEGORY 
 	VALUES('1','Plumbing');
 INSERT INTO SERVICE_CATEGORY 
@@ -3024,13 +3023,13 @@ INSERT INTO SERVICE_CATEGORY
 INSERT INTO SERVICE_CATEGORY 
 	VALUES('6','Furniture replacement');
     
-# Displaying the all the data in the SERVICE_CATEGORY table
+-- Displaying the all the data in the SERVICE_CATEGORY table
 SELECT * 
 	FROM SERVICE_CATEGORY;
     
-#--------------------------------Table 5: SERVICE_REQUEST TABLE ---------------------------#
+-----Table 5: SERVICE_REQUEST TABLE -------------
 
-# Create SERVICE_REQUEST table
+-- Create SERVICE_REQUEST table
 DROP TABLE IF EXISTS SERVICE_REQUEST;
 CREATE TABLE SERVICE_REQUEST 
 (
@@ -3045,10 +3044,10 @@ CREATE TABLE SERVICE_REQUEST
     NEXT_SERVICE_DATE DATE
 );
 
-# Display the structure of the SERVICE_REQUEST table
+-- Display the structure of the SERVICE_REQUEST table
 DESCRIBE SERVICE_REQUEST;
 
-# Add data to the SERVICE_REQUEST table
+-- Add data to the SERVICE_REQUEST table
 INSERT INTO SERVICE_REQUEST 
 	VALUES('1','11','2','2','The second bedroom upstairs is not heating up at night.','Problem has been confirmed. central heating engineer has been scheduled. ','2','1','2019-11-01');
 INSERT INTO SERVICE_REQUEST 
@@ -3068,13 +3067,13 @@ INSERT INTO SERVICE_REQUEST
 INSERT INTO SERVICE_REQUEST 
 	VALUES('9','12','6','2','New sofa requested.','Open','2','0',NULL);
 
-# Displaying the all the data in the SERVICE_REQUEST table
+-- Displaying the all the data in the SERVICE_REQUEST table
 SELECT * 
 	FROM SERVICE_REQUEST;
 
-#--------------------------------Table 6: RESIDENTS TABLE ---------------------------#
+------Table 6: RESIDENTS TABLE ---------------
 
-# Create RESIDENTS table
+-- Create RESIDENTS table
 DROP TABLE IF EXISTS RESIDENTS;
 CREATE TABLE RESIDENTS 
 (
@@ -3084,10 +3083,10 @@ CREATE TABLE RESIDENTS
     PROPERTY_ID INT NOT NULL
 );
 
-# Display the structure of the RESIDENTS table
+-- Display the structure of the RESIDENTS table
 DESCRIBE RESIDENTS;
 
-# Add data to the RESIDENTS table
+-- Add data to the RESIDENTS table
 INSERT INTO RESIDENTS 
 	VALUES('1','Albie ','ORyan','1');
 INSERT INTO RESIDENTS 
@@ -3161,7 +3160,7 @@ INSERT INTO RESIDENTS
 INSERT INTO RESIDENTS 
 	VALUES('37','Zayn ','Fowler','12');
 
-# Displaying the all the data in the SERVICE_REQUEST table
+-- Displaying the all the data in the SERVICE_REQUEST table
 SELECT * 
 	FROM RESIDENTS;
 </code>
@@ -3173,22 +3172,22 @@ SELECT *
 
 <pre style="white-space: pre-wrap;">
 <code>
-# Display the structure of the OFFICE table
+-- Display the structure of the OFFICE table
 DESCRIBE OFFICE;
 
-# Display the structure of the OWNER table
+-- Display the structure of the OWNER table
 DESCRIBE OWNER;
 
-# Display the structure of the PROPERTY table
+-- Display the structure of the PROPERTY table
 DESCRIBE PROPERTY;
 
-# Display the structure of the SERVICE_CATEGORY table
+-- Display the structure of the SERVICE_CATEGORY table
 DESCRIBE SERVICE_CATEGORY;
 
-# Display the structure of the SERVICE_REQUEST table
+-- Display the structure of the SERVICE_REQUEST table
 DESCRIBE SERVICE_REQUEST;
 
-# Display the structure of the RESIDENTS table
+-- Display the structure of the RESIDENTS table
 DESCRIBE RESIDENTS;
 </code>
 </pre>
@@ -3199,27 +3198,27 @@ DESCRIBE RESIDENTS;
 
 <pre style="white-space: pre-wrap;">
 <code>
-# Displaying the all the data in the OFFICE table
+-- Displaying the all the data in the OFFICE table
 SELECT * 
 	FROM OFFICE;
 
-# Displaying the all the data in the OWNER table
+-- Displaying the all the data in the OWNER table
 SELECT * 
 	FROM OWNER;
 
-# Displaying the all the data in the PROPERTY table
+-- Displaying the all the data in the PROPERTY table
 SELECT * 
 	FROM PROPERTY;
 
-# Displaying the all the data in the SERVICE_CATEGORY table
+-- Displaying the all the data in the SERVICE_CATEGORY table
 SELECT * 
 	FROM SERVICE_CATEGORY;
 
-# Displaying the all the data in the SERVICE_REQUEST table
+-- Displaying the all the data in the SERVICE_REQUEST table
 SELECT * 
 	FROM SERVICE_REQUEST;
 
-# Displaying the all the data in the SERVICE_REQUEST table
+-- Displaying the all the data in the SERVICE_REQUEST table
 SELECT * 
 	FROM RESIDENTS;
 </code>
@@ -4531,3 +4530,1398 @@ SELECT SERVICE_ID, PROPERTY_ID, DESCRIPTION
 </pre>
 
 ![figure-4-review-question-staywell-critical-thinking-2.JPG](./images/figure-4-review-question-staywell-critical-thinking-2.JPG)
+
+## MODULE 5: MULTIPLE-TABLE QUERIES
+
+### INTRODUCTION
+
+- In this module,
+    - you learn how to use SQL to retrieve data from two or more tables using one SQL command. 
+    - You join tables together and examine how to obtain similar results using the SQL IN and EXISTS operators. 
+    - Then you use aliases to simplify queries and join a table to itself. 
+    - You also implement the set operations of union, intersection, and difference using SQL commands. You examine two related SQL operators: ALL and ANY.
+    - Finally, you perform inner joins, outer joins, and products.
+
+### QUERYING MULTIPLE TABLES
+
+- In Module 4, you learned how to retrieve data from a single table. Many queries require you to retrieve data from two or more tables. To retrieve data from multiple tables, you first must join the tables and then formulate a query using the same commands that you use for single-table queries.
+
+> **HELPFUL HINT**
+> In the following queries, your results might contain the same rows, but they might be listed in a different order. If order is important, you can include an ORDER BY clause in the query to ensure that the results are listed in the desired order.
+
+**EXAMPLE 1: List the ID, first name, and last name of each customer, together with the ID, first name, and last name of the sales rep who represents the customer.**
+
+- Because the customer ID values and names are in the CUSTOMER table and the sales rep ID values and names are in the SALES_REP table, you need to include both tables in the SQL command so you can retrieve data from both tables. To join (or relate) the tables, you construct the SQL command as follows:
+    <ol style="list-style-type: decimal;">
+    <li>In the SELECT clause, list all columns you want to display.</li>
+    <li>In the FROM clause, list all tables involved in the query.</li>
+    <li>In the WHERE clause, list the condition that restricts the data to be retrieved to only those rows from the two tables that match; that is, restrict it to the rows that have common values in matching columns.</li>
+    </ol>
+- As you learned in Module 2, it is often necessary to qualify a column name to specify the particular column you are referencing. Qualifying column names is especially important when joining tables because you must join tables on matching columns that frequently have identical column names. To qualify a column name, precede the name of the column with the name of the table, followed by a period. The matching columns in this example are both named REP_ID — there is a column in the SALES_REP table named REP_ID and a column in the CUSTOMER table that also is named REP_ID. The REP_ID column in the SALES_REP table is written as SALES_REP.REP_ID and the REP_ID column in the CUSTOMER table is written as CUSTOMER.REP_ID. The query and its results appear in Figure 5-1.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME, SALES_REP.REP_ID, SALES_REP.FIRST_NAME, SALES_REP.LAST_NAME
+    FROM CUSTOMER, SALES_REP
+        WHERE (CUSTOMER.REP_ID = SALES_REP.REP_ID);
+</code>
+</pre>
+
+![figure-5-1-joining-two-tables-with-a-single-sql-command](./images/figure-5-1-joining-two-tables-with-a-single-sql-command.JPG)
+
+- When there is potential ambiguity in listing column names, you must qualify the columns involved in the query. It is permissible to qualify other columns as well, even when there is no possible confusion. Some people prefer to qualify all column names; however, in this text, you qualify column names only when necessary. In Figure 5-1, all columns are qualified except for CUST_ID. Because there are FIRST_NAME and LAST_NAME columns in both the CUSTOMER and SALES_REP tables, qualifying is necessary.
+
+> **Q & A**
+> Q & A
+> **Question**: 
+> - In the first row of output in Figure 5-1, the customer ID is 125, the customer first name is Joey, and the customer last name is Smith. These values represent the first row of the CUSTOMER table. How do you know the first and last names of sales rep ID 05 is Susan Garcia?
+> **Answer**: 
+> - In the CUSTOMER table, the sales rep ID for customer ID 125 is 05. (This indicates that customer ID 125 is related to sales rep ID 05.) In the SALES_REP table, the first name of sales rep 05 is Susan and the last name is Garcia.
+
+**EXAMPLE 2: List the ID, first name, and last name of each customer whose credit limit is $500, together with the ID, first name, and last name of the sales rep who represents the customer.**
+
+- In Example 1, you used a condition in the WHERE clause only to relate a customer with a sales rep to join the tables. Although relating a customer with a sales rep is essential in this example as well, you also need to restrict the output to only those customers whose credit limits are $500. You can restrict the rows by using a compound condition, as shown in Figure 5-2.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME, SALES_REP. REP_ID, SALES_REP.FIRST_NAME, SALES_REP.LAST_NAME
+    FROM CUSTOMER, SALES_REP
+        WHERE (CUSTOMER.REP_ID = SALES_REP.REP_ID) AND (CREDIT_LIMIT = 500);
+</code>
+</pre>
+
+![figure-5-2-restricting-the-rows-in-a-join](./images/figure-5-2-restricting-the-rows-in-a-join.JPG)
+
+**EXAMPLE 3: For every item on an invoice, list the invoice number, item ID, description, quantity ordered, quoted price, and unit price.**
+
+- An item is considered to be on an invoice when there is a row in the INVOICE_LINE table on which the item appears. You can find the invoice number, quantity ordered, and quoted price in the INVOICE_LINE table. To find the description and the unit price, however, you need to look in the ITEM table. Then you need to find rows in the INVOICE_ LINE table and rows in the ITEM table that match (rows containing the same item ID). The query and its results appear in Figure 5-3.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT INVOICE_NUM, INVOICE_LINE.ITEM_ID, DESCRIPTION, QUANTITY, QUOTED_PRICE, PRICE
+    FROM INVOICE_LINE, ITEM
+        WHERE (INVOICE_LINE.ITEM_ID = ITEM.ITEM_ID);
+</code>
+</pre>
+
+![figure-5-3-joining-the-invoice_line-and-item-tables](./images/figure-5-3-joining-the-invoice_line-and-item-tables.JPG)
+
+> **Q & A**
+> **Question**: 
+> - Can you use ITEM.ITEM_ID instead of INVOICE_LINE.ITEM_ID in the SELECT clause?
+> **Answer**: 
+> - Yes. The values for these two columns match because they must satisfy the condition INVOICE_LINE.ITEM_ID = ITEM.ITEM_ID.
+
+**HELPFUL HINT**
+- Remember the word DESCRIPTION was added to the keyword list in version 8.0.4 of MySQL; however, it is a non-reserved keyword and can be used. This is why the word DESCRIPTION is not blue in the command in Figure 5-3; however, it is blue in the screen shot of the results.
+
+### COMPARING JOINS, IN, AND EXISTS
+
+- You join tables in SQL by including a condition in the WHERE clause to ensure that matching columns contain equal values (for example, INVOICE_LINE.ITEM_ID = ITEM.ITEM_ID). You can obtain similar results by using either the IN operator (described in Module 4) or the EXISTS operator with a subquery. The choice is a matter of personal preference because either approach obtains the same results. The following examples illustrate the use of each operator.
+
+**EXAMPLE 4: Find the description of each item included in invoice number 14233.**
+
+- Because this query also involves retrieving data from the INVOICE_LINE and ITEM tables (as illustrated in Example 3), you could approach it in a similar fashion. There are two basic differences, however, between Examples 3 and 4. First, the query in Example 4 does not require as many columns; second, it involves only invoice number 14233. Having fewer columns to retrieve means that there are fewer columns listed in the SELECT clause. You can restrict the query to a single invoice by adding the condition INVOICE_NUM = '14233' to the WHERE clause. The query and its results appear in Figure 5-4.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT DESCRIPTION
+    FROM INVOICE_LINE, ITEM
+        WHERE (INVOICE_LINE.ITEM_ID = ITEM.ITEM_ID)AND(INVOICE_NUM = "14233");
+</code>
+</pre>
+
+![figure-5-4-restricting-the-rows-when-joining-the-invoice_line-and-item-tables](./images/figure-5-4-restricting-the-rows-when-joining-the-invoice_line-and-item-tables.JPG)
+
+- Notice that the INVOICE_LINE table is listed in the FROM clause, even though you do not need to display any columns from the INVOICE_LINE table. The WHERE clause contains columns from the INVOICE_LINE table, so it is necessary to include the table in the FROM clause.
+
+#### Using the IN Operator
+
+Another way to retrieve data from multiple tables in a query is to use the IN operator with a subquery. In Example 4, you first could use a subquery to find all item ID values in the INVOICE_LINE table that appear in any row on which the invoice number is 14233. Then you could find the description for any item whose item ID is in this list. The query and its results appear in Figure 5-5.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT DESCRIPTION
+    FROM ITEM
+        WHERE ITEM_ID IN(SELECT ITEM_ID
+                            FROM INVOICE_LINE
+                                WHERE(INVOICE_NUM ="14233")
+                        );
+</code>
+</pre>
+
+![figure-5-5-using-the-in-operator-instead-of-a-join-to-query-two-tables](./images/figure-5-5-using-the-in-operator-instead-of-a-join-to-query-two-tables.JPG)
+
+In Figure 5-5, evaluating the subquery produces a temporary table consisting of those item ID values that are present in invoice number 14233. Executing the remaining portion of the query produces descriptions for each item whose ID is in this temporary table; in this case, Wild Bird Food (25 lb), Quilted Stable Blanket, and Insulated Water Bucket.
+
+#### Using the EXISTS Operator
+
+You also can use the EXISTS operator to retrieve data from more than one table, as shown in Example 5. The EXISTS operator checks for the existence of rows that satisfy some criterion.
+
+**EXAMPLE 5: Find the invoice number and invoice date for each invoice that contains item ID KH81.**
+
+- This query is similar to the one in Example 4, but this time the query involves the INVOICES table and not the ITEM table. In this case, you can write the query in either of the ways previously demonstrated. For example, you could use the IN operator with a subquery, as shown in Figure 5-6.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT INVOICE_NUM, INVOICE_DATE
+    FROM INVOICES
+        WHERE INVOICE_NUM IN (SELECT INVOICE_NUM
+                                    FROM INVOICE_LINE
+                                        WHERE (ITEM_ID ="KH81")
+                                    );
+</code>
+</pre>
+
+![figure-5-6-using-the-in-operator-to-select-invoice-information](./images/figure-5-6-using-the-in-operator-to-select-invoice-information.JPG)
+
+- Using the EXISTS operator provides another approach to solving Example 5, as shown in Figure 5-7.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT INVOICE_NUM, INVOICE_DATE
+    FROM INVOICES
+        WHERE EXISTS (SELECT *
+                            FROM INVOICE_LINE
+                                WHERE (INVOICES.INVOICE_NUM = INVOICE_LINE.INVOICE_NUM) AND (ITEM_ID = "KH81")
+                            );
+</code>
+</pre>
+
+![figure-5-7-using-the-exists-operator-to-select-invoice-information](./images/figure-5-7-using-the-exists-operator-to-select-invoice-information.JPG)
+
+- The subquery in Figure 5-7 is the first one you have seen that involves a table listed in the outer query. This type of subquery is called a correlated subquery. In this case, the INVOICES table, which is listed in the FROM clause of the outer query, is used in the subquery. For this reason, you need to qualify the INVOICE_NUM column in the subquery (INVOICES.INVOICE_NUM). You did not need to qualify the columns in the previous queries involving the IN operator.
+- The query shown in Figure 5-7 works as follows. For each row in the INVOICES table, the subquery is executed using the value of INVOICES.INVOICE_NUM that occurs in that row. The inner query produces a list of all rows in the INVOICE_LINE table in which INVOICE_LINE.INVOICE_NUM matches this value and in which ITEM_ID is equal to KH81. You can precede a subquery with the EXISTS operator to create a condition that is true if one or more rows are obtained when the subquery is executed; otherwise, the condition is false.
+- To illustrate the process, consider invoice numbers 14224 and 14228 in the
+INVOICES table. Invoice number 14224 is included because a row exists in the INVOICE_ LINE table with this invoice number and item ID KH81. When the subquery is executed, there is at least one row in the results, which in turn makes the EXISTS condition true. Invoice number 14228, however, is not included because no row exists in the INVOICE_LINE table with this invoice number and item ID KH81. There are no rows contained in the results of the subquery, which in turn makes the EXISTS condition false.
+
+#### Using a Subquery Within a Subquery
+
+- You can use SQL to create a nested subquery (a subquery within a subquery), as
+illustrated in Example 6.
+
+**EXAMPLE 6: Find the invoice number and invoice date for each invoice that includes an item stored in location C.**
+
+- One way to approach this request is first to determine the list of item ID values in the ITEM table for each item located in location C. Then you obtain a list of invoice numbers in the INVOICE_LINE table with a corresponding item ID in the item ID list. Finally, you retrieve those invoice numbers and invoice dates in the INVOICES table for which the invoice number is in the list of invoice numbers obtained during the second step. The query and its results appear in Figure 5-8.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT INVOICE_NUM, INVOICE_DATE
+    FROM INVOICES
+        WHERE INVOICE_NUM IN(SELECT INVOICE_NUM
+                                FROM INVOICE_LINE
+                                    WHERE ITEM_ID IN (SELECT ITEM_ID
+                                                            FROM ITEM
+                                                                WHERE (LOCATION ="C")
+                                                      )
+                              );
+</code>
+</pre>
+
+![figure-5-8-nested-subqueries-a-subquery-within-a-subquery](./images/figure-5-8-nested-subqueries-a-subquery-within-a-subquery.JPG)
+
+- As you might expect, SQL evaluates the queries from the innermost query to the outermost query. The query in this example is evaluated in three steps:
+  1. The innermost subquery is evaluated first, producing a temporary table of item ID values for those items stored in location C.
+  1. The next (intermediate) subquery is evaluated, producing a second temporary table with a list of invoice numbers. Each invoice number in this collection has a row in the INVOICE_LINE table for which the item ID is in the temporary table produced in Step 1.
+  1. The outer query is evaluated last, producing the desired list of invoice numbers and invoice dates. Only those invoices whose numbers are in the temporary table produced in Step 2 are included in the results. Another approach to solving Example 6 involves joining the INVOICES, INVOICE_LINE, and ITEM tables. The query and its results appear in Figure 5-9.
+
+- Another approach to solving Example 6 involves joining the INVOICES, INVOICE_LINE, and ITEM tables. The query and its results appear in Figure 5-9.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT DISTINCT INVOICES.INVOICE_NUM, INVOICE_DATE
+    FROM INVOICE_LINE, INVOICES, ITEM
+        WHERE (INVOICE_LINE.INVOICE_NUM = INVOICES.INVOICE_NUM) AND (INVOICE_LINE.ITEM_ID = ITEM.ITEM_ID) AND (LOCATION= "C");
+</code>
+</pre>
+
+![figure-5-9-joining-three-tables](./images/figure-5-9-joining-three-tables.JPG)
+
+- In this query, the following conditions join the tables: INVOICE_LINE.INVOICE_NUM = INVOICES.INVOICE_NUM INVOICE_LINE.ITEM_ID = ITEM.ITEM_ID 
+- The condition LOCATION = "C" restricts the output to only those items stored in
+location C.
+- The query results are correct regardless of which command you use. You can use whichever approach you prefer.
+- You might wonder whether one approach is more efficient than the other. SQL
+performs many built-in optimizations that analyze queries to determine the best way to satisfy them. Given a good optimizer, it should not make much difference how you formulate the query—both set of results completed in less than 0.00 seconds in the computing environment used for this text; however, your computing environment may show different results. It is expected that using nested subqueries (Figure 5-8) produces the results in a slightly longer amount of time than joining the tables (Figure 5-9). If you are using a DBMS without an optimizer, the way you write a query can make a difference in the speed at which the DBMS executes the query. When you are working with a very large database and efficiency is a prime concern, consult the DBMS’s manual or try some timings yourself. Try running the same query both ways to see whether you notice a difference in the speed of execution. In small databases, there should not be a significant time difference between the two approaches.
+
+#### A Comprehensive Example
+
+- The query used in Example 7 involves several of the features already presented. The query illustrates all the major clauses that you can use in a SELECT command. It also illustrates the order in which these clauses must appear.
+
+**EXAMPLE 7: List the customer ID, invoice number, invoice date, and invoice total for each invoice with a total that exceeds $250. Assign the column name INVOICE_TOTAL to the column that displays invoice totals. Order the results by invoice number.**
+
+The query and its results appear in Figure 5-10.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, INVOICES.INVOICE_NUM, INVOICE_DATE, SUM(QUANTITY * QUOTED_PRICE) AS INVOICE_TOTAL
+    FROM INVOICES, INVOICE_LINE
+        WHERE (INVOICES.INVOICE_NUM = INVOICE_LINE.INVOICE_NUM)
+            GROUP BY INVOICES.INVOICE_NUM, CUST_ID, INVOICE_DATE
+            HAVING SUM(QUANTITY * QUOTED_PRICE) > 250
+            ORDER BY INVOICES.INVOICE_NUM;
+</code>
+</pre>
+
+![figure-5-10-comprehensive-example](./images/figure-5-10-comprehensive-example.JPG)
+
+- In this query, the INVOICES and INVOICE_LINE tables are joined by listing both tables in the FROM clause and relating them in the WHERE clause. Selected data is sorted by invoice number using the ORDER BY clause. The GROUP BY clause indicates that the data is to be grouped by invoice number, customer ID, and invoice date. For each group, the SELECT clause displays the customer ID, invoice number, invoice date, and invoice total (SUM(QUANTITY * QUOTED_PRICE)). In addition, the total was renamed INVOICE_TOTAL. Not all groups are displayed, however. The HAVING clause displays only those groups whose SUM(NUM_ORDERED * QUOTED_PRICE) is greater than $250.
+- The invoice number, customer ID, and invoice date are unique for each invoice. Thus, it would seem that merely grouping by invoice number would be sufficient. SQL requires that both the customer ID and the invoice date be listed in the GROUP BY clause. Recall that a SELECT clause can include statistics calculated for only the groups or columns whose values are identical for each row in a group. By stating that the data is to be grouped by invoice number, customer ID, and invoice date, you tell SQL that the values in these columns must be the same for each row in a group.
+
+#### Using an Alias
+
+- When tables are listed in the FROM clause, you can give each table an alias, or an alternate name, that you can use in the rest of the statement. You create an alias by typing the name of the table, pressing the Spacebar, and then typing the name of the alias. No commas or periods are necessary to separate the two names. One reason for using an alias is simplicity. In Example 8, you assign the SALES_REP table the alias R and the CUSTOMER table the alias C. By doing this, you can type R instead of SALES_REP and C instead of CUSTOMER in the remainder of the query. The query in this example is simple, so you might not see the full benefit of this feature. When a query is complex and requires you to qualify the names, using aliases can simplify the process.
+
+**EXAMPLE 8: List the ID, first name, and last name for each sales rep together with the ID, first name, and last name for each customer the sales rep represents.**
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT R.REP_ID, R.FIRST_NAME, R.LAST_NAME, C.CUST_ID, C.FIRST_NAME, C.LAST_NAME
+    FROM SALES_REP R, CUSTOMER C
+        WHERE (R.REP_ID = C.REP_ID);
+</code>
+</pre>
+
+![figure-5-11-using-aliases-in-a-query](./images/figure-5-11-using-aliases-in-a-query.JPG)
+
+#### Joining a Table to Itself
+
+A second situation for using an alias is to join a table to itself, called a self-join, as illustrated in Example 9.
+
+**EXAMPLE 9: For each pair of customers located in the same city, display the customer ID, first name, last name, and city.**
+
+- If you had two separate tables for customers and the query requested customers in the first table having the same city as customers in the second table, you could use a normal join operation to find the answer. In this case, however, there is only one table (CUSTOMER) that stores all the customer information. You can treat the CUSTOMER table as if it were two tables in the query by creating an alias, as illustrated in Example 8. In this case, you use the following FROM clause:
+
+    `FROM CUSTOMER F, CUSTOMER S`
+
+SQL treats this clause as a query of two tables: one that has the alias F (first), and another that has the alias S (second). The fact that both tables are really the same CUSTOMER table is not a problem. The query and its results appear in Figure 5-12.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT F.CUST_ID, F.FIRST_NAME, F.LAST_NAME, S.CUST_ID, S.FIRST_NAME, S.LAST_NAME, F.CITY
+    FROM CUSTOMER F, CUSTOMER S
+        WHERE (F.CITY = S.CITY) AND (F.CUST_ID < S.CUST_ID)
+        ORDER BY F.CUST_ID, S.CUST_ID;
+</code>
+</pre>
+
+![figure-5-12-using-aliases-for-a-self-join](./images/figure-5-12-using-aliases-for-a-self-join.JPG)
+
+- You are requesting a customer ID, first name, and last name from the F table, followed by a customer ID, first name, and last name from the S table, and then the city. (Because the city in the first table must match the city in the second table, you can select the city from either table.) The WHERE clause contains two conditions: the cities must match, and the customer ID from the first table must be less than the customer ID from the second table. In addition, the ORDER BY clause ensures that the data is sorted by the first customer ID. For those rows with the same first customer ID, the data is further sorted by the second customer ID.
+
+> **Q & A**
+> **Question**: Why is the condition F.CUST_ID < S.CUST_ID important in the query?
+> **Answer**: If you did not include this condition, you would get the query results shown in Figure 5-13. The first row is included because it is true that customer ID 125 (Joey Smith) in the F table has the same city as customer ID 125 (Joey Smith) in the S table. The second row indicates that customer ID 125 (Joey Smith) has the same city as customer number 314 (Tom Rascal). The tenth row, however, repeats the same information because customer number 314 (Tom Rascal) has the same city as customer ID 125 (Joey Smith). Of these three rows, the only row that should be included in the query results is the second row. The second row also is the only one of the three rows in which the first customer ID (125) is less than the second customer ID (314). This is why the query requires the condition F.CUST_ID < S.CUST_ID.
+>
+> ![figure-5-13-incorrect-joining-of-a-table-to-itself](./images/figure-5-13-incorrect-joining-of-a-table-to-itself.JPG)
+
+#### Using a Self-Join on a Primary Key Column
+
+- Figure 5-14 shows some fields from an EMPLOYEE table whose primary key is EMP_ID. Another field in the table is MGR_EMP_ID, which represents the ID of the employee’s manager, who also is an employee. If you look at the row for employee 217 (Lynn Thomas), you see that employee 182 (Edgar Davis) is Lynn’s manager. By looking at the row for employee 182 (Edgar Davis), you see that his manager is employee 105 (Samantha Baker). In the row for employee 105 (Samantha Baker), the manager number is null, indicating that she has no manager.
+
+![figure-5-14-employee-and-manager-data](./images/figure-5-14-employee-and-manager-data.JPG)
+
+Suppose you need to list the employee ID, employee first name, and employee last name along with the ID, first name, and last name of each employee’s manager. Just as in the previous self-join, you would list the EMPLOYEE table twice in the FROM clause with aliases.
+
+![figure-5-15-list-of-employees-and-their-managers](./images/figure-5-15-list-of-employees-and-their-managers.JPG)
+
+#### Joining Several Tables
+
+It is possible to join several tables, as illustrated in Example 10. For each pair of tables you join, you must include a condition indicating how the columns are related.
+
+**EXAMPLE 10: For each item on an invoice, list the item ID, quantity ordered, invoice number, invoice date, customer ID, customer first name, and customer last name, along with the last name of the sales rep who represents each customer.**
+
+- As mentioned earlier, an item is on an invoice when it occurs on any row in the INVOICE_LINE table. The item ID, quantity ordered, and invoice number appear in the INVOICE_LINE table. If these requirements represent the entire query, you would write the query as follows:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, QUANTITY, INVOICE_NUM
+    FROM INVOICE_LINE;
+</code>
+</pre>
+
+- This query is not sufficient, however. You also need the invoice date, which is in the INVOICES table; the customer ID, first name, and last name, which are in the CUSTOMER table; and the last name of the sales rep, which is in the SALES_REP table. Thus, you need to join four tables: INVOICE_LINE, INVOICES, CUSTOMER, and SALES_REP. The procedure for joining more than two tables is essentially the same as the one for joining two tables. The difference is that the condition in the WHERE clause becomes a compound condition. In this case, you write the WHERE clause as follows:
+
+<pre style="white-space: pre-wrap;">
+<code>
+WHERE (INVOICES.INVOICE_NUM = INVOICE_LINE.INVOICE_NUM) AND (CUSTOMER.CUST_ID = INVOICES.CUST_ID) AND (SALES_REP.REP_ID = CUSTOMER.REP_ID)
+</code>
+</pre>
+
+> **HELPFUL HINT**
+> Note the entire WHERE clause could be typed on one line; however, because a single line in the textbook would not accommodate the entire WHERE clause, it is logically broken up here. Because the condition is very long, this option also promotes readability. Remember you can type a statement in any manner, and the statement ends only with a semicolon. The same is true for the columns in the SELECT clause because they would also not fit on one line in the textbook. The indention is consistent and makes the statement more readable.
+
+- The first condition relates an invoice to an invoice line with a matching invoice number. The second condition relates the customer to the invoice with a matching customer ID. The final condition relates the sales rep to a customer with a matching sales rep ID.
+- The first condition relates an invoice to an invoice line with a matching invoice number. The second condition relates the customer to the invoice with a matching customer ID. The final condition relates the sales rep to a customer with a matching sales rep ID.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, QUANTITY, INVOICE_LINE.INVOICE_NUM, INVOICE_DATE, CUSTOMER.CUST_ID,CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME,SALES_REP.LAST_NAME AS SALES_REP_LAST
+    FROM INVOICE_LINE, INVOICES, CUSTOMER, SALES_REP
+        WHERE (INVOICES.INVOICE_NUM = INVOICE_LINE.INVOICE_NUM) AND
+              (CUSTOMER.CUST_ID = INVOICES.CUST_ID) AND
+              (SALES_REP.REP_ID = CUSTOMER.REP_ID)
+        ORDER BY ITEM_ID, INVOICE_LINE.INVOICE_NUM;
+</code>
+</pre>
+
+![figure-5-16-joining-four-tables-in-a-query](./images/figure-5-16-joining-four-tables-in-a-query.JPG)
+
+
+> **Q & A**
+> **Question**: Why is the ITEM_ID column, which appears in the ITEM and INVOICE_LINE tables, not qualified in the SELECT clause?
+> **Answer**: Among the tables listed in the query, only one table contains a column named ITEM_ID, so it is not necessary to qualify the table. If the ITEM table also appeared in the FROM clause, you would need to qualify ITEM_ID to avoid confusion between the ITEM_ID columns in the ITEM and INVOICE_LINE tables.
+
+- The query shown in Figure 5-16 is more complex than many of the previous ones you have examined. You might think that SQL is not such an easy language to use after all. If you take it one step at a time, however, the query in Example 10 really is not that difficult. To construct a detailed query in a systematic fashion, do the following:
+
+    1. List in the SELECT clause all the columns that you want to display. If the name of a column appears in more than one table, precede the column name with the table name (that is, qualify the column name).
+    2. List in the FROM clause all the tables involved in the query. Usually you include the tables that contain the columns listed in the SELECT clause. Occasionally, however, there might be a table that does not contain any columns used in the SELECT clause but that does contain columns used in the
+    WHERE clause. In this case, you also must list the table in the FROM clause.
+    For example, if you do not need to list a customer ID or name, but you do
+    need to list the sales rep name, you would not include any columns from
+    the CUSTOMER table in the SELECT clause. The CUSTOMER table still is
+    required, however, because you must include a column from it in the WHERE
+    clause.
+    3. Take one pair of related tables at a time and indicate in the WHERE clause
+    the condition that relates the tables. Join these conditions with the AND
+    operator. If there are any other conditions, include them in the WHERE
+    clause and connect them to the other conditions with the AND operator. For
+    example, if you want to view items present on invoices placed by only those
+    customers with $500 credit limits, you would add one more condition to the
+    WHERE clause, as shown in Figure 5-17.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, QUANTITY, INVOICE_LINE.INVOICE_NUM, INVOICE_DATE, CUSTOMER.CUST_ID, CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME, SALES_REP.LAST_NAME AS SALES_REP_LAST
+    FROM INVOICE_LINE, INVOICES, CUSTOMER, SALES_REP
+        WHERE (INVOICES.INVOICE_NUM = INVOICE_LINE.INVOICE_NUM) AND
+              (CUSTOMER.CUST_ID = INVOICES.CUST_ID) AND
+              (SALES_REP.REP_ID = CUSTOMER.REP_ID) AND
+              (CREDIT_LIMIT = 500)
+        ORDER BY ITEM_ID, INVOICE_LINE.INVOICE_NUM;
+</code>
+</pre>
+
+![figure-5-17-restricting-the-rows-when-joining-four-tables](./images/figure-5-17-restricting-the-rows-when-joining-four-tables.JPG)
+
+### SET OPERATIONS
+
+- In SQL, you can use the set operations for taking the union, intersection, and difference of two tables. The union of two tables uses the UNION operator to create a temporary table containing every row that is in either the first table, the second table, or both tables. The intersection of two tables uses the INTERSECT operator to create a temporary table containing all rows that are in both tables. The difference of two tables uses the MINUS operator to create a temporary table containing the set of all rows that are in the first table but that are not in the second table.
+- For example, suppose that TEMP1 is a table containing the ID and names of each customer represented by sales rep 05. Further, suppose that TEMP2 is a table containing the ID and names of those customers that currently have invoices on file, as shown in Figure 5-18.
+
+![figure-5-18-customers-of-sales-rep-05-and-customers-with-active-invoices](./images/figure-5-18-customers-of-sales-rep-05-and-customers-with-active-invoices.JPG)
+
+- The union of TEMP1 and TEMP2 (TEMP1 UNION TEMP2) consists of the ID and names of those customers that are represented by sales rep 05 or that currently have invoices on file, or both. The intersection of these two tables (TEMP1 INTERSECT TEMP2) contains those customers that are represented by sales rep 05 and that have invoices on file. The difference of these two tables (TEMP1 MINUS TEMP2) contains those customers that are represented by sales rep 05 but that do not have invoices on file. The results of these set operations are shown in Figure 5-19.
+
+![figure-5-19-union-intersection-and-difference-of-the-temp1-and-temp2-tables](./images/figure-5-19-union-intersection-and-difference-of-the-temp1-and-temp2-tables.JPG)
+
+- There is a restriction on set operations. It does not make sense, for example, to talk about the union of the CUSTOMER table and the INVOICES table because these tables do not contain the same columns. What might rows in this union look like? The two tables in the union must have the same structure for a union to be appropriate; the formal term is **union compatible**. Two tables are union compatible when they have the same number of columns and their corresponding columns have identical data types and lengths.
+- Note that the definition of union compatible does not state that the columns of the two tables must be identical but rather that the columns must be of the same type. Thus, if one column is CHAR(20), the matching column also must be CHAR(20).
+
+**EXAMPLE 11: List the ID and names of each customer that is either represented by sales rep 10 or currently has invoices on file, or both.**
+
+- You can create a temporary table containing the ID, first name, and last name of each customer that is represented by sales rep 10 by selecting the customer ID values and names from the CUSTOMER table for which the sales rep number is 10. Then you can create another temporary table containing the ID, first name, and last name of each customer that currently has invoices on file by joining the CUSTOMER and INVOICES tables. The two temporary tables created by this process have the same structure; that is, they both contain the CUST_ID, FIRST_NAME, and LAST_NAME columns. Because the temporary tables are union compatible, it is possible to take the union of these two tables. The query and its results appear in Figure 5-20.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME
+    FROM CUSTOMER
+        WHERE (REP_ID = "10")
+UNION
+SELECT CUSTOMER.CUST_ID, CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME
+    FROM CUSTOMER, INVOICES
+        WHERE (CUSTOMER.CUST_ID = INVOICES.CUST_ID);
+</code>
+</pre>
+
+![figure-5-20-using-the-union-operator](./images/figure-5-20-using-the-union-operator.JPG)
+
+- Note the results of the query are not in order by CUST_ID as they were pictured in Figures 5-18 and 5-19. If you want your results in a particular order, you may use the ORDER BY clause. You would remove the semicolon from the second WHERE clause and add the following at the end of your statement:
+
+    `ORDER BY CUST_ID;`
+
+- If your SQL implementation truly supports the union operation, it removes any duplicate rows automatically. For example, any customer that is represented by sales rep 10 *and* that currently has invoices on file (such as customers 182 and 294 in this case) appears only once in the results. Oracle, Access, and SQL Server support the union operation and correctly remove duplicates.
+
+**EXAMPLE 12: List the ID and names of each customer that is represented by sales rep 10 and that currently has invoices on file.**
+
+- The only difference between this query and the one in Example 11 is that the appropriate operator to use is INTERSECT, as shown in Figure 5-21. Note that MySQL does not support the INTERSECT operator, so there is no screen shot with the figure. If your version of SQL does support the INTERSECT operator, the statement would be as follows:
+
+![figure-5-21-using-the-intersect-operator](./images/figure-5-21-using-the-intersect-operator.JPG)
+
+- Some SQL implementations do not support the INTERSECT operator, such as MySQL, so you need to take a different approach. The command shown in Figure 5-22 produces the same results as the INTERSECT operator by using the IN operator and a subquery. The command selects the ID and names of each customer that is represented by sales rep 10 and whose customer ID also appears in the collection of customer ID values in the INVOICES table.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME
+    FROM CUSTOMER
+        WHERE (REP_ID = "10") AND (CUST_ID IN (SELECT CUST_ID
+                                                    FROM INVOICES));
+</code>
+</pre>
+
+![figure-5-22-performing-an-intersection-without-using-the-intersect-operator](./images/figure-5-22-performing-an-intersection-without-using-the-intersect-operator.JPG)
+
+> **HELPFUL HINT**:
+> Oracle and SQL Server support the INTERSECT operator.
+
+> **HELPFUL HINT**:
+> Note that the parentheses are formatted differently for the subquery than those previously used in this module (for example, see Figure 5-6). Remember that your formatting is a matter of preference to support readability on your part. This example was used on purpose to draw attention to the difference.
+
+**EXAMPLE 13: List the ID and names of each customer that is represented by sales rep 10 but that does not have invoices currently on file.**
+
+- The query uses the MINUS operator, as shown in Figure 5-23. Note that MySQL does not support the MINUS operator, so there is no screen shot with the figure. If your version of SQL does support the MINUS operator, the statement would be as follows:
+
+![figure-5-23-using-the-minus-operator](./images/figure-5-23-using-the-minus-operator.JPG)
+
+- Just as with the INTERSECT operator, some SQL implementations do not support the MINUS operator. In such cases, you need to take a different approach, such as the one shown in Figure 5-24. This command produces the same results by selecting the ID and names of each customer that is represented by sales rep 10 and whose customer ID does not appear in the collection of customer ID values in the INVOICES table.
+
+![figure-5-24-performing-a-difference-without-using-the-minus-operator](./images/figure-5-24-performing-a-difference-without-using-the-minus-operator.JPG)
+
+![sql-server-figure-5-1-except-operator-in-sql-server](./images/sql-server-figure-5-1-except-operator-in-sql-server.JPG)
+
+### ALL AND ANY
+
+- You can use the ALL and ANY operators with subqueries to produce a single column of numbers. When you precede the subquery by the ALL operator, the condition is true only if it satisfies all values produced by the subquery. When you precede the subquery by the ANY operator, the condition is true if it satisfies any value (one or more) produced by the subquery. The following examples illustrate the use of these operators.
+
+**EXAMPLE 14: Find the customer ID, full name, current balance, and sales rep ID of each customer whose balance exceeds the maximum balance of all customers represented by sales rep 10.**
+
+- You can find the maximum balance of the customers represented by sales rep 10 in a subquery and then find all customers whose balances are greater than this number. There is an alternative method that is simpler, however. You can use the ALL operator, as shown in Figure 5-25.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.CUST_ID, C.FIRST_NAME, C.LAST_NAME, C.BALANCE, C.REP_ID
+    FROM CUSTOMER C
+        WHERE C.BALANCE > ALL (SELECT (C.BALANCE)
+                                FROM CUSTOMER C
+                                    WHERE C.REP_ID = "10"
+                              );
+</code>
+</pre>
+
+![figure-5-25-select-command-that-uses-the-all-operator](./images/figure-5-25-select-command-that-uses-the-all-operator.JPG)
+
+- To some users, the query shown in Figure 5-25 might seem more natural than finding the maximum balance in the subquery. For other users, the opposite might be true. You can use whichever approach you prefer.
+
+> **Q & A**
+> **Question**: How would you get the same result for Example 14 without using the ALL operator?
+> **Answer**: You could select each customer whose balance is greater than the maximum balance of any customer of sales rep 10, as shown in Figure 5-26.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, BALANCE, REP_ID
+    FROM CUSTOMER
+        WHERE (BALANCE > (SELECT MAX(BALANCE)
+                                FROM CUSTOMER
+                                    WHERE REP_ID = "10"));
+</code>
+</pre>
+
+![figure-5-26-alternative-to-using-the-all-operator](./images/figure-5-26-alternative-to-using-the-all-operator.JPG)
+
+**EXAMPLE 15: Find the customer ID, full name, current balance, and sales rep ID of each customer whose balance is greater than the balance of at least one customer of sales rep 10.**
+
+- You can find the minimum balance of the customers represented by sales rep 10 in a subquery and then find all customers whose balance is greater than this number. To simplify the process, you can use the ANY operator, as shown in Figure 5-27.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, BALANCE, REP_ID
+    FROM CUSTOMER
+        WHERE (BALANCE > ANY (SELECT BALANCE
+                                    FROM CUSTOMER
+                                        WHERE REP_ID = "10")
+                             );
+</code>
+</pre>
+
+![figure-5-27-select-command-that-uses-the-all-operator](./images/figure-5-27-select-command-that-uses-the-all-operator.JPG)
+
+> **Q & A**
+> **Question**: How would you get the same results without using the ANY operator?
+> **Answer**: You could select each customer whose balance is greater than the minimum balance of any customer of sales rep 10, as shown in Figure 5-28.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUST_ID, FIRST_NAME, LAST_NAME, BALANCE, REP_ID
+    FROM CUSTOMER
+        WHERE (BALANCE > (SELECT MIN(BALANCE)
+                                FROM CUSTOMER
+                                    WHERE REP_ID = "10"));
+</code>
+</pre>
+
+![figure-5-28-alternative-to-using-the-any-operator](./images/figure-5-28-alternative-to-using-the-any-operator.JPG)
+
+### SPECIAL OPERATIONS
+
+- You can perform special operations within SQL, such as the self-join that you already used. Three other special operations are the inner join, the outer join, and the product.
+
+#### Inner Join
+
+- A join that compares the tables in a FROM clause and lists only those rows that satisfy the condition in the WHERE clause is called an inner join. The joins that you have performed so far in this text have been inner joins. Example 16 illustrates the inner join.
+
+**EXAMPLE 16: Display the ID, first name, and last name for each customer, along with the invoice number, and invoice date for each invoice. Sort the results by customer ID.**
+
+- This example requires the same type of join that you have been using. The command is as follows:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.CUST_ID, C.FIRST_NAME, C.LAST_NAME, I.INVOICE_NUM, I.INVOICE_DATE
+    FROM CUSTOMER C, INVOICES I
+        WHERE C.CUST_ID = I.CUST_ID
+        ORDER BY C.CUST_ID;
+</code>
+</pre>
+
+- The previous approach should work in any SQL implementation. An update to the SQL standard approved in 1992, called SQL-92, provides an alternative way of performing an inner join, as shown in Figure 5-29.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUSTOMER.CUST_ID, FIRST_NAME, LAST_NAME, INVOICE_NUM, INVOICE_DATE
+    FROM CUSTOMER
+        INNER JOIN INVOICES
+            ON (CUSTOMER.CUST_ID = INVOICES.CUST_ID)
+            ORDER BY CUSTOMER.CUST_ID;
+</code>
+</pre>
+
+![figure-5-29-query-that-uses-an-inner-join-clause](./images/figure-5-29-query-that-uses-an-inner-join-clause.JPG)
+
+### Outer Join
+
+- Sometimes you need to list all the rows from one of the tables in a join, regardless of whether they match any rows in a second table. For example, you can perform the join of the CUSTOMER and INVOICES tables in the query for Example 16, but display all customers—even the ones without invoices. This type of join is called an outer join.
+- There are actually three types of outer joins. In a left outer join, all rows from the table on the left (the table listed first in the query) are included regardless of whether they match rows from the table on the right (the table listed second in the query). Rows from the table on the right are included only when they match. In a right outer join, all rows from the table on the right are included regardless of whether they match rows from the table on the left. Rows from the table on the left are included only when they match. In a full outer join, all rows from both tables are included regardless of whether they match
+rows from the other table. (The full outer join is rarely used.)
+- Example 17 illustrates the use of a left outer join.
+
+**EXAMPLE 17: Display the ID, first name, and last name for each customer, along with the invoice number, and invoice date for all invoices. Include all customers in the results. For customers that do not have invoices, omit the invoice number and invoice date.**
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUSTOMER.CUST_ID, FIRST_NAME, LAST_NAME, INVOICE_NUM, INVOICE_DATE
+    FROM CUSTOMER
+        LEFT JOIN INVOICES
+            ON (CUSTOMER.CUST_ID = INVOICES.CUST_ID)
+            ORDER BY CUSTOMER.CUST_ID;
+</code>
+</pre>
+
+![figure-5-30-query-that-uses-a-left-join-clause](./images/figure-5-30-query-that-uses-a-left-join-clause.JPG)
+
+- All customers are included in the results. For customers without invoices, the invoice number and date are blank. Technically, these blank values are null.
+
+> **HELPFUL HINT**
+> In Oracle, not MySQL, there is another way to perform left and right outer joins. You write the join as you have been doing, with one exception. You include parentheses and a plus sign in the WHERE clause after the column in the table for which only matching rows are to be included. In this example, the plus sign would follow the CUST_ID column in the INVOICES table because only invoices that match customers are to be included. Because customers that do not have invoices are to be included in the results, there is no plus sign after the CUST_ID column in the CUSTOMER table. The correct query is as follows:
+> <pre style="white-space: pre-wrap;">
+> <code>
+> SELECT CUSTOMER.CUST_ID, FIRST_NAME, LAST_NAME, INVOICE_NUM, INVOICE_DATE
+>    FROM CUSTOMER
+>        LEFT JOIN INVOICES
+>            ON (CUSTOMER.CUST_ID = INVOICES.CUST_ID)
+>            ORDER BY CUSTOMER.CUST_ID;
+> </code>
+> </pre>
+
+#### Product
+
+- The **product** (formally called the **Cartesian product**) of two tables is the combination of all rows in the first table and all rows in the second table.
+
+> **HELPFUL HINT**
+> - The product operation is not common. You need to be aware of it, however, because it is easy to create a product inadvertently by omitting the WHERE clause when you are attempting to join tables.
+
+**EXAMPLE 18: Form the product of the CUSTOMER and INVOICES tables. Display the customer ID, first name, and last name from the CUSTOMER table, along with the invoice number and invoice date from the INVOICES table.**
+
+- Forming a product is actually very easy. You simply omit the WHERE clause, as shown in Figure 5-31.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT CUSTOMER.CUST_ID, FIRST_NAME, LAST_NAME, INVOICE_NUM, INVOICE DATE
+        FROM CUSTOMER, INVOICES;
+</code>
+</pre>
+
+![figure-5-31-query-that-produces-a-product-of-two-tables](./images/figure-5-31-query-that-produces-a-product-of-two-tables.JPG)
+
+> **Q & A**
+> **Question**: Figure 5-31 does not show all the rows in the result. How many rows are actually included?
+> **Answer**: The CUSTOMER table has 12 rows and the INVOICES table has eight rows. Because each of the 12 customer rows is matched with each of the eight invoice rows, there are 96 (12 × 8) rows in the result.
+
+### Module Summary
+
+- To join tables, indicate in the SELECT clause all columns to display, list in the FROM clause all tables to join, and then include in the WHERE clause any conditions requiring values in matching columns to be equal.
+- When referring to matching columns in different tables, you must qualify the column names to avoid confusion. You qualify column names using the following format: table name.column name.
+- Use the IN or EXISTS operators with an appropriate subquery as an alternate way of performing a join.
+- A subquery can contain another subquery. The innermost subquery is executed first.
+- The name of a table in a FROM clause can be followed by an alias, which is an alternate name for a table. You can use the alias in place of the table name throughout the SQL command. By using two different aliases for the same table in a single SQL command, you can join a table to itself.
+- The UNION operator creates a union of two tables (the collection of rows that are in either or both tables). The INTERSECT operator creates the intersection of two tables (the collection of rows that are in both tables). The MINUS operator creates the difference of two tables (the collection of rows that are in the first table but not in the second table). To perform any of these operations, the tables involved must be union compatible. Two tables are union compatible when they have the same number of columns and their corresponding columns have identical data types and lengths.
+- When the ALL operator precedes a subquery, the condition is true only if it is satisfied by all values produced by the subquery.
+- When the ANY operator precedes a subquery, the condition is true if it is satisfied by any value (one or more) produced by the subquery.
+- In an inner join, only matching rows from both tables are included. You can use the INNER JOIN clause to perform an inner join.
+- In a left outer join, all rows from the table on the left (the table listed first in the query) are included regardless of whether they match rows from the table on the right (the table listed second in the query). Rows from the table on the right are included only when they match. You can use the LEFT JOIN clause to perform a left outer join. In a right outer join, all rows from the table on the right are included regardless of whether they match rows from the table on the left. Rows from the table on the left are included only when they match. You can use the RIGHT JOIN clause to perform a right outer
+join.
+• The product (Cartesian product) of two tables is the combination of all rows in the first table and all rows in the second table. To form a product of two tables, include both tables in the FROM clause and omit the WHERE clause.
+
+### Key Terms
+
+- alias
+- ALL
+- ANY
+- Cartesian product
+- correlated subquery
+- difference
+- EXISTS
+- full outer join
+- inner join
+- INTERSECT
+- intersection
+- join
+- left outer join
+- MINUS
+- nested subquery
+- outer join
+- product
+- right outer join
+- self-join
+- union
+- UNION
+- union compatible
+
+### Review Questions
+
+#### Module Quiz
+
+**Question 1.** How do you join tables in SQL?
+**Answer**:
+- We can join tables by finding rows in the two tables that have identical values in matching columns. We can join tables by using a condition in the WHERE clause.
+- For example, the following SQL SELECT command list the ID, first name, and last name of each customer, together with the ID, first name, and last name of the sales rep who represents the customer.
+
+<pre>
+<code>
+SELECT CUST_ID, CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME, 
+       SALES_REP.REP_ID, SALES_REP.FIRST_NAME, SALES_REP.LAST_NAME
+    FROM CUSTOMER, SALES_REP
+        WHERE (CUSTOMER.REP_ID = SALES_REP.REP_ID);
+</code>
+</pre>
+
+**Question 2.** When must you qualify names in SQL commands? How do you qualify a column name?
+**Answer**:
+- WE must qualify column names when joining tables with column names that have identical names. 
+- For example, in customer table and sales rep table, there are FIRST_NAME, LAST_NAME, and SALES_REP identical columns. 
+- We qualify the column names by preceeding the name of the column with
+the name of the table, followed by a period. 
+- The example, FIRST_NAME was qualified as CUSTOMER.FIRST_NAME to indicate that its the first name from the customer table, LAST_NAME was qualified as CUSTOMER.LAST_NAME to indicate that its the last name from the customer table, CUSTOMER.REP_ID was qualified as CUSTOMER.REP_ID to indicate that its the sales rep ID from the customer table. The same was done for FIRST_NAME, LAST_NAME, and SALES_REP from SALES_REP table.
+
+<pre>
+<code>
+SELECT CUST_ID, CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME, 
+       SALES_REP.REP_ID, SALES_REP.FIRST_NAME, SALES_REP.LAST_NAME
+    FROM CUSTOMER, SALES_REP
+        WHERE (CUSTOMER.REP_ID = SALES_REP.REP_ID);
+</code>
+</pre>
+
+**Question 3.** List two operators that you can use with subqueries as an alternate way of performing joins.
+**Answer**:
+- We can use the IN Operator, or the EXISTS Operator. 
+
+**Question 4.** What is a nested subquery? In which order does SQL evaluate nested subqueries?
+**Answer**:
+- A nested subquery is a subquery within a subquery. 
+- SQL evaluates the queries from the innermost query to the outermost query.
+
+**Question 5.** What is an alias? How do you specify an alias in SQL? Why would you use an alias?
+**Answer**:
+- An alias is an alternative name that is given tables listed in the FROM clause, that we can use in the rest of the statement.
+- We specify an alias in SQL by typing the name of the table, pressing the Spacebar, and then typing the name of the alias. No commas or periods are necessary to separate the two names.
+- Aliases are used because they simplify the SQL command. For example, instead of typing CUSTOMER or SALES_REP when qualifying the table names in SQL commands, we simply type C or SR respectively.
+
+<pre>
+<code>
+SELECT CUST_ID, C.FIRST_NAME, C.LAST_NAME, 
+       SR.REP_ID, SR.FIRST_NAME, SR.LAST_NAME
+    FROM CUSTOMER C, SALES_REP SR
+        WHERE (C.REP_ID = SR.REP_ID);
+</code>
+</pre>
+
+**Question 6.** How do you join a table to itself in SQL?
+**Answer**:
+
+- You can join a table to itself by specifying two different aliases for the same table. 
+- For example: `FROM CUSTOMER F, CUSTOMER S`
+- Here, SQL will treat customer table as 2 tables: one that has the alias F (first), and another that has the alias S (second). 
+
+**Question 7.** What command would you use to show all rows of two tables? How would you use it? What command would you use to show only common rows between two tables? How would you use it?
+**Answer**:
+- We can use the UNION operator in SQL to show all rows of two tables. We use this by putting the UNION operator between two SQL querries that create temporary tables that are union compatible.
+- We can use the INTERSECT operator to show only common rows between two tables. We use this by putting the INTERSECT operator between two SQL querries that create temporary tables that are union compatible.
+
+**Question 8.** What does it mean for two tables to be union compatible?
+**Answer**:
+
+- The two tables are union compatible when they have the same number of columns and their corresponding columns have identical data types and lengths. For example, if one column is CHAR(20), the matching column also must be CHAR(20).
+
+**Question 9.** How do you use the ALL operator with a subquery?
+**Answer**:
+
+- We precede the subquery by the ALL operator in the WHERE clause. The condition is true only if it satisfies all values produced by the subquery.
+
+**Question 10.** How do you use the ANY operator with a subquery?
+**Answer**:
+
+- We precede the subquery by the ANY operator, the condition is true if it satisfies any value (one or more) produced by the subquery.
+
+**Question 11.** Which rows are included in an inner join? What clause can you use to perform an inner join in SQL?
+**Answer**:
+
+- An inner join compares the tables in a FROM clause and lists only those rows that satisfy the condition in the WHERE clause.
+- We use INNER JOIN clause and ON clause to perform an inner join in SQL. 
+
+**Question 12.** Which rows are included in a left outer join? What clause can you use to perform a left outer join in SQL?
+**Answer**:
+
+- A left outer join includes all the rows from the table on the left (the table listed first in the query) regardless of whether they match rows from the table on the right (the table listed second in the query). Rows from the table on the right are included only when they match.
+- We use LEFT JOIN clause and ON clause to perform an inner join in SQL. 
+
+**Question 13.** Which rows are included in a right outer join? What clause can you use to perform a right outer join in SQL?
+**Answer**:
+
+- A right outer join includes all rows from the table on the right (the table listed second in the query) regardless of whether they match rows from the table on the left (the table listed first in the query). Rows from the table on the left are included only when they match.
+- We use RIGHT JOIN clause and ON clause to perform an inner join in SQL. 
+
+**Question 14.** What is the formal name for the product of two tables? How do you form a product in SQL?
+**Answer**:
+
+- The formal name for the product of two tables is called the Cartesian product. 
+- A product in SQL is formed by omitting the WHERE clause when you are attempting to join tables.
+
+
+#### Critical Thinking
+
+**Question 1.** Use the Internet to find definitions for the terms equi-join, natural join, and cross join. Write a short report that identifies how these terms relate to the terms join, inner join, and Cartesian product. Be sure to reference your online sources properly.
+**Answer**:
+- Equi-join is a type of inner-join. It joins two or more tables where the specified columns are equal. It uses only the "=" operator in comparing the columns in the WHERE clause. For example,
+
+<pre>
+<code>
+SELECT *
+    FROM (SELECT CUST_ID, FIRST_NAME, LAST_NAME, REP_ID
+                FROM CUSTOMER) C
+INNER JOIN (SELECT REP_ID, FIRST_NAME, LAST_NAME
+                FROM SALES_REP) SR
+ON C.REP_ID = SR.REP_ID;
+</code>
+</pre>
+
+![figure-5-case-exercises-critical-question-1](./images/figure-5-case-exercises-critical-question-1.JPG)
+
+- Natural join is the same as equi-join but the difference is that in natural join, the common attribute appears only once. For example:
+
+<pre>
+<code>
+SELECT *
+    FROM (SELECT CUST_ID, FIRST_NAME, LAST_NAME, REP_ID
+                FROM CUSTOMER) C
+NATURAL JOIN (SELECT REP_ID, FIRST_NAME, LAST_NAME
+                FROM SALES_REP) SR;
+</code>
+</pre>
+
+![]()
+
+- A cross join produces Cartesian product of the tables. The size of a Cartesian product is the number of the rows in first table multiplied by the number of rows in the second table. For example:
+
+<pre>
+<code>
+SELECT *
+    FROM (SELECT CUST_ID, FIRST_NAME, LAST_NAME, REP_ID
+                FROM CUSTOMER) C
+CROSS JOIN (SELECT REP_ID, FIRST_NAME, LAST_NAME
+                FROM SALES_REP) SR;
+</code>
+</pre>
+
+![figure-5-case-exercises-critical-question-1c.JPG](./images/figure-5-case-exercises-critical-question-1c.JPG)
+
+**Reference**
+1. https://javacodeimpl.blogspot.com/2013/08/difference-between-equi-join-natural.html
+
+**Question 2.** Use the Internet to find information on cost-based query optimizers. Write a short report that explains how cost-based query optimization works and what type(s) of queries benefit the most from cost-based query optimization. Be sure to reference your online sources properly.
+**Answer**:
+
+- An SQL optimizer analyzes an SQL query and chooses the most efficient way to execute it. An SQL query might have more than one ways to execute it. The better an SQL optimizer, the closer it gets to choosing the optimal execution plan, that is, the most efficient way to execute a query.
+- Am SQL cost-based query optimizers enumerates possible execution plans and assign a cost to each plan, which is an estimate of the time and resources required to execute that plan. Once the possibilities have been enumerated, the optimizer picks the lowest cost plan and hands it off for execution. While a cost model is typically designed to maximize throughput (i.e. queries per second), it can be designed to favor other desirable query behavior, such as minimizing latency (i.e. time to retrieve first row) or minimizing memory usage. 
+- The accuracy of the costs are highly dependent on the accuracy of the row count estimates made by the optimizer, that is, the optimizer estimates how many rows will be returned by each stage of the query plan. 
+
+**Reference**
+1. https://www.cockroachlabs.com/blog/building-cost-based-sql-optimizer/
+
+### Case Exercises
+
+#### KimTay Pet Supplies
+
+- Use SQL and the KimTay Pet Supplies database (see Figure 1-2 in Module 1) to complete the following exercises. If directed to do so by your instructor, use the information provided with the Module 3 Exercises to print your output or save it to a document.
+**Question 1.** For each invoice, list the invoice number and invoice date along with the ID, first name, and last name of the customer for which the invoice was created.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE, C.CUST_ID, C.FIRST_NAME, C.LAST_NAME
+    FROM INVOICES I, CUSTOMER C
+        WHERE I.CUST_ID = C.CUST_ID;
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-1](./images/figure-5-case-exercises-kimtay-pet-supplies-question-1.JPG)
+
+**Question 2.** For each invoice placed on November 15, 2021, list the invoice number along with the ID, first name, and last name of the customer for which the invoice was created.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, C.CUST_ID, C.FIRST_NAME, C.LAST_NAME
+    FROM INVOICES I, CUSTOMER C
+        WHERE (I.CUST_ID = C.CUST_ID) AND (INVOICE_DATE = "2021-11-15");
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-2](./images/figure-5-case-exercises-kimtay-pet-supplies-question-2.JPG)
+
+**Question 3.** For each invoice, list the invoice number, invoice date, item ID, quantity ordered, and quoted price for each invoice line that makes up the invoice.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE, IL.ITEM_ID, IL.QUANTITY, IL.QUOTED_PRICE
+    FROM INVOICES I, INVOICE_LINE IL
+        WHERE I.INVOICE_NUM = IL.INVOICE_NUM;
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-3](./images/figure-5-case-exercises-kimtay-pet-supplies-question-3.JPG)
+
+**Question 4.** Use the IN operator to find the ID, first name, and last name of each customer for which as invoice was created on November 15, 2021.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.CUST_ID, C.FIRST_NAME, C.LAST_NAME
+    FROM CUSTOMER C
+        WHERE C.CUST_ID IN (SELECT I.CUST_ID
+                                FROM INVOICES I
+                                    WHERE I.INVOICE_DATE = "2021-11-15"
+                            );
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-4](./images/figure-5-case-exercises-kimtay-pet-supplies-question-4.JPG)
+
+**Question 5.** Repeat Exercise 4, but this time use the EXISTS operator in your answer.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.CUST_ID, C.FIRST_NAME, C.LAST_NAME
+    FROM CUSTOMER C
+        WHERE EXISTS (SELECT *
+                            FROM INVOICES I
+                                    WHERE (C.CUST_ID = I.CUST_ID) AND (I.INVOICE_DATE = "2021-11-15")
+                      );
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-5](./images/figure-5-case-exercises-kimtay-pet-supplies-question-5.JPG)
+
+**Question 6.** Find the ID, first name, and last name of each customer for which an invoice was not created on November 15, 2021.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.CUST_ID, C.FIRST_NAME, C.LAST_NAME
+    FROM CUSTOMER C
+        WHERE C.CUST_ID IN (SELECT I.CUST_ID
+                                FROM INVOICES I
+                                    WHERE I.INVOICE_DATE <> "2021-11-15");
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-6](./images/figure-5-case-exercises-kimtay-pet-supplies-question-6.JPG)
+
+**Question 7.** For each invoice, list the invoice number, invoice date, item ID, description, and category for each item that makes up the invoice.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE, IL.ITEM_ID, ITEM.ITEM_ID, ITEM.DESCRIPTION, ITEM.CATEGORY
+    FROM INVOICES I, INVOICE_LINE IL, ITEM
+        WHERE (I.INVOICE_NUM = IL.INVOICE_NUM) AND (IL.ITEM_ID = ITEM.ITEM_ID);
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-7](./images/figure-5-case-exercises-kimtay-pet-supplies-question-7.JPG)
+
+**Question 8.** Repeat Exercise 7, but this time order the rows by category and then by invoice number.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE, IL.ITEM_ID, ITEM.ITEM_ID, ITEM.DESCRIPTION, ITEM.CATEGORY
+    FROM INVOICES I, INVOICE_LINE IL, ITEM
+        WHERE (I.INVOICE_NUM = IL.INVOICE_NUM) AND (IL.ITEM_ID = ITEM.ITEM_ID)
+        ORDER BY ITEM.CATEGORY, I.INVOICE_NUM;
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-8](./images/figure-5-case-exercises-kimtay-pet-supplies-question-8.JPG)
+
+**Question 9.**  Use a subquery to find the sales rep ID, first name, and last name of each sales rep who represents at least one customer with a credit limit of $500. List each sales rep only once in the results.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT SR.REP_ID, SR.FIRST_NAME, SR.LAST_NAME
+    FROM SALES_REP SR
+    WHERE SR.REP_ID IN (SELECT REP_ID
+                            FROM CUSTOMER
+                                WHERE CREDIT_LIMIT = 500);
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-9](./images/figure-5-case-exercises-kimtay-pet-supplies-question-9.JPG)
+
+**Question 10.** Repeat Exercise 9, but this time do not use a subquery.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT DISTINCT SR.REP_ID, SR.FIRST_NAME, SR.LAST_NAME
+    FROM SALES_REP SR, CUSTOMER C
+        WHERE SR.REP_ID = C.REP_ID;
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-10](./images/figure-5-case-exercises-kimtay-pet-supplies-question-10.JPG)
+
+**Question 11.** Find the ID, first name, and last name of each customer that currently has an invoice on file for Wild Bird Food (25 lb).
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.CUST_ID, C.FIRST_NAME, C.LAST_NAME
+    FROM CUSTOMER C, INVOICES I, INVOICE_LINE IL, ITEM
+        WHERE (C.CUST_ID = I.CUST_ID) AND
+              (I.INVOICE_NUM = IL.INVOICE_NUM) AND 
+              (IL.ITEM_ID = ITEM.ITEM_ID) AND 
+              (ITEM.DESCRIPTION = "Wild Bird Food (25 lb)");
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-11](./images/figure-5-case-exercises-kimtay-pet-supplies-question-11.JPG)
+
+**Question 12.** List the item ID, description, and category for each pair of items that are in the same category. (For example, one such pair would be item FS42 and item PF19, because the category for both items is FSH.)
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT F.ITEM_ID, F.DESCRIPTION, F.CATEGORY, S.ITEM_ID, S.DESCRIPTION, S.CATEGORY
+    FROM ITEM F, ITEM S
+        WHERE (F.CATEGORY = S.CATEGORY) AND (F.ITEM_ID < S.ITEM_ID)
+        ORDER BY F.ITEM_ID, S.ITEM_ID;
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-12](./images/figure-5-case-exercises-kimtay-pet-supplies-question-12.JPG)
+
+**Question 13.** List the invoice number and invoice date for each invoice created for the customer James Gonzalez.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE
+    FROM INVOICES I, CUSTOMER C
+        WHERE (I.CUST_ID = C.CUST_ID) AND (C.FIRST_NAME = "James") AND (C.LAST_NAME = "Gonzalez");
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-13](./images/figure-5-case-exercises-kimtay-pet-supplies-question-13.JPG)
+
+**Question 14.** List the invoice number and invoice date for each invoice that contains an invoice line for a Wild Bird Food (25 lb).
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE
+    FROM INVOICES I, INVOICE_LINE IL, ITEM
+        WHERE (I.INVOICE_NUM = IL.INVOICE_NUM) AND 
+              (IL.ITEM_ID = ITEM.ITEM_ID) AND 
+              (ITEM.DESCRIPTION = "Wild Bird Food (25 lb)");
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-14](./images/figure-5-case-exercises-kimtay-pet-supplies-question-14.JPG)
+
+**Question 15.** List the invoice number and invoice date for each invoice that either was created for James Gonzalez or that contains an invoice line for Wild Bird Food (25 lb).
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT DISTINCT I.INVOICE_NUM, I.INVOICE_DATE
+    FROM INVOICES I, CUSTOMER C, INVOICE_LINE IL, ITEM
+        WHERE ((I.CUST_ID = C.CUST_ID) AND 
+              (C.FIRST_NAME = "James") AND 
+              (C.LAST_NAME = "Gonzalez")) OR
+              ((I.INVOICE_NUM = IL.INVOICE_NUM) AND 
+              (IL.ITEM_ID = ITEM.ITEM_ID) AND 
+              (ITEM.DESCRIPTION = "Wild Bird Food (25 lb)"));
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-15](./images/figure-5-case-exercises-kimtay-pet-supplies-question-15.JPG)
+
+**Question 16.** List the invoice number and invoice date for each invoice that was created for James Gonzalez and that contains an invoice line for Wild Bird Food (25 lb).
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE
+    FROM INVOICES I, CUSTOMER C, INVOICE_LINE IL, ITEM
+        WHERE ((I.CUST_ID = C.CUST_ID) AND 
+              (C.FIRST_NAME = "James") AND 
+              (C.LAST_NAME = "Gonzalez")) AND
+              ((I.INVOICE_NUM = IL.INVOICE_NUM) AND 
+              (IL.ITEM_ID = ITEM.ITEM_ID) AND 
+              (ITEM.DESCRIPTION = "Wild Bird Food (25 lb)"));
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-16](./images/figure-5-case-exercises-kimtay-pet-supplies-question-16.JPG)
+
+**Question 17.** List the invoice number and invoice date for each invoice that was created for James Gonzalez but that does not contain an invoice line for Wild Bird Food (25 lb).
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT I.INVOICE_NUM, I.INVOICE_DATE
+    FROM INVOICES I, CUSTOMER C
+        WHERE ((I.CUST_ID = C.CUST_ID) AND 
+              (C.FIRST_NAME = "James") AND 
+              (C.LAST_NAME = "Gonzalez")) AND
+              I.INVOICE_NUM NOT IN (SELECT I.INVOICE_NUM
+                                        FROM INVOICES I, INVOICE_LINE IL, ITEM
+                                            WHERE (I.INVOICE_NUM = IL.INVOICE_NUM) AND 
+                                                  (IL.ITEM_ID = ITEM.ITEM_ID) AND 
+                                                  (ITEM.DESCRIPTION = "Wild Bird Food (25 lb)"));
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-17](./images/figure-5-case-exercises-kimtay-pet-supplies-question-17.JPG)
+
+**Question 18.** List the item ID, description, unit price, and category for each item that has a unit price greater than the unit price of every item in category CAT. Use either the ALL or ANY operator in your query. (Hint: Make sure you select the correct operator.)
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, PRICE, CATEGORY
+    FROM ITEM
+        WHERE PRICE > ALL (SELECT PRICE
+                                FROM ITEM
+                                    WHERE CATEGORY = "CAT");
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-18](./images/figure-5-case-exercises-kimtay-pet-supplies-question-18.JPG)
+
+**Question 19.** For each item, list the item ID, description, units on hand, invoice number, and quantity ordered. All items should be included in the results. For those items that are currently not on an invoice, the invoice number and quantity ordered should be left blank. Order the results by item ID.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT IT.ITEM_ID, IT.DESCRIPTION, IT.ON_HAND, IL.INVOICE_NUM, IL.QUANTITY
+    FROM (SELECT *
+                FROM ITEM) IT
+LEFT JOIN (SELECT *
+                FROM INVOICE_LINE) IL 
+ON IT.ITEM_ID = IL.ITEM_ID
+ORDER BY ITEM_ID;
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-question-19](./images/figure-5-case-exercises-kimtay-pet-supplies-question-19.JPG)
+
+
+#### Critical Thinking
+
+**Question 1.** If you used ALL in Exercise 18, repeat the exercise using ANY. If you used ANY, repeat the exercise using ALL, and then run the new command. What question does the new command answer?
+**Answer**:
+
+- The new command ANY List the item ID, description, unit price, and category for each item that has a unit price greater than the unit price of one or more item in category CAT. 
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT ITEM_ID, DESCRIPTION, PRICE, CATEGORY
+    FROM ITEM
+        WHERE PRICE > ANY (SELECT PRICE
+                                FROM ITEM
+                                    WHERE CATEGORY = "CAT");
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-critical-thinking-1](./images/figure-5-case-exercises-kimtay-pet-supplies-critical-thinking-1.JPG)
+
+**Question 2.** For each sales rep, list the ID, first name, and last name for the customer, along with the sales rep first name, and sales rep last name. All reps should be included in the results. Order the results by rep ID. There are two SQL commands for this query that lists the same results. Create and run each SQL command.
+**Answer**:
+
+- First SQL query
+  
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.REP_ID, C.FIRST_NAME AS CUSTOMER_FIRST_NAME, C.LAST_NAME AS CUSTOMER_LAST_NAME, 
+       SR.FIRST_NAME AS SALES_REP_FIRST_NAME, SR.LAST_NAME AS SALES_REP_LAST_NAME
+    FROM CUSTOMER C, SALES_REP SR
+    ORDER BY C.REP_ID
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-critical-thinking-2A](./images/figure-5-case-exercises-kimtay-pet-supplies-critical-thinking-2A.JPG)
+
+- Second SQL query
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT C.REP_ID, C.FIRST_NAME AS CUSTOMER_FIRST_NAME, C.LAST_NAME AS CUSTOMER_LAST_NAME, 
+       SR.FIRST_NAME AS SALES_REP_FIRST_NAME, SR.LAST_NAME AS SALES_REP_LAST_NAME
+    FROM CUSTOMER C
+    INNER JOIN SALES_REP SR
+    ORDER BY C.REP_ID;
+</code>
+</pre>
+
+![figure-5-case-exercises-kimtay-pet-supplies-critical-thinking-2A](./images/figure-5-case-exercises-kimtay-pet-supplies-critical-thinking-2B.JPG)
+
+#### StayWell Student Accommodation
+
+- Use SQL and the StayWell Student Accommodation database (see Figures 1-4 through 1-9 in Module 1) to complete the following exercises. If directed to do so by your instructor, use the information provided with the Module 3 Exercises to print your output or save it to a document.
+**Question 1.** For every property, list the management office number, address, monthly rent, owner number, owner’s first name, and owner’s last name.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.OFFICE_NUM, P.ADDRESS, P.MONTHLY_RENT, P.OWNER_NUM, 
+       O.FIRST_NAME AS OWNER_FIRST_NAME, O.LAST_NAME AS OWNER_LAST_NAME
+    FROM PROPERTY P, OWNER O
+        WHERE (P.OWNER_NUM = O.OWNER_NUM);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-1](./images/figure-5-case-exercises-staywell-question-1.JPG)
+
+**Question 2.** For every completed or open service request, list the property ID, description, and status.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT SR.PROPERTY_ID, SR.DESCRIPTION, SR.STATUS
+    FROM SERVICE_REQUEST SR;
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-2](./images/figure-5-case-exercises-staywell-question-2.JPG)
+
+**Question 3.** For every service request for furniture replacement, list the property ID, management office number, address, estimated hours, spent hours, owner number, and owner’s last name.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.PROPERTY_ID, OFFICE.OFFICE_NUM, OFFICE.ADDRESS, SR.EST_HOURS, SR.SPENT_HOURS, 
+       OWNER.OWNER_NUM, OWNER.LAST_NAME
+    FROM PROPERTY P, SERVICE_REQUEST SR, OFFICE, OWNER, SERVICE_CATEGORY SC
+        WHERE (P.PROPERTY_ID = SR.PROPERTY_ID) AND 
+              (SR.OFFICE_ID = OFFICE.OFFICE_NUM) AND  
+              (P.OWNER_NUM = OWNER.OWNER_NUM) AND
+              (SC.CATEGORY_DESCRIPTION = "Furniture replacement");
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-3](./images/figure-5-case-exercises-staywell-question-3.JPG)
+
+**Question 4.** List the first and last names of all owners who own a two-bedroom property. Use the IN operator in your query.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT O.FIRST_NAME, O.LAST_NAME
+    FROM OWNER O
+        WHERE O.OWNER_NUM IN (SELECT P.OWNER_NUM
+                                    FROM PROPERTY P
+                                        WHERE P.BDRMS = 2);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-4](./images/figure-5-case-exercises-staywell-question-4.JPG)
+
+**Question 5.** Repeat Exercise 4, but this time use the EXISTS operator in your query.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT O.FIRST_NAME, O.LAST_NAME
+    FROM OWNER O
+        WHERE EXISTS (SELECT P.OWNER_NUM
+                            FROM PROPERTY P
+                                WHERE (O.OWNER_NUM = P.OWNER_NUM) AND (P.BDRMS = 2));
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-5](./images/figure-5-case-exercises-staywell-question-5.JPG)
+
+**Question 6.** List the property IDs of any pair of properties that have the same number of bedrooms. For example, one pair would be property ID 2 and property ID 6, because they both have four bedrooms. The first property ID listed should be the major sort key and the second property ID should be the minor sort key.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT F.PROPERTY_ID, S.PROPERTY_ID 
+    FROM PROPERTY F, PROPERTY S
+        WHERE (F.PROPERTY_ID < S.PROPERTY_ID) AND (F.BDRMS = S.BDRMS);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-6](./images/figure-5-case-exercises-staywell-question-6.JPG)
+
+**Question 7.** List the square footage, owner number, owner last name, and owner first name for each property managed by the Columbia City office.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.SQR_FT, P.OWNER_NUM, O.LAST_NAME AS OWNER_LAST_NAME , O.FIRST_NAME AS OWNER_FIRST_NAME
+    FROM PROPERTY P, OWNER O
+        WHERE (P.OWNER_NUM = O.OWNER_NUM) AND (P.OFFICE_NUM = 1);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-7](./images/figure-5-case-exercises-staywell-question-7.JPG)
+
+**Question 8.** Repeat Exercise 7, but this time include only those properties with three bedrooms.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.SQR_FT, P.OWNER_NUM, O.LAST_NAME AS OWNER_LAST_NAME , O.FIRST_NAME AS OWNER_FIRST_NAME
+    FROM PROPERTY P, OWNER O
+        WHERE (P.OWNER_NUM = O.OWNER_NUM) AND (P.OFFICE_NUM = 1) AND (P.BDRMS = 3);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-8](./images/figure-5-case-exercises-staywell-question-8.JPG)
+
+**Question 9.** List the office number, address, and monthly rent for properties whose owners live in Washington state or own two-bedroom properties.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.OFFICE_NUM, P.ADDRESS, P.MONTHLY_RENT
+    FROM PROPERTY P, OWNER O
+        WHERE (P.OWNER_NUM = O.OWNER_NUM) AND (O.STATE = "WA") AND (P.BDRMS = 2);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-9](./images/figure-5-case-exercises-staywell-question-9.JPG)
+
+**Question 10.** List the office number, address, and monthly rent for properties whose owners live in Washington state and own a two-bedroom property.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.OFFICE_NUM, P.ADDRESS, P.MONTHLY_RENT
+    FROM PROPERTY P, OWNER O
+        WHERE (P.OWNER_NUM = O.OWNER_NUM) AND (O.STATE = "WA") AND (P.BDRMS = 2);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-10](./images/figure-5-case-exercises-staywell-question-10.JPG)
+
+**Question 11.** List the office number, address, and monthly rent for properties whose owners live in Washington state but do not own two-bedroom properties.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.OFFICE_NUM, P.ADDRESS, P.MONTHLY_RENT
+    FROM PROPERTY P, OWNER O
+        WHERE (P.OWNER_NUM = O.OWNER_NUM) AND (O.STATE = "WA") AND (P.BDRMS <> 2);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-11](./images/figure-5-case-exercises-staywell-question-11.JPG)
+
+**Question 12.** Find the service ID and property ID for each service request whose estimated hours are greater than the number of estimated hours of at least one service request on which the category number is 5.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT SR.SERVICE_ID, SR.PROPERTY_ID, SR.EST_HOURS
+    FROM SERVICE_REQUEST SR 
+        WHERE SR.EST_HOURS > ANY (SELECT SR.EST_HOURS
+                                        FROM SERVICE_REQUEST SR
+                                            WHERE SR.CATEGORY_NUMBER = "5"
+                                  );
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-12](./images/figure-5-case-exercises-staywell-question-12.JPG)
+
+**Question 13.** Find the service ID and property ID for each service request whose estimated hours are greater than the number of estimated hours on every service request on which the category number is 5.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT SR.SERVICE_ID, SR.PROPERTY_ID, SR.EST_HOURS
+    FROM SERVICE_REQUEST SR 
+        WHERE SR.EST_HOURS > ALL (SELECT SR.EST_HOURS
+                                        FROM SERVICE_REQUEST SR
+                                            WHERE SR.CATEGORY_NUMBER = "5"
+                                  );
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-13](./images/figure-5-case-exercises-staywell-question-13.JPG)
+
+**Question 14.** List the address, square footage, owner number, service ID, number of estimated hours, and number of spent hours for each service request on which the category number is 4.
+**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.ADDRESS, P.SQR_FT, P.OWNER_NUM, SR.SERVICE_ID, SR.EST_HOURS, SR.SPENT_HOURS
+    FROM PROPERTY P, SERVICE_REQUEST SR
+        WHERE (P.PROPERTY_ID = SR.PROPERTY_ID) AND (SR.CATEGORY_NUMBER = "4");
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-14](./images/figure-5-case-exercises-staywell-question-14.JPG)
+
+**Question 15.** Repeat Exercise 14, but this time be sure each property is included regardless of whether the property currently has any service requests for category 4.**Answer**:
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.ADDRESS, P.SQR_FT, P.OWNER_NUM, SR.SERVICE_ID, SR.EST_HOURS, SR.SPENT_HOURS
+    FROM PROPERTY P, SERVICE_REQUEST SR
+        WHERE (P.PROPERTY_ID = SR.PROPERTY_ID);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-15](./images/figure-5-case-exercises-staywell-question-15.JPG)
+
+
+**Question 16.** Repeat Exercise 15 using a different SQL command to obtain the same result. What is the difference between the two commands?
+**Answer**:
+
+The difference is that question 16 I have used inner join while in question 15 there is no inner join.
+
+<pre style="white-space: pre-wrap;">
+<code>
+SELECT P.ADDRESS, P.SQR_FT, P.OWNER_NUM, SR.SERVICE_ID, SR.EST_HOURS, SR.SPENT_HOURS
+    FROM PROPERTY P
+        INNER JOIN SERVICE_REQUEST SR
+            ON (P.PROPERTY_ID = SR.PROPERTY_ID);
+</code>
+</pre>
+
+![figure-5-case-exercises-staywell-question-16.JPG](./images/figure-5-case-exercises-staywell-question-16.JPG)
